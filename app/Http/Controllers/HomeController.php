@@ -24,7 +24,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $volunteer = $user->volunteer;
+	$volunteer = $user->volunteer;
+	if(is_null($volunteer))
+		return redirect("/register/wizard");
         return view('home')->with('volunteer',$volunteer);
     }
 
