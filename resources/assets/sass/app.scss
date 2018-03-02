@@ -1,0 +1,155 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One');
+// Variables
+//@import "variables";
+// Libraries
+@import "~bootstrap/scss/bootstrap";
+@import "paper-kit";
+@import "paper-bootstrap-wizard";
+@import "nucleo-icons";
+@import "floating-label";
+@import "~font-awesome/scss/font-awesome";
+
+html, body, #app {
+  height: 100%;
+}
+
+b {
+  font-weight: bold;
+}
+
+nav.navbar {
+  //position: relative;
+  //z-index: 3;
+  height: 62px;
+  .navbar-brand {
+    font-family: 'Fugaz One', cursive;
+    padding: 2px 15px;
+    line-height: 1rem;
+  }
+}
+
+.image-container {
+  background-image: url("../images/bg3.jpg");
+  background-size: cover;
+  min-height: 100%;
+  position: relative;
+  .filter::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  .container {
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.landing-message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  span.typed {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  .typed-cursor {
+    display: none;
+  }
+}
+
+.form-login {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  span {
+    color: #fff;
+    font-weight: bold;
+    margin-right: 0.2rem;
+  }
+  .form-group {
+    margin: 0 0.3rem 0 0;
+    //flex: 1;
+    input {
+      border-radius: 30px;
+      border: 2px solid #51cbce;
+    }
+    &:last-child {
+      flex: 0;
+      margin: 0;
+    }
+  }
+  .btn {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+.card-register {
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  .card-title {
+    font-family: 'Fugaz One', cursive;
+  }
+  .division {
+    float: none;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    color: #d8d3ce;
+    .line {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 10px;
+      width: 40%;
+      &.l {
+        left: 0;
+      }
+      &.r {
+        right: 0;
+      }
+    }
+  }
+}
+
+.register-form {
+  label {
+    display: none;
+  }
+  .input-group {
+    margin: 1rem 0;
+  }
+}
+
+.education-item, .experience-item {
+  position: relative;
+  padding-right: 38px;
+  .item-tools {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    right: 0;
+    width: 36px;
+  }
+
+}
+
+main {
+  margin-top: 62px;
+}

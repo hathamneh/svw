@@ -1,0 +1,59 @@
+{
+	"accountType": "",
+    "personal_info": {
+    	"first_name": "",
+    	"last_name": "",
+    	"gender": "",
+    	"birthday": "",
+    	"country": "",
+    	"city": "",
+    	"phone": "",
+    	"bio": "",
+    },
+    "educationAdded": [
+    	{
+    		"school": "",
+    		"field_of_study": "",
+    		"gdate": ""
+    	}
+    ],
+    "experienceAdded":[
+    	{
+    		"position": "",
+    		"org": "",
+    		"period": ""
+    	}
+    ],
+    "capabilities": [
+    	{
+    		"type": "certification",
+    		"value":{
+				"name": "",
+				"from": "",
+				"url": ""
+			}
+    	},
+    	{
+    		"type": "course",
+    		"value": {
+    			"name": "",
+    			"from": ""
+    		}
+    	},
+    	{
+    		"type": "project",
+    		"value": {
+    			"name": "",
+    			"from": ""
+    		}
+    	},
+    	{
+    		"type": "language",
+    		"value": {
+    			"name": "",
+    			"level": ""
+    		}
+    	}
+
+    ]
+}

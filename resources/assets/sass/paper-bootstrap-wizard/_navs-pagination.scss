@@ -1,0 +1,28 @@
+/*            Navigation menu                */
+.register-wizard {
+  .nav-pills {
+    position: relative;
+    .nav-item {
+      .nav-link {
+        text-align: center;
+        border-right: none !important;
+        border-left: none !important;
+        &:not(.active) {
+          border-color: $gray-input-outline;
+          color: $gray-input-outline;
+        }
+        &.active {
+          background-color: transparent !important;
+        }
+        &.checked {
+          border-color: $primary-color;
+        }
+      }
+      &:first-child, &:last-child {
+        .nav-link {
+          border-radius: 0 !important;
+        }
+      }
+    }
+  }
+}
