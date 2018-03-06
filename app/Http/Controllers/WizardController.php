@@ -40,7 +40,11 @@ class WizardController extends Controller
 
     public function store(Request $request)
     {
-        $user_data = json_decode($request->get('data'));
+        $user_data = $request->get('data');
+        if(is_array($user_data))
+            $user_data = (object) $user_data;
+        else
+            $user_data = json_encode($user_data);
         /**
          * @var User $user
          */
