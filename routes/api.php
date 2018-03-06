@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,10 +14,22 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::namespace("Api")->group(function() {
+    Route::post('/login',"AuthController@login");
+    Route::post('/register',"AuthController@register");
 
-Route::post('/login',"Api\AuthController@login");
-Route::post('/register',"Api\AuthController@register");
+//Route::middleware('auth:api')->group(function () {
+//    Route::post('/registration/wizard', "WizardController@store");
+//    Route::middleware('auth:api')->get('/user', function (Request $request) {
+//        return $request->user();
+//    });
+//});
+//
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/registration/wizard', "WizardController@store");
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+    });
 
-Route::middleware('auth:api')->group(function () {
-    Route::post('/registration/wizard', "WizardController@store");
 });
