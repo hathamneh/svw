@@ -23,9 +23,6 @@ class WizardController extends Controller
         else
             $user_data = json_decode($user_data_raw);
 
-
-
-        //return $user_data_raw;
         /**
          * @var User $user
          */

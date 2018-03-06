@@ -75,7 +75,7 @@ class WizardController extends Controller
             'first_name' => $user_data->personal_info->first_name,
             'last_name'  => $user_data->personal_info->last_name,
             'gender'     => $user_data->personal_info->gender,
-            'birthday'   => $user_data->personal_info->birthday,
+            'birthday'   => date("Y-m-d G:i:s",strtotime($user_data->personal_info->birthday)),
             'country'    => $user_data->personal_info->country,
             'city'       => $user_data->personal_info->city,
             'phone'      => $user_data->personal_info->phone,
