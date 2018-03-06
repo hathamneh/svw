@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +16,6 @@ use Illuminate\Http\Request;
 Route::post('/login',"Api\AuthController@login");
 Route::post('/register',"Api\AuthController@register");
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::post('/registration/wizard', "WizardController@store");
 });
-
-Route::post('/testing', function (Request $request){
-    return $request->toArray();
-})->middleware('auth:api');

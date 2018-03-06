@@ -40,41 +40,47 @@ class WizardController extends Controller
 
     public function store(Request $request)
     {
-        $user_id = $request->get('id');
         $user_data = json_decode($request->get('data'));
+        /**
+         * @var User $user
+         */
         $user = Auth::user();
         $user->accountType($user_data->accountType);
 
         if (!$user->is_org) {
-            $volunteer = new Volunteer([
-                'first_name' => $user_data->personal_info->first_name,
-                'last_name' => $user_data->personal_info->last_name,
-                'gender' => $user_data->personal_info->gender,
-                'birthday' => $user_data->personal_info->birthday,
-                'country' => $user_data->personal_info->country,
-                'city' => $user_data->personal_info->city,
-                'phone' => $user_data->personal_info->phone,
-            ]);
 
-            if(isset($user_data->personal_info->bio))
-                $volunteer->bio = $user_data->personal_info->bio;
-
-            // associate to user
-            $volunteer->user()->associate($user);
-
-            $volunteer->save();
-
-            // education
-            $volunteer->saveEducations($user_data->educationAdded);
-
-            // experiences
-            $volunteer->saveExperiences($user_data->experienceAdded);
-
-            // capabilities
-            $volunteer->saveCapabilities($user_data->capabilities);
+            $this->newVolunteer($user, $user_data);
 
             return redirect('home');
-
         }
+    }
+
+    public function newVolunteer($user, $user_data)
+    {
+        $volunteer = new Volunteer([
+            'first_name' => $user_data->personal_info->first_name,
+            'last_name' => $user_data->personal_info->last_name,
+            'gender' => $user_data->personal_info->gender,
+            'birthday' => $user_data->personal_info->birthday,
+            'country' => $user_data->personal_info->country,
+            'city' => $user_data->personal_info->city,
+            'phone' => $user_data->personal_info->phone,
+        ]);
+
+        if(isset($user_data->personal_info->bio))
+            $volunteer->bio = $user_data->personal_info->bio;
+
+        // associate to user and save
+        $volunteer->user()->associate($user);
+        $volunteer->save();
+
+        // add his education
+        $volunteer->saveEducations($user_data->educationAdded);
+
+        // add his experiences
+        $volunteer->saveExperiences($user_data->experienceAdded);
+
+        // add his capabilities
+        $volunteer->saveCapabilities($user_data->capabilities);
     }
 }
