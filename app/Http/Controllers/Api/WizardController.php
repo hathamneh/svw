@@ -28,16 +28,16 @@ class WizardController extends Controller
 
 
         if (!$user->is_org) {
-            $validator = Wizard::validateVolunteer($user_data);
-            if ($validator->passes()) {
+            //$validator = Wizard::validateVolunteer((array)$user_data);
+            //if ($validator->passes()) {
 
                 $volunteer = Wizard::newVolunteer($user, $user_data);
                 $volunteer->load('user', 'educations', 'experiences', 'capabilities');
                 return $volunteer;
-                
-            } else {
-                dd($validator->errors()->all());
-            }
+
+            //} else {
+//                dd($validator->errors()->all());
+//            }
         }
         return $user;
     }
