@@ -42,9 +42,9 @@ class WizardController extends Controller
     {
         $user_data = $request->get('data');
         if(is_array($user_data))
-            $user_data = (object) $user_data;
+            $user_data = json_decode(json_encode($user_data));
         else
-            $user_data = json_encode($user_data);
+            $user_data = json_decode($user_data);
         /**
          * @var User $user
          */
