@@ -28,41 +28,46 @@
         data() {
             return {
                 show: false,
-                caps: [],
+                caps: {
+                    courses: [],
+                    certificates: [],
+                    projects: [],
+                    languages: []
+                },
                 types: {
                     course: {
-                        name: "course",
+                        name: "courses",
                         modal: [
-                            {name: "crs_name", label: "Name", "placeholder": "Enter course name"},
-                            {name: "crs_from", label: "Given by", "placeholder": "Who has given oy yo you?"}
+                            {name: "name", label: "Name", "placeholder": "Enter course name"},
+                            {name: "from", label: "Given by", "placeholder": "Who has given oy yo you?"}
                         ]
                     },
                     certificate: {
-                        name: "certificate",
+                        name: "certificates",
                         modal: [
-                            {name: "crt_name", label: "Name", "placeholder": "Enter certificate name"},
-                            {name: "crt_from", label: "Given by", "placeholder": "Who has given oy yo you?"},
-                            {name: "crt_url", label: "Url", "placeholder": "input url"}
+                            {name: "name", label: "Name", "placeholder": "Enter certificate name"},
+                            {name: "from", label: "Given by", "placeholder": "Who has given oy yo you?"},
+                            {name: "url", label: "Url", "placeholder": "input url"}
                         ]
                     },
                     project: {
-                        name: "project",
+                        name: "projects",
                         modal: [
-                            {name: "prj_name", label: "Name", "placeholder": "Enter project name"},
+                            {name: "name", label: "Name", "placeholder": "Enter project name"},
                             {
-                                name: "prj_desc",
+                                name: "desc",
                                 label: "description",
                                 "placeholder": "Who has given oy yo you?",
                                 type: "textarea"
                             },
-                            {name: "prj_url", label: "Url", "placeholder": "input url"}
+                            {name: "url", label: "Url", "placeholder": "input url"}
                         ]
                     },
                     language: {
-                        name: "language",
+                        name: "languages",
                         modal: [
-                            {name: "lng_name", label: "Name", "placeholder": "Enter Language"},
-                            {name: "lng_level", label: "Level", "placeholder": "Native, Excellent, Good?"},
+                            {name: "name", label: "Name", "placeholder": "Enter Language"},
+                            {name: "level", label: "Level", "placeholder": "Native, Excellent, Good?"},
                         ]
                     }
                 }
@@ -70,7 +75,8 @@
         },
         methods: {
             pushCaps(val) {
-                this.caps.push(val);
+                let type = val.type;
+                this.caps[type].push(val.value);
             }
         },
         watch: {

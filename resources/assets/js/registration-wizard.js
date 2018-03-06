@@ -13,7 +13,6 @@ Vue.component('w-step3', require('./components/wizard/step3'));
 Vue.component('w-experience', require('./components/wizard/experience'));
 Vue.component('w-education', require('./components/wizard/education'));
 Vue.component('w-more', require('./components/wizard/more/more'));
-Vue.component('add-courses', require('./components/wizard/more/addCourses'));
 Vue.component('add-more', require('./components/wizard/more/addMore'));
 
 Vue.component('education-item', require('./components/EducationItem'))

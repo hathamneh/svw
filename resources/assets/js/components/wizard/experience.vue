@@ -97,7 +97,7 @@
                         this.addExpDialogVisible = false;
                         const position = this.experience.position
                         const organization = this.experience.organization
-                        const period = this.experience.period
+                        const period = this.experience.period * 30
                         const desc = this.experience.desc
                         if (this.edit === false) {
                             this.added.push({

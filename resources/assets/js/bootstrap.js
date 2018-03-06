@@ -12,7 +12,6 @@ try {
 
     //require('bootstrap');
     require('jquery-validation');
-    require('twitter-bootstrap-wizard');
     require('moment');
 } catch (e) {}
 

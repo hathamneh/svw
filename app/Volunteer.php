@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Pluralizer;
 
 /**
  * @property String bio
@@ -63,11 +64,14 @@ class Volunteer extends Model
     public function saveCapabilities($capabilities)
     {
         $arr = [];
-        foreach ($capabilities as $item) {
-            $arr[] = [
-                'type' => $item->type,
-                'value' => json_encode($item->value),
-            ];
+        foreach ($capabilities as $type => $values) {
+            $type_singular = Pluralizer::singular($type);
+            foreach ($values as $value) {
+                $arr[] = [
+                    'type' => $type_singular,
+                    'value' => json_encode($value),
+                ];
+            }
         }
         return $this->capabilities()->createMany($arr);
     }
