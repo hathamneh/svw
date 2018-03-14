@@ -1,6 +1,11 @@
 <template>
     <el-tabs tab-position="left">
         <el-tab-pane>
+            <span slot="label"><b>Skills</b> <i class="fa fa-lightbulb-o"></i></span>
+            <add-more :type="types.skills" message="What skills do you have?"
+                      @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
+        </el-tab-pane>
+        <el-tab-pane>
             <span slot="label"><b>Courses</b> <i class="fa fa-graduation-cap"></i></span>
             <add-more :type="types.course" message="Add courses you have taken"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
@@ -29,24 +34,31 @@
             return {
                 show: false,
                 caps: {
+                    skills: [],
                     courses: [],
                     certificates: [],
                     projects: [],
                     languages: []
                 },
                 types: {
+                    skills: {
+                        name: "skills",
+                        modal: [
+                            {name: "name", label: "Skill Name", "placeholder": "Enter skill name"},
+                        ]
+                    },
                     course: {
                         name: "courses",
                         modal: [
                             {name: "name", label: "Name", "placeholder": "Enter course name"},
-                            {name: "from", label: "Given by", "placeholder": "Who has given oy yo you?"}
+                            {name: "from", label: "Given by", "placeholder": "Who has given it to you?"}
                         ]
                     },
                     certificate: {
                         name: "certificates",
                         modal: [
                             {name: "name", label: "Name", "placeholder": "Enter certificate name"},
-                            {name: "from", label: "Given by", "placeholder": "Who has given oy yo you?"},
+                            {name: "from", label: "Given by", "placeholder": "Who has given it to you?"},
                             {name: "url", label: "Url", "placeholder": "input url"}
                         ]
                     },
