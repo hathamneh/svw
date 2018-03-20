@@ -27,6 +27,7 @@ class CreateOrganizationsTable extends Migration
             $table->timestamp("founded_date")->nullable();
             $table->string("category")->nullable();
             $table->string("specialities")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

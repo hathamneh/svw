@@ -47,7 +47,7 @@
                 background-color: transparent;
                 border: 0 none;
                 &:after{
-                    border-bottom: 11px solid $white-color;
+                    border-bottom: 11px solid $white;
                     border-left: 11px solid rgba(0, 0, 0, 0);
                     border-right: 11px solid rgba(0, 0, 0, 0);
                     content: "";
@@ -146,7 +146,7 @@
     }
     .nav-item .nav-link.active{
         background-color: $default-color;
-        color: $white-color;
+        color: $white;
     }
 
 }
@@ -157,7 +157,7 @@
             color: $primary-color;
             &.active{
                 border: 1px solid $primary-color !important;
-                color: $white-color !important;
+                color: $white !important;
             }
         }
     }
@@ -169,7 +169,7 @@
             color: $danger-color !important;
             &.active{
                 border: 1px solid $danger-color !important;
-                color: $white-color !important;
+                color: $white !important;
             }
         }
     }
@@ -181,7 +181,7 @@
             color: $info-color !important;
             &.active{
                 border: 1px solid $info-color !important;
-                color: $white-color !important;
+                color: $white !important;
             }
         }
     }
@@ -193,7 +193,7 @@
             color: $success-color !important;
             &.active{
                 border: 1px solid $success-color !important;
-                color: $white-color !important;
+                color: $white !important;
             }
         }
     }
@@ -205,7 +205,7 @@
             color: $warning-color !important;
             &.active{
                 border: 1px solid $warning-color !important;
-                color: $white-color !important;
+                color: $white !important;
             }
         }
     }
@@ -252,7 +252,7 @@
 .pagination-danger > .page-item.active > span:focus{
    background-color: $danger-color !important;
    border-color: $danger-color !important;
-   color: $white-color;
+   color: $white;
 }
 
 .nav-text, .nav-icons{
@@ -385,7 +385,7 @@
 .pagination > li.active > span:focus{
     background-color: $danger-color;
     border-color: $danger-color;
-    color: $white-color;
+    color: $white;
 }
 
 .page-item.active .page-link{

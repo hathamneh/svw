@@ -3,7 +3,6 @@
     <div>
         <form action="/register/wizard" method="POST" id="wizardForm">
             <input type="hidden" name="_token" :value="csrf_token">
-            <input type="hidden" name="user_id" :value="user_id">
             <input type="hidden" name="data" :value="JSON.stringify(formData)">
         </form>
         <!--        You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure"          -->
@@ -14,7 +13,7 @@
                 <w-account-type @accTypeUpdated="(val) => { formData.accountType = val}"></w-account-type>
             </tab-content>
             <tab-content title="About" icon="fa fa-user-circle" :before-change="validateAbout">
-                <w-about :old="old" :default_avatar="default_avatar"
+                <w-about :old="old"
                          :countries="countries" @aboutUpdated="(val) => { formData.personal_info = val }"></w-about>
             </tab-content>
             <tab-content title="Experience" icon="fa fa-certificate">
@@ -41,8 +40,9 @@
                     personal_info: {},
                     educationAdded: {},
                     experienceAdded: {},
-                    capabilities: []
-                }
+                    capabilities: [],
+                },
+                csrf_token: ""
             };
         },
         methods: {
@@ -94,9 +94,9 @@
         props: {
             old: Object,
             countries: Object,
-            default_avatar: String,
-            user_id: Number,
-            csrf_token: String
+        },
+        mounted() {
+            this.csrf_token = $("meta[name='csrf-token']").attr('content')
         }
     }
 </script>

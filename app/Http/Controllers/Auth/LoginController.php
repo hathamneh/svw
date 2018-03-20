@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     protected $activationService;
 
@@ -74,4 +74,11 @@ class LoginController extends Controller
         }
         abort(404);
     }
+
+    public function showLoginForm()
+    {
+        return view("auth.login")->with("login", true);
+    }
+
+
 }

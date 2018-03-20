@@ -17,7 +17,7 @@
 @yield("after_body")
 
 <div id="app">
-    <nav class="navbar navbar-expand-sm fixed-top">
+    <nav class="navbar navbar-expand-sm fixed-top{{ isset($wizard) ? " transparent-bg" : "" }}">
         <div class="container">
             <div class="navbar-translate">
                 <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse"
@@ -27,11 +27,12 @@
                     <span class="navbar-toggler-bar"></span>
                     <span class="navbar-toggler-bar"></span>
                 </button>
-                <a class="navbar-brand text-secondary" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
+                <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
             </div>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <div class="ml-auto">
-                @guest
+                    @if(!isset($login) || !$login)
+                        @guest
                             <form class="form-login" action="{{ route('login') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -49,7 +50,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary btn-round" type="submit"><i class="fa fa-key"></i>
+                                    <button class="btn btn-sm btn-primary btn-round" type="submit"><i
+                                                class="fa fa-key"></i>
                                         Login
                                     </button>
                                 </div>
@@ -57,25 +59,30 @@
                                    href='{{ route('password.request') }}'><b>Forgot your<br>password?</b></a>
                             </form>
 
-                @else
-                <!-- Right Side Of Navbar -->
+                        @else
+                        <!-- Right Side Of Navbar -->
 
-                        <el-menu class="el-menu-demo" mode="horizontal">
-                            <el-submenu index="1">
-                                <template slot="title">Welcome {{{ auth()->user()->username }}}</template>
-                                <el-menu-item index="1-1">
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                    >Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </el-menu-item>
-                            </el-submenu>
-                        </el-menu>
+                            <el-menu mode="horizontal">
+                                <el-submenu index="1">
+                                    <template slot="title">
+                                        <a href="/volunteer/{{{ auth()->user()->username }}}"><img
+                                                    src="{{ asset("/images/default-avatar.jpg") }}" width="25"
+                                                    alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
+                                    </template>
+                                    <el-menu-item index="1-1">
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                        >Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </el-menu-item>
+                                </el-submenu>
+                            </el-menu>
 
-                @endguest
+                        @endguest
+                    @endif
                 </div>
             </div>
         </div>

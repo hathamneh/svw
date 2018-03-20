@@ -44,12 +44,12 @@
     color: #EB5E28;
 }
 .footer{
-    background-color: $white-color;
+    background-color: $white;
     line-height: $line-height;
 
     &.footer-black{
         h4{
-            color: $white-color;
+            color: $white;
         }
     }
 
@@ -211,19 +211,19 @@
 .subscribe-line-black{
     background-color: $black-footer-bg;
     .form-control{
-        color: $white-color;
+        color: $white;
     }
 }
 
 .subscribe-line-transparent{
     @extend .footer-transparent;
     .form-control{
-        color: $white-color;
+        color: $white;
     }
 }
 
 
 .social-line-black{
     background-color: $black-footer-bg;
-    color: $white-color;
+    color: $white;
 }

@@ -29,14 +29,10 @@ class WizardController extends Controller
     {
         $user = Auth::user();
         $countries = Countries::all();
-        JavaScript::put([
-            'user'      => $user,
-            'countries' => $countries,
-            'old'       => session()->getOldInput(),
-        ]);
         return view('wizard')->with([
             'user'      => $user,
             'countries' => $countries,
+            'wizard'    => true,
         ]);
     }
 
@@ -59,7 +55,7 @@ class WizardController extends Controller
             $validator = self::validateVolunteer($user_data);
             if ($validator->passes()) {
                 self::newVolunteer($user, $user_data);
-                return redirect('home');
+                return redirect()->route("home");
             } else {
                 dd($validator->errors()->all());
             }
@@ -75,7 +71,7 @@ class WizardController extends Controller
             'first_name' => $user_data->personal_info->first_name,
             'last_name'  => $user_data->personal_info->last_name,
             'gender'     => $user_data->personal_info->gender,
-            'birthday'   => date("Y-m-d G:i:s",strtotime($user_data->personal_info->birthday)),
+            'birthday'   => date("Y-m-d G:i:s", strtotime($user_data->personal_info->birthday)),
             'country'    => $user_data->personal_info->country,
             'city'       => $user_data->personal_info->city,
             'phone'      => $user_data->personal_info->phone,
@@ -104,7 +100,7 @@ class WizardController extends Controller
     {
         $rules = [
             'accountType'              => 'required', //Must be a number and length of value is 8
-            'personal_info'            => 'required',
+            'personal_info'            => 'required|array',
             'personal_info.first_name' => 'required',
             'personal_info.last_name'  => 'required',
             'personal_info.birthday'   => 'required|date',
@@ -114,6 +110,6 @@ class WizardController extends Controller
             'personal_info.phone'      => 'required',
         ];
 
-        return Validator::make($data, $rules);
+        return Validator::make(json_decode(json_encode($data), true), $rules);
     }
 }

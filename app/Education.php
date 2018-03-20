@@ -3,15 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property  school
- * @property  field_of_study
- * @property  graduation_year
+ * @property  String school
+ * @property  String field_of_study
+ * @property  String gdate
+ * @property int volunteer_id
  */
 class Education extends Model
 {
-    protected $fillable = ['school', 'field_of_study', 'graduation_year'];
+    use SoftDeletes;
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    protected $fillable = ['school', 'field_of_study', 'gdate'];
 
     public function volunteer()
     {

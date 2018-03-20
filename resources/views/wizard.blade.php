@@ -13,8 +13,8 @@
                     <div class="wizard-container">
 
                         <div class="card wizard-card" id="wizardProfile">
-                                <my-wizard :old="{{ json_encode(Session::getOldInput(),JSON_FORCE_OBJECT) }}" default_avatar="{{ asset('images/default-avatar.jpg')  }}"
-                                           :countries="{{ json_encode($countries) }}" csrf_token="{{ csrf_token() }}" :user_id="{{ auth()->id() }}"></my-wizard>
+                                <my-wizard :old="{{ json_encode(Session::getOldInput(),JSON_FORCE_OBJECT) }}"
+                                           :countries="{{ json_encode($countries) }}" :user_id="{{ auth()->id() }}"></my-wizard>
                         </div>
                     </div> <!-- wizard container -->
                 </div>

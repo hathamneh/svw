@@ -16,4 +16,5 @@ mix.js(['resources/assets/js/app.js',
     'resources/assets/js/bootstrap-switch.min.js',
     'resources/assets/js/paper-kit.js',], 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .sourceMaps().version();
+   .sourceMaps().version()
+   .copyDirectory('resources/assets/images', 'public/images');

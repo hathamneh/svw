@@ -18,6 +18,7 @@ class CreateCapabilitiesTable extends Migration
             $table->integer("volunteer_id");
             $table->string("type");
             $table->string("value");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

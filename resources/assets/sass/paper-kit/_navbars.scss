@@ -12,7 +12,7 @@
     transition: all 0.4s;
     -webkit-transition: all 0.4s;
     padding: 0;
-    background: $white-color;
+    background: $white;
     box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
 
     .navbar-toggler-right{
@@ -162,21 +162,21 @@
 }
 .navbar-transparent, [class*="bg"]{
     .navbar-brand{
-        color: $white-color;
+        color: $white;
         @include opacity(.9);
 
         &:focus,
         &:hover{
             background-color: transparent;
             @include opacity(1);
-            color: $white-color;
+            color: $white;
         }
     }
 
     .navbar-nav{
         .nav-item .nav-link:not(.btn){
-            color: $white-color;
-            border-color: $white-color;
+            color: $white;
+            border-color: $white;
         }
         .active .nav-link
         .active .nav-link:hover,
@@ -184,7 +184,7 @@
         .nav-item .nav-link:hover,
         .nav-item .nav-link:focus{
             background-color: transparent;
-            color: $white-color;
+            color: $white;
             @include opacity(1);
         }
         .nav .nav-item a.btn:hover{
@@ -194,8 +194,8 @@
         .dropdown .nav-link .caret,
         .dropdown .nav-link:hover .caret,
         .dropdown .nav-link:focus .caret{
-            border-bottom-color: $white-color;
-            border-top-color: $white-color;
+            border-bottom-color: $white;
+            border-top-color: $white;
         }
 
         .open .nav-link,
@@ -209,7 +209,7 @@
 
     .btn-default.btn-fill{
         color: $dark-gray;
-        background-color: $white-color;
+        background-color: $white;
         @include opacity(.9);
     }
     .btn-default.btn-fill:hover,
@@ -217,15 +217,15 @@
     .btn-default.btn-fill:active,
     .btn-default.btn-fill.active,
     .open .dropdown-toggle.btn-fill.btn-default{
-        border-color: $white-color;
+        border-color: $white;
         @include opacity(1);
     }
 
 }
 
 .nav-open .nav .caret{
-    border-bottom-color: $white-color;
-    border-top-color: $white-color;
+    border-bottom-color: $white;
+    border-top-color: $white;
 }
 
 .navbar-default {
@@ -314,9 +314,9 @@
     }
     .navbar-transparent & .form-control,
     [class*="bg"] & .form-control{
-        color: $white-color;
+        color: $white;
         border: $none;
-        border-bottom: 1px solid rgba($white-color,.6);
+        border-bottom: 1px solid rgba($white,.6);
     }
 
 }
@@ -327,7 +327,7 @@
     border: $none;
 
     .icon-bar {
-        background-color: $white-color;
+        background-color: $white;
     }
      .navbar-collapse,
      .navbar-form {
@@ -455,7 +455,7 @@
 }
 #description-areas .nav-stacked .nav-link.active:after,
 #navtabs-row .nav-stacked .nav-link.active:after{
-    border-right: 11px solid $white-color;
+    border-right: 11px solid $white;
     border-top: 11px solid transparent;
     border-bottom: 11px solid transparent;
     content: "";
@@ -492,7 +492,7 @@
     box-shadow: none;
 
     .dropdown-menu .divider{
-        background-color: rgba($white-color,.2);
+        background-color: rgba($white,.2);
     }
 }
 .section-navbars{
@@ -500,7 +500,7 @@
         .navbar{
             .navbar-toggler{
                 .navbar-toggler-icon{
-                    background: $white-color;
+                    background: $white;
                 }
             }
         }

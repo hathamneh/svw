@@ -1,38 +1,4 @@
-.btn{
-    box-sizing: border-box;
-    border-width: $border-thick;
-    font-size: $font-size-small;
-    font-weight: $font-weight-bold;
-    padding: .5rem $padding-base-horizontal;
-    line-height: 1.75;
-    cursor: pointer;
-    text-transform: uppercase;
 
-    &.btn-border,
-    &.btn-link{
-        background-color: $transparent-bg;
-    }
-
-    @include btn-styles($default-color, $default-states-color);
-    @include transition($fast-transition-time, linear);
-
-    &:hover,
-    &:focus{
-        outline: 0 !important;
-        @include box-shadow(none);
-    }
-    &:active,
-    &.active,
-    .open > &.dropdown-toggle {
-         @include box-shadow(none);
-         outline: 0 !important;
-    }
-
-    &[class*="btn-outline-"]{
-        background-image: none;
-        background-color: transparent;
-    }
-}
 .btn-just-icon{
     border-radius: $border-radius-btn-large;
     height: 40px;
@@ -44,13 +10,8 @@
         padding: 4px !important;
     }
     i{
-        font-size: $font-size-medium;
+        font-size: $font-size-base;
         padding: 2px 0px;
-    }
-}
-.upgrade-pro{
-    .btn{
-        margin-top: 30px;
     }
 }
 .btn-link.btn-just-icon{
@@ -64,19 +25,18 @@
     margin-left: -2px;
 }
 
-
 // Apply the mixin to the buttons
-.btn-neutral  { @include btn-styles($white-color, $default-states-color); }
+.btn-neutral  { @include btn-styles($white, $default-states-color); }
 
-.btn-outline-neutral { @include btn-outline-styles($white-color, $default-states-color);
+.btn-outline-neutral { @include btn-outline-styles($white, $default-states-color);
     &:hover,
     &:focus{
         color: $default-states-color;
-        background-color: $white-color;
+        background-color: $white;
     }
 }
 .btn-neutral {
-    @include btn-styles($white-color, $white-color);
+    @include btn-styles($white, $white);
     color: $default-color;
     &:hover,
     &:focus{
@@ -92,8 +52,8 @@
         &:active,
         &.active,
         .open > &.dropdown-toggle{
-             background-color: $white-color;
-             color: $default-color;
+            background-color: $white;
+            color: $default-color;
         }
     }
 
@@ -103,51 +63,6 @@
     }
 }
 
-.btn{
-     &:disabled,
-     &[disabled],
-     &.disabled{
-        @include opacity(.5);
-    }
-}
-.btn-link{
-    border-color: transparent !important;
-    padding: $padding-base-vertical $padding-base-horizontal;
-
-    &:hover,
-    &:focus,
-    &:active{
-        text-decoration: none;
-        border-color: transparent;
-    }
-
-    &.btn-icon{
-        padding: $padding-base-vertical;
-    }
-}
-
-.btn-lg{
-   @include btn-size($padding-large-vertical, $padding-large-horizontal, $font-size-base, $line-height-small);
-}
-.btn-sm{
-    @include btn-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small);
-}
-.btn-wd {
-    min-width: 140px;
-}
-
-.btn-group.select{
-    width: 100%;
-}
-.btn-group.select .btn{
-    text-align: left;
-}
-.btn-group.select .caret{
-    position: absolute;
-    top: 50%;
-    margin-top: -1px;
-    right: 8px;
-}
 .btn-just-icon{
     &.btn-sm{
         height: 30px;
@@ -156,7 +71,7 @@
         padding: 0;
 
         i{
-            font-size: $font-size-small;
+            font-size: $font-size-sm;
 
         }
     }
@@ -176,49 +91,4 @@
 }
 .btn-round{
     border-radius: 30px;
-}
-.btn.btn-link:focus{
-    box-shadow: none !important;
-    text-decoration: none;
-}
-
-.column .btn-link{
-    padding: 7px 0;
-}
-.share-buttons .btn-outline-default{
-    margin-top: 24px;
-}
-#modals .btn-outline-neutral{
-    margin-bottom: 10px;
-}
-.btn-group.select{
-    overflow: visible !important;
-}
-.media{
-    .media-body{
-        .media-footer{
-            .btn-neutral{
-               margin: $navbar-margin-btn;
-               font-size: $font-size-base;
-               i{
-                   margin-right: 0 !important;
-               }
-           }
-        }
-    }
-}
-@each $color, $value in $theme-colors {
-    .btn-#{$color} {
-        @include button-variant($value, $value);
-    }
-}
-
-@each $color, $value in $theme-colors {
-    .btn-outline-#{$color} {
-        @if $color == "light" {
-            @include button-outline-variant($value, $gray-900);
-        } @else {
-            @include button-outline-variant($value, $white);
-        }
-    }
 }

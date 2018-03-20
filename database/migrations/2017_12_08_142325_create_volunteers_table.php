@@ -26,6 +26,7 @@ class CreateVolunteersTable extends Migration
             $table->string("profile_picture")->nullable();
             $table->string("cover_picture")->nullable();
             $table->text('bio')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

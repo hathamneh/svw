@@ -1,15 +1,5 @@
 <template>
     <div class="row">
-        <div class="col-sm-4 offset-sm-4">
-            <div class="picture-container">
-                <div class="picture">
-                    <img :src="user_avatar"
-                         class="picture-src" id="wizardPicturePreview" title=""/>
-                    <input type="file" id="wizard-picture">
-                </div>
-                <h6>Choose Picture</h6>
-            </div>
-        </div>
 
         <div class="col-sm-5 offset-sm-1">
             <div class="form-group">
@@ -93,10 +83,6 @@
         props: {
             old: Object,
             countries: Object,
-            default_avatar: {
-                type: String,
-                default: ""
-            }
         },
         mounted() {
         },

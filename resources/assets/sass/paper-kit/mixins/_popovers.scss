@@ -1,6 +1,6 @@
 @mixin popover-style($background-color){
     background-color: $background-color;
-    color: $white-color;
+    color: $white;
     .popover-title{
         background-color: $background-color;
         color: rgba(0, 0, 0, 0.56);

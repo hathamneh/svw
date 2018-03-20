@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -13,7 +12,8 @@ try {
     //require('bootstrap');
     require('jquery-validation');
     require('moment');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -53,3 +53,25 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+try {
+    window.onerror = logError = function (err, line) {
+        //api url
+        var apiUrl = '/api/logging/error';
+
+        //suppress browser error messages
+        var suppressErrors = true;
+
+        axios.post(apiUrl, {
+            errorMsg: err,
+            errorLine: line,
+            queryString: document.location.search,
+            url: document.location.pathname,
+            referrer: document.referrer,
+            userAgent: navigator.userAgent
+        });
+
+        return suppressErrors;
+    };
+} catch (e) {
+}

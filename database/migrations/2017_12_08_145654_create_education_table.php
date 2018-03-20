@@ -18,7 +18,8 @@ class CreateEducationTable extends Migration
             $table->integer("volunteer_id");
             $table->string("school");
             $table->string("field_of_study");
-            $table->string("graduation_year");
+            $table->string("gdate");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

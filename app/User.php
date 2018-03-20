@@ -7,7 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
 /**
- * @property mixed is_org
+ * @property string username
+ * @property bool is_org
+ * @property Organization organization
+ * @property Volunteer volunteer
  */
 class User extends Authenticatable
 {
@@ -19,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'is_org'
+        'username', 'email', 'password', 'is_org',
     ];
 
     /**
@@ -30,7 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     public function volunteer()
     {
         return $this->hasOne(Volunteer::class);
@@ -43,11 +46,19 @@ class User extends Authenticatable
 
     public function accountType(string $type)
     {
-        if($type === "volunteer")
+        if ($type === "volunteer")
             $this->is_org = false;
-        elseif($type === "organization")
+        elseif ($type === "organization")
             $this->is_org = true;
     }
 
+    public function getNameAttribute()
+    {
+        if ($this->is_org && !is_null($this->organization))
+            return $this->organization->name;
+        elseif (!is_null($this->volunteer))
+            return $this->volunteer->full_name;
+        return $this->username;
+    }
 
 }

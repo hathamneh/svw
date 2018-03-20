@@ -21,6 +21,7 @@ class CreateExperiencesTable extends Migration
             $table->integer("period");
             $table->string("description")->nullable();
             $table->string("attachment")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

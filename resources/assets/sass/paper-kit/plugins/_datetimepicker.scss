@@ -87,7 +87,7 @@
 .bootstrap-datetimepicker-widget.dropdown-menu.top.open {
   margin-top: auto;
   margin-bottom: 5px;
-  background-color: $white-color;
+  background-color: $white;
 }
 .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
   left: auto;
@@ -363,7 +363,7 @@
         transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
     }
     &.dropdown-menu{
-        background-color: $white-color;
+        background-color: $white;
     }
 }
 .bootstrap-datetimepicker-widget.open.top{

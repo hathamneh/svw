@@ -16,6 +16,6 @@
 }
 @mixin label-color-fill($color){
      border-color: $color;
-     color: $white-color;
+     color: $white;
      background-color: $color;
 }

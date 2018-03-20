@@ -3,13 +3,32 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Pluralizer;
 
 /**
+ * @property String full_name
+ * @property String first_name
+ * @property String last_name
+ * @property String birthday
+ * @property String gender
+ * @property String country
+ * @property String city
+ * @property String phone
+ * @property String profile_picture
+ * @property String cover_picture
  * @property String bio
  */
 class Volunteer extends Model
 {
+    use SoftDeletes;
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     protected $fillable = ['first_name', 'last_name', 'birthday',
         'gender', 'country', 'city', 'phone', 'profile_picture',
         'cover_picture', 'bio'];
@@ -36,15 +55,20 @@ class Volunteer extends Model
 
     public function saveEducations($educations)
     {
-        $arr = [];
-        foreach ($educations as $item) {
-            $arr[] = [
-                'school' => $item->school,
-                'field_of_study' => $item->field_of_study,
-                'graduation_year' => $item->gdate,
-            ];
+        if(is_array($educations)) {
+            $arr = [];
+            foreach ($educations as $item) {
+                $arr[] = [
+                    'school'         => $item->school,
+                    'field_of_study' => $item->field_of_study,
+                    'gdate'          => $item->gdate,
+                ];
+            }
+            return $this->educations()->createMany($arr);
+        } elseif(is_object($educations)) {
+            return $this->educations()->create((array)$educations);
         }
-        return $this->educations()->createMany($arr);
+        return false;
     }
 
     public function saveExperiences($experiences)
@@ -74,5 +98,15 @@ class Volunteer extends Model
             }
         }
         return $this->capabilities()->createMany($arr);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getGenderAttribute($val)
+    {
+        return ucfirst($val);
     }
 }

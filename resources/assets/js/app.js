@@ -16,8 +16,10 @@ require('./bootstrap');
 
 Vue.use(Element,{ locale })
 
+require('./Auth')
+require('./shared-components')
 require('./registration-wizard')
-
+require('./profile-components')
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

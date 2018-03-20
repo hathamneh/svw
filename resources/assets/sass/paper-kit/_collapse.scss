@@ -4,8 +4,8 @@
     box-shadow: none;
 }
 .panel-default > .panel-heading {
-    background-color: $white-color;
-    border-color: $white-color;
+    background-color: $white;
+    border-color: $white;
 }
 .panel-group .panel{
     border-radius: 0;
@@ -37,7 +37,7 @@
         color: $danger-color;
     }
     .card-header{
-        background-color: $white-color;
+        background-color: $white;
     }
 }
 // .panel-default > .panel-heading + .panel-collapse.gsdk-collapse > .panel-body {

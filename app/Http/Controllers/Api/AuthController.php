@@ -22,6 +22,7 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('SVW APP')->accessToken;
+            $success['user_id'] = $user->id;
             return response()->json(['success' => $success], $this->successStatus);
         }
         else{
@@ -53,7 +54,7 @@ class AuthController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('SVW APP')->accessToken;
         $success['username'] =  $user->username;
-
+        $success['user_id'] = $user->id;
         return response()->json(['success'=>$success], $this->successStatus);
     }
 
