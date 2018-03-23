@@ -14,7 +14,7 @@
             }
         },
         mounted() {
-            console.log(this.$slots)
+
         }
     }
 </script>

@@ -1,0 +1,35 @@
+.new-post {
+  display: flex;
+  padding: 1rem;
+  background-color: #5ec9cd;
+  border-radius: 0.25rem;
+  &_avatar {
+    flex: 0 0 60px;
+    max-width: 60px;
+    padding: 0 0.75rem 0 0;
+    overflow: visible;
+    .avatar-thumb {
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #fff;
+      box-shadow: 0 0 5px rgba(150,150,150,0.5);
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+  &_content {
+    flex: 1;
+    textarea {
+      width: 100%;
+      resize: none;
+    }
+  }
+  &_actions {
+    margin-top: 0.5rem;
+    display: flex;
+    .btn-publish {
+      margin-left: auto;
+    }
+  }
+}

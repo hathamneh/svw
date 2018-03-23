@@ -45,7 +45,7 @@
                             <div>Following</div>
                         </div>
                     </div>
-
+                    <volunteer-info :user_id="{{ $user->id }}"></volunteer-info>
                 </div>
                 <div class="col-md-7 profile-main">
                     <profile-tabs :user_id="{{ $user->id }}"></profile-tabs>

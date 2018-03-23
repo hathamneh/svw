@@ -8,7 +8,6 @@
 @import "paper-bootstrap-wizard";
 @import "nucleo-icons";
 @import "floating-label";
-@import "~font-awesome/scss/font-awesome";
 
 body {
   background-color: #f9f9f9;
@@ -30,6 +29,8 @@ main {
 @import "landing-page";
 @import "login-page";
 @import "profile-page";
+@import "posts";
+@import "search";
 
 .education-item, .experience-item {
   position: relative;
@@ -46,6 +47,18 @@ main {
 
 }
 
+img {
+  max-width: 100%;
+}
+
+a.card {
+  transition: all 0.2s;
+}
+
+a.card:hover {
+  text-decoration: none;
+  background-color: #f0f0f0;
+}
 
 .btn-primary {
   color: #fff;

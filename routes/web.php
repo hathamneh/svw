@@ -18,7 +18,6 @@ Route::get('/', 'LandingController@index')->name('home');
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware("auth")->group(function(){
     Route::get('/register/wizard', 'WizardController@index');
 
@@ -29,6 +28,9 @@ Route::middleware("auth")->group(function(){
 
     Route::get('/volunteer/{username}', 'ProfileController@index')->name('profile.main');
 
+    Route::get('/search', function () {
+        return view("search");
+    });
 });
 
 
