@@ -25,8 +25,9 @@ class VolunteerController extends Controller
     {
         $user = User::findOrFail($user);
         if (!is_null($user->volunteer)) {
+            $user->volunteer->load('user');
             if ($request->get("all", false) == true) {
-                $user->volunteer->load(['user', 'educations', 'experiences', "capabilities"]);
+                $user->volunteer->load(['educations', 'experiences', "capabilities"]);
             }
             return $user->volunteer;
         }
