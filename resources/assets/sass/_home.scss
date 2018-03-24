@@ -1,3 +1,8 @@
+.sidebar-sticky {
+  position: sticky;
+  top: $topnav-height + 10px;
+}
+
 .sidebar_user-details {
   display: flex;
   padding-bottom: 0.75rem;
@@ -7,11 +12,15 @@
   justify-content: center;
   &__text {
     padding-left: 0.5rem;
+    line-height: normal;
     a {
       font-size: 0.75rem;
       font-weight: bold;
       display: block;
       margin-top: 0.1rem;
+    }
+    small {
+      color: $gray-500;
     }
   }
 }

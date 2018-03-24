@@ -28,6 +28,7 @@ Route::namespace("Api")->group(function () {
         Route::resource('/volunteer', "VolunteerController");
         Route::resource('/volunteer/education', "EducationController");
         Route::resource('/volunteer/experience', "ExperienceController");
+        Route::resource('/volunteer/capability', "CapabilityController");
     });
 
 });

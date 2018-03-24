@@ -42,7 +42,7 @@ class Capability extends Model
 
         foreach ($old as $item) {
             $key = Pluralizer::plural($item->type);
-            $modified[$key][] = json_decode($item->value);
+            $modified[$key][] = ['id' => $item->id] + (array)json_decode($item->value);
         }
         return new Collection($modified);
     }
