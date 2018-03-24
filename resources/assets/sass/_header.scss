@@ -12,6 +12,10 @@ nav.navbar {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+
     .el-menu {
       .el-submenu {
         &__title > a {

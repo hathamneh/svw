@@ -13,11 +13,11 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="{{ $body_classes ?? "" }}">
+<body class="{{ $body_classes ?? "" }}{{ isset($wizard) ?: " nav-fixed" }}">
 @yield("after_body")
 
 <div id="app">
-    <nav class="navbar navbar-expand-sm fixed-top{{ isset($wizard) ? " transparent-bg" : "" }}">
+    <nav class="navbar navbar-expand-sm{{ isset($wizard) ? " transparent-bg" : " fixed-top" }}">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
 
@@ -29,12 +29,13 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 @guest
                 @else
-
-                    <div class="header-search-form">
-                        <input type="text" placeholder="Find Organization, Events, Volunteers ..."
-                               class="form-control">
-                        <button class="search-button"><i class="fa fa-search"></i></button>
-                    </div>
+                    @if(!isset($wizard))
+                        <div class="header-search-form">
+                            <input type="text" placeholder="Find Organization, Events, Volunteers ..."
+                                   class="form-control">
+                            <button class="search-button"><i class="fa fa-search"></i></button>
+                        </div>
+                    @endif
                 @endguest
                 <div class="navbar-nav ml-auto ">
                     @guest

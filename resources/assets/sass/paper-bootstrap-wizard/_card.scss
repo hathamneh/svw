@@ -18,6 +18,11 @@
             align-items: center;
             justify-content: center;
             min-height: 200px;
+
+            svg {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
         }
 
         .card-hover-effect {

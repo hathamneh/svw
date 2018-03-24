@@ -29,3 +29,10 @@
 @import "paper-bootstrap-wizard/wizard-card";
 //@import "paper-bootstrap-wizard/footers";
 @import "paper-bootstrap-wizard/responsive";
+
+.vue-form-wizard .wizard-icon-circle .wizard-icon {
+  margin: auto !important;
+}
+.vue-form-wizard li.active .wizard-icon-circle {
+  background-color: $primary-color;
+}

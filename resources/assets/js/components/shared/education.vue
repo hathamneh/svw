@@ -1,20 +1,20 @@
 <template>
 
     <div class="row">
-        <div class="col-md-12" v-if="currentUser">
+        <div class="col-md-12" v-if="currentUser || !isProfile">
             <div class="list-group list-group-flush" v-if="added.length">
                 <education-item v-for="(item, index) in added" :key="index"
-                                :educationItem="item" :editable="editable"
+                                :educationItem="item" :editable="editable  || !isProfile"
                                 @eduItemEdit="editEduItem(item,index)"
                                 @eduItemDelete="deleteEduItem(index)"></education-item>
 
             </div>
             <list-message v-if="!added.length">No Education added!</list-message>
         </div>
-        <div class="col-md-12" v-if="!currentUser">
+        <div class="col-md-12" v-else>
             <list-message>Not Authorized!</list-message>
         </div>
-        <div class="form-group col-md-2" v-if="editable">
+        <div class="form-group col-md-2" v-if="editable || !isProfile">
             <el-button @click="addEduDialogVisible = true" icon="el-icon-plus">Add Education
             </el-button>
             <el-dialog title="Add Your Education" :visible.sync="addEduDialogVisible" :append-to-body="true"
@@ -249,16 +249,18 @@
         },
 
         created() {
-            window.currentUser().then((response) => {
-                this.currentUser = response.data
-                this.editable = Number.parseInt(this.currentUser.id) === this.user_id;
-            }).catch((response) => {
-                logError(response.data, "unauthorized")
-            })
-
-            this.autocompletes = this.loadAll();
-            if (this.isProfile)
+            if (this.isProfile) {
+                window.currentUser().then((response) => {
+                    this.currentUser = response.data
+                    this.editable = Number.parseInt(this.currentUser.id) === this.user_id;
+                }).catch((response) => {
+                    logError(response.data, "unauthorized")
+                })
                 this.loadOldItems()
+            }
+            this.autocompletes = this.loadAll();
+
+
         }
     }
 </script>

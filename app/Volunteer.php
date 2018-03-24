@@ -53,6 +53,11 @@ class Volunteer extends Model
         return $this->hasMany(Capability::class);
     }
 
+    /*public function getCapabilitiesAttribute($val)
+    {
+        return Capability::groupify($val);
+    }*/
+
     public function saveEducations($educations)
     {
         if(is_array($educations)) {

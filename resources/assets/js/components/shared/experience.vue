@@ -1,10 +1,10 @@
 <template>
 
     <div class="row">
-        <div class="col-md-12" v-if="currentUser">
+        <div class="col-md-12" v-if="currentUser || !isProfile">
             <div class="list-group list-group-flush" v-if="added.length">
                 <experience-item v-for="(item, index) in added" :key="index"
-                                 :experienceItem="item" :editable="editable"
+                                 :experienceItem="item" :editable="editable || !isProfile"
                                  @expItemEdit="editExpItem(item,index)"
                                  @expItemDelete="deleteExpItem(index)"></experience-item>
             </div>
@@ -16,7 +16,7 @@
             <list-message>Not Authorized!</list-message>
         </div>
 
-        <div class="form-group col-md-2" v-if="editable">
+        <div class="form-group col-md-2" v-if="editable || !isProfile">
             <el-button @click="addExpDialogVisible = true" icon="el-icon-plus">Add Experience
             </el-button>
             <el-dialog title="Add Your Experience" :visible.sync="addExpDialogVisible" :append-to-body="true"
@@ -201,13 +201,13 @@
             },
         },
         created() {
-            window.currentUser().then((response) => {
-                this.currentUser = response.data
-                this.editable = Number.parseInt(this.currentUser.id) === this.user_id;
-            })
-
-            if (this.isProfile)
+            if (this.isProfile) {
+                window.currentUser().then((response) => {
+                    this.currentUser = response.data
+                    this.editable = Number.parseInt(this.currentUser.id) === this.user_id;
+                })
                 this.loadOldItems()
+            }
         }
     };
 </script>

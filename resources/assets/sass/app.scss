@@ -14,13 +14,20 @@ body {
 }
 
 html, body, #app {
+  height: 100%;
+}
+
+body.nav-fixed {
   height: calc(100% - 52px);
+  #app {
+    height: calc(100% - 52px);
+  }
 }
 
 b {
   font-weight: bold;
 }
-main {
+body.nav-fixed main {
   margin-top: $topnav-height;
 }
 
