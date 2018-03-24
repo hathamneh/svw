@@ -25,10 +25,20 @@ Route::namespace("Api")->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-        Route::resource('/volunteer', "VolunteerController");
-        Route::resource('/volunteer/education', "EducationController");
-        Route::resource('/volunteer/experience', "ExperienceController");
-        Route::resource('/volunteer/capability', "CapabilityController");
+        Route::resource('/volunteer', "VolunteerController", ['except' => ['show']]);
+        Route::get('/volunteer/{id}', "VolunteerController@show")->where(['id' => '[0-9]+']);
+
+        Route::resource('/volunteer/{user}/education', "EducationController", ['except' => ['index','show']]);
+        Route::get('/volunteer/education', "EducationController@show");
+        Route::get('/volunteer/{user}/education', "EducationController@show");
+
+        Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index','show']]);
+        Route::get('/volunteer/experience', "ExperienceController@show");
+        Route::get('/volunteer/{user}/experience', "ExperienceController@show");
+
+
+        Route::get('/volunteer/capability', "CapabilityController@index");
+        Route::get('/volunteer/{user}/capability', "CapabilityController@show");
     });
 
 });

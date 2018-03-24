@@ -24,6 +24,7 @@
     "pug": "^2.0.1",
     "typed.js": "^2.0.6",
     "vue": "^2.5.13",
+    "vue-autosize": "^1.0.2",
     "vue-form-wizard": "^0.8.2",
     "vue-template-compiler": "^2.5.13"
   },
@@ -32,6 +33,6 @@
     "@fortawesome/fontawesome-free-brands": "^5.0.8",
     "@fortawesome/fontawesome-free-regular": "^5.0.8",
     "@fortawesome/fontawesome-free-solid": "^5.0.8",
-    "npm": "^5.7.1"
+    "autosize": "^4.0.1"
   }
 }

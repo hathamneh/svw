@@ -6,6 +6,7 @@ import fontawesome from '@fortawesome/fontawesome'
 import regular from '@fortawesome/fontawesome-free-regular'
 import solid from '@fortawesome/fontawesome-free-solid'
 import brands from '@fortawesome/fontawesome-free-brands'
+import VueAutosize from 'vue-autosize'
 
 fontawesome.library.add(regular)
 fontawesome.library.add(solid)
@@ -24,7 +25,7 @@ import '../sass/element-vars.scss';
 require('./bootstrap');
 
 Vue.use(Element,{ locale })
-
+Vue.use(VueAutosize)
 require('./Auth')
 require('./shared-components')
 require('./registration-wizard')

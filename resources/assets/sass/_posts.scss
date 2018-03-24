@@ -16,6 +16,8 @@
   background-color: #5ec9cd;
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  transition: all 0.75s;
   &_avatar {
     flex: 0 0 40px;
     max-width: 60px;
@@ -39,6 +41,15 @@
       margin-left: auto;
     }
   }
+  &.focused {
+    background-color: #fff;
+    border-color: #ddd;
+    .new-post_content textarea {
+      border-color: transparent;
+      border-bottom: 1px solid #ddd;
+      border-radius: 0;
+    }
+  }
 }
 
 .posts-group {
@@ -49,6 +60,7 @@
     flex-direction: row;
   }
 }
+
 .Post {
   &_menu-icon {
     position: absolute;
