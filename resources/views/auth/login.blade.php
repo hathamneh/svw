@@ -17,10 +17,10 @@
                                 <label>Login with:</label>
                                 <div class="sites-links">
                                     <a href="#" class="login-btn fb-login col-sm-6">
-                                        <i class="fa fa-facebook"></i> Facebook
+                                        <i class="fab fa-facebook"></i> Facebook
                                     </a>
                                     <a href="#" class="login-btn google-login col-sm-6">
-                                        <i class="fa fa-google"></i> Google
+                                        <i class="fab fa-google"></i> Google
                                     </a>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                         </label>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in"></i> Login
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in-alt"></i> Login
                                     </button>
                                 </div>
 

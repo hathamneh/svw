@@ -2,6 +2,11 @@
   &-header {
     position: relative;
     margin-bottom: 1.5rem;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+57,0+100 */
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 57%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 
     &__cover {
       top: 0;
@@ -138,7 +143,7 @@
             &:last-child {
               margin-bottom: 0;
             }
-            i {
+            svg {
               flex: 0 0 22px;
             }
             span {
@@ -156,38 +161,47 @@
         }
       }
 
-      &-numbers {
-        display: flex;
-        background-color: #fff;
-        &_item {
-          flex: 1;
-          padding: 0.5rem;
-          font-size: 0.75rem;
-          text-align: center;
-          border: 1px solid $border-color;
-          border-right: none;
-          color: $text-muted;
-          &:first-child {
-            border-radius: 5px 0 0 5px;
-          }
-          &:last-child {
-            border-radius: 0 5px 5px 0;
-            border-right: 1px solid $border-color;
-          }
-          .item-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: $primary-color;
-          }
-        }
 
-      }
     }
   }
   &-main {
     .el-tabs__header {
       padding: 0 1rem;
       background-color: #fff;
+    }
+  }
+}
+
+.profile-numbers {
+  display: flex;
+  &_item {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+    border: 1px solid $border-color;
+    border-right: none;
+    color: $text-muted;
+    background-color: #fff;
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+      border-right: 1px solid $border-color;
+    }
+    .item-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+  &-sm {
+    .profile-numbers_item {
+      font-size: 0.65rem;
+      .item-number {
+        font-size: 1rem;
+      }
     }
   }
 }

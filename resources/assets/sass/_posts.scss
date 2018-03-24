@@ -1,22 +1,29 @@
+.avatar-thumb {
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(150, 150, 150, 0.5);
+  width: 40px;
+  img {
+    max-width: 100%;
+  }
+}
+
 .new-post {
   display: flex;
-  padding: 1rem;
+  padding: 0.75rem;
   background-color: #5ec9cd;
   border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
   &_avatar {
-    flex: 0 0 60px;
+    flex: 0 0 40px;
     max-width: 60px;
     padding: 0 0.75rem 0 0;
     overflow: visible;
-    .avatar-thumb {
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid #fff;
-      box-shadow: 0 0 5px rgba(150,150,150,0.5);
-    }
-    img {
-      max-width: 100%;
-    }
+    display: flex;
+    align-items: center;
+    height: 45px;
   }
   &_content {
     flex: 1;
@@ -30,6 +37,77 @@
     display: flex;
     .btn-publish {
       margin-left: auto;
+    }
+  }
+}
+
+.posts-group {
+  @extend .list-group;
+  &-item {
+    @extend .list-group-item;
+    display: flex;
+    flex-direction: row;
+  }
+}
+.Post {
+  &_menu-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: #bbb;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    &:hover {
+      color: #999;
+    }
+  }
+  &_content {
+    margin-left: 1rem;
+    &-top {
+      font-size: 0.9rem;
+    }
+  }
+  &_username {
+    font-weight: bold;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &_date {
+    color: $gray-500;
+    a {
+      color: $gray-500;
+    }
+  }
+  &_text {
+    font-size: 0.9rem;
+    line-height: normal;
+  }
+  &_actions {
+    display: flex;
+    margin-top: 0.5rem;
+  }
+  &_action {
+    text-align: center;
+    padding: 0 0.62rem 0 0;
+    button {
+      display: block;
+      margin-right: 1rem;
+      font-size: 0.75rem;
+      color: $secondary;
+      &:hover {
+        color: darken($secondary, 10);
+        text-decoration: none;
+        background-color: #eee;
+      }
+      svg + span {
+        margin-left: 0.25rem;
+      }
+    }
+    &-number {
+
     }
   }
 }

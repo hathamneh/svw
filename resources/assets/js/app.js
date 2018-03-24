@@ -29,6 +29,7 @@ require('./Auth')
 require('./shared-components')
 require('./registration-wizard')
 require('./profile-components')
+require('./post-components')
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -21,7 +21,7 @@
                         </div>
                         <div class="user-actions">
                             @if($view_mode === "self")
-                                <a href="#" class="btn btn-light"><i class="fa fa-edit"></i> Edit Profile</a>
+                                <a href="#" class="btn btn-light btn-sm"><i class="fa fa-edit"></i> Edit Profile</a>
                             @elseif($view_mode === "other")
                                 <a href="#" class="btn btn-primary btn-follow"><i class="fa fa-user"></i> Follow</a>
                             @endif
@@ -33,18 +33,10 @@
         </div>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-3 profile-sidebar">
 
-                    <div class="sidebar-numbers">
-                        <div class="sidebar-numbers_item followers">
-                            <div class="item-number">1.2k</div>
-                            <div>Follower</div>
-                        </div>
-                        <div class="sidebar-numbers_item followers">
-                            <span class="item-number">852</span>
-                            <div>Following</div>
-                        </div>
-                    </div>
+                <div class="col-md-3 profile-sidebar">
+                    <profile-numbers></profile-numbers>
+
                     <volunteer-info :user_id="{{ $user->id }}"></volunteer-info>
                 </div>
                 <div class="col-md-7 profile-main">

@@ -18,75 +18,77 @@
 
 <div id="app">
     <nav class="navbar navbar-expand-sm fixed-top{{ isset($wizard) ? " transparent-bg" : "" }}">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
 
-        <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            @guest
-            @else
-
-                <div class="header-search-form">
-                    <input type="text" placeholder="Find Organization, Events, Volunteers ..."
-                           class="form-control">
-                    <button class="search-button"><i class="fa fa-search"></i></button>
-                </div>
-            @endguest
-            <div class="navbar-nav ml-auto ">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 @guest
-                    @if(!isset($login) || !$login)
-                        <form class="form-login" action="{{ route('login') }}" method="post">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" name="login_email"
-                                       placeholder="Email or Username" value="{{ old('login_email') }}">
-                                @if ($errors->has('login_email'))
-                                    <div class="form-control-feedback">{{ $errors->first('login_email') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control form-control-sm" name="login_password"
-                                       placeholder="Password">
-                                @if ($errors->has('login_password'))
-                                    <div class="form-control-feedback">{{ $errors->first('login_password') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-sm btn-primary btn-round" type="submit"><i
-                                            class="fa fa-key"></i>
-                                    Login
-                                </button>
-                            </div>
-                            <a class='pink-text' style="font-size: 0.6rem;"
-                               href='{{ route('password.request') }}'><b>Forgot your<br>password?</b></a>
-                        </form>
-                    @endif
                 @else
-                <!-- Right Side Of Navbar -->
 
-                    <el-menu mode="horizontal">
-                        <el-submenu index="1">
-                            <template slot="title">
-                                <a href="/volunteer/{{{ auth()->user()->username }}}"><img
-                                            src="{{ asset("/images/default-avatar.jpg") }}" width="25"
-                                            alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
-                            </template>
-                            <el-menu-item index="1-1">
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                >Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </el-menu-item>
-                        </el-submenu>
-                    </el-menu>
-
+                    <div class="header-search-form">
+                        <input type="text" placeholder="Find Organization, Events, Volunteers ..."
+                               class="form-control">
+                        <button class="search-button"><i class="fa fa-search"></i></button>
+                    </div>
                 @endguest
+                <div class="navbar-nav ml-auto ">
+                    @guest
+                        @if(!isset($login) || !$login)
+                            <form class="form-login" action="{{ route('login') }}" method="post">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-sm" name="login_email"
+                                           placeholder="Email or Username" value="{{ old('login_email') }}">
+                                    @if ($errors->has('login_email'))
+                                        <div class="form-control-feedback">{{ $errors->first('login_email') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-sm" name="login_password"
+                                           placeholder="Password">
+                                    @if ($errors->has('login_password'))
+                                        <div class="form-control-feedback">{{ $errors->first('login_password') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary btn-round" type="submit"><i
+                                                class="fa fa-key"></i>
+                                        Login
+                                    </button>
+                                </div>
+                                <a class='pink-text' style="font-size: 0.6rem;"
+                                   href='{{ route('password.request') }}'><b>Forgot your<br>password?</b></a>
+                            </form>
+                        @endif
+                    @else
+                    <!-- Right Side Of Navbar -->
+
+                        <el-menu mode="horizontal">
+                            <el-submenu index="1">
+                                <template slot="title">
+                                    <a href="/volunteer/{{{ auth()->user()->username }}}"><img
+                                                src="{{ asset("/images/default-avatar.jpg") }}" width="25"
+                                                alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
+                                </template>
+                                <el-menu-item index="1-1">
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                    >Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </el-menu-item>
+                            </el-submenu>
+                        </el-menu>
+
+                    @endguest
+                </div>
             </div>
         </div>
     </nav>

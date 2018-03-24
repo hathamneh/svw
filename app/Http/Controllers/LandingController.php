@@ -11,7 +11,7 @@ class LandingController extends Controller
     public function index()
     {
         //$this->middleware('guest');
-        if(Auth::check())
+        if (Auth::check())
             return $this->indexLoggedIn();
         else
             return $this->indexGuest();
@@ -19,8 +19,8 @@ class LandingController extends Controller
 
     public function indexGuest()
     {
-        return view('landing',[
-            'body_classes'=> "is-landing"
+        return view('landing', [
+            'body_classes' => "is-landing",
         ]);
     }
 
@@ -35,6 +35,9 @@ class LandingController extends Controller
         $volunteer = $user->volunteer;
         if (is_null($volunteer))
             return redirect("/register/wizard");
-        return view('home')->with('volunteer', $volunteer);
+        return view('home')->with([
+            'user'      => $user,
+            'volunteer' => $volunteer,
+        ]);
     }
 }

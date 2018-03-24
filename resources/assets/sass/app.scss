@@ -10,11 +10,11 @@
 @import "floating-label";
 
 body {
-  background-color: #f9f9f9;
+  background-color: $body-bg;
 }
 
 html, body, #app {
-  height: 100%;
+  height: calc(100% - 52px);
 }
 
 b {
@@ -22,7 +22,6 @@ b {
 }
 main {
   margin-top: $topnav-height;
-
 }
 
 @import "header";
@@ -31,6 +30,7 @@ main {
 @import "profile-page";
 @import "posts";
 @import "search";
+@import "home";
 
 .education-item, .experience-item {
   position: relative;
