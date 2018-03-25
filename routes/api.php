@@ -36,9 +36,8 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/experience', "ExperienceController@index");
         Route::get('/volunteer/{user}/experience', "ExperienceController@show");
 
-
-        Route::get('/volunteer/capability', "CapabilityController@index");
-        Route::get('/volunteer/{user}/capability', "CapabilityController@show");
+        Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
+        Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
     });
 
 });

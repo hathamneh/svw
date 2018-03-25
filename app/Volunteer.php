@@ -18,6 +18,7 @@ use Illuminate\Support\Pluralizer;
  * @property String profile_picture
  * @property String cover_picture
  * @property String bio
+ * @property mixed capabilities
  */
 class Volunteer extends Model
 {
