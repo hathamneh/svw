@@ -118,7 +118,7 @@
 }
 /*             Navigation Pills               */
 
-.nav-pills {
+.pk.nav-pills {
     .nav-item + .nav-link {
         margin-left: 0;
     }
@@ -150,7 +150,7 @@
     }
 
 }
-.nav-pills-primary{
+.pk.nav-pills-primary{
     .nav-item{
         .nav-link{
             border: 1px solid $primary-color;
@@ -162,7 +162,7 @@
         }
     }
 }
-.nav-pills-danger{
+.pk.nav-pills-danger{
     .nav-item{
         .nav-link{
             border: 1px solid $danger-color !important;
@@ -174,7 +174,7 @@
         }
     }
 }
-.nav-pills-info{
+.pk.nav-pills-info{
     .nav-item{
         .nav-link{
             border: 1px solid $info-color !important;
@@ -186,7 +186,7 @@
         }
     }
 }
-.nav-pills-success{
+.pk.nav-pills-success{
     .nav-item{
         .nav-link{
             border: 1px solid $success-color !important;
@@ -198,7 +198,7 @@
         }
     }
 }
-.nav-pills-warning{
+.pk.nav-pills-warning{
     .nav-item{
         .nav-link{
             border: 1px solid $warning-color !important;

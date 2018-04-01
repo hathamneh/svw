@@ -1,10 +1,11 @@
 <template>
     <div class="new-post">
-        <div class="new-post_avatar">
-            <div class="avatar-thumb">
-                <img src="/images/default-avatar.jpg" alt="User Name">
-            </div>
-        </div>
+        <!--<div class="new-post_avatar">-->
+            <!--<div class="avatar-thumb">-->
+                <!--<img src="/images/default-avatar.jpg" alt="User Name">-->
+            <!--</div>-->
+        <!--</div>-->
+
         <div class="new-post_content">
                     <textarea name="post_text" id="post_text" cols="30" rows="1" class="form-control" v-autosize
                               placeholder="What is your status" @focus="showActions" @blur="blurTextarea"></textarea>

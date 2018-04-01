@@ -26,6 +26,16 @@ require('./bootstrap');
 
 Vue.use(Element,{ locale })
 Vue.use(VueAutosize)
+
+Vue.prototype.trans = (string, args) => {
+    let value = _.get(window.i18n, string, string);
+
+    _.eachRight(args, (paramVal, paramKey) => {
+        value = _.replace(value, `:${paramKey}`, paramVal);
+    });
+    return value;
+};
+
 require('./Auth')
 require('./shared-components')
 require('./registration-wizard')

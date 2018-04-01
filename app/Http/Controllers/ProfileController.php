@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Volunteer;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -25,5 +26,12 @@ class ProfileController extends Controller
             return view("profile.main")->with($data);
         } else
             return redirect("home");
+    }
+
+    public function edit($username)
+    {
+        $user = User::has("volunteer")->where('username', $username)->first();
+        $volunteer = $user->volunteer;
+        return view("profile.edit")->with("volunteer",$volunteer);
     }
 }

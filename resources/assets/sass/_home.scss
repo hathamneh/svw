@@ -23,4 +23,10 @@
       color: $gray-500;
     }
   }
+
+  &__image {
+    .avatar-thumb {
+      width: 75px;
+    }
+  }
 }

@@ -16,7 +16,7 @@
                 <w-about :old="old"
                          :countries="countries" @aboutUpdated="(val) => { formData.personal_info = val }"></w-about>
             </tab-content>
-            <tab-content title="Experience" icon="fa fa-certificate">
+            <tab-content title="Experience" icon="fa fa-graduation-cap">
                 <w-step3 @step3Updated="(val) => { formData.educationAdded = val.education; formData.experienceAdded= val.experience; }"></w-step3>
             </tab-content>
             <tab-content title="More" icon="fa fa-trophy">

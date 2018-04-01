@@ -11,14 +11,16 @@
 |
 */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingController@index')->name('home');
 
 Auth::routes();
 
-Route::middleware("auth")->group(function(){
+Route::middleware(["auth", "lang"])->group(function(){
     Route::get('/register/wizard', 'WizardController@index');
 
     Route::post('/register/wizard', 'WizardController@store');
@@ -27,10 +29,34 @@ Route::middleware("auth")->group(function(){
 
 
     Route::get('/volunteer/{username}', 'ProfileController@index')->name('profile.main');
+    Route::get('/volunteer/{username}/edit', 'ProfileController@edit')->name('profile.edit');
 
-    Route::get('/search', function () {
-        return view("search");
-    });
+    Route::get('/search', function (Request $request) {
+        $data = [];
+        if($request->has("s"))
+            $data['s'] = $request->get("s");
+        return view("search")->with($data);
+    })->name("search");
 });
 
 
+// Localization
+Route::get('/js/lang.js', function () {
+    $strings = Cache::rememberForever('lang.js', function () {
+        $lang = config('app.locale');
+
+        $files   = glob(resource_path('lang/' . $lang . '/*.php'));
+        $strings = [];
+
+        foreach ($files as $file) {
+            $name           = basename($file, '.php');
+            $strings[$name] = require $file;
+        }
+
+        return $strings;
+    });
+
+    header('Content-Type: text/javascript');
+    echo('window.i18n = ' . json_encode($strings) . ';');
+    exit();
+})->name('assets.lang');

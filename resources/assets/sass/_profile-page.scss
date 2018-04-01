@@ -1,0 +1,229 @@
+.profile {
+  &-header {
+    position: relative;
+    margin-bottom: 1.5rem;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+57,0+100 */
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 57%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 57%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
+    &__cover {
+      top: 0;
+      left: 0;
+      height: 175px;
+      width: 100%;
+      background: no-repeat bottom;
+      -webkit-background-size: cover;
+      background-size: cover;
+      .btn-change-cover {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+      }
+      &:hover .btn-change-cover {
+        visibility: visible;
+        opacity: 1;
+      }
+      &:before {
+        //content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.5)));
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+      }
+    }
+    .container {
+      margin-top: -70px;
+    }
+    &__user {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      @include media-breakpoint-down("sm") {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile-picture {
+        box-shadow: 1px 1px 5px rgba(100, 100, 100, 0.5);
+        padding: 0.25rem;
+        background-color: #fff;
+        height: 150px;
+        width: 150px;
+        flex: 0 0 150px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    &__right {
+      flex: 1;
+      display: flex;
+      @include media-breakpoint-down("sm") {
+        flex-direction: column;
+        .user-full_name {
+          text-align: center;
+          margin: 1rem 0;
+        }
+      }
+      .user-full_name {
+        flex: 1;
+        margin-left: 1rem;
+        h2 {
+          color: #777;
+          font-weight: bold;
+          text-shadow: 1px 1px 3px rgba(100, 100, 100, 0.4);
+          font-size: 2rem;
+        }
+        span {
+          color: #aaa;
+        }
+      }
+      .user-actions {
+        display: flex;
+        align-items: flex-end;
+        .btn-follow {
+          -webkit-transition: all 0.5s;
+          -moz-transition: all 0.5s;
+          -ms-transition: all 0.5s;
+          -o-transition: all 0.5s;
+          transition: all 0.5s;
+          &:hover {
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            -o-transform: scale(1.05);
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+    .btn-light {
+      color: #777;
+      border-color: #eee;
+    }
+  }
+  &-sidebar {
+    border-right: 1px solid #ddd;
+    @include media-breakpoint-down("sm") {
+      border: none;
+    }
+    .sidebar {
+      &-card {
+        margin: 1rem 0;
+      }
+      &-section {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid $border-color;
+        &:last-child {
+          border-bottom: none;
+        }
+        .section-title {
+          font-size: 0.7rem;
+          font-weight: bold;
+          color: $text-muted;
+          text-align: left;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          li {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 0.3rem;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            svg {
+              flex: 0 0 22px;
+            }
+            span {
+              flex: 1;
+              padding-left: 0.25rem;
+              line-height: 1.2;
+            }
+          }
+        }
+        &.section {
+          &-bio {
+            font-size: 0.85rem;
+            text-align: center;
+          }
+        }
+      }
+
+
+    }
+  }
+  &-main {
+    .el-tabs__header {
+      padding: 0 1rem;
+      background-color: #fff;
+    }
+  }
+}
+
+.profile-numbers {
+  display: flex;
+  &_item {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+    border: 1px solid $border-color;
+    border-right: none;
+    color: $text-muted;
+    background-color: #fff;
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+      border-right: 1px solid $border-color;
+    }
+    .item-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+  &-sm {
+    .profile-numbers_item {
+      font-size: 0.65rem;
+      .item-number {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.suggestion-item.demo {
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 70px;
+  background-color: #ddd;
+}

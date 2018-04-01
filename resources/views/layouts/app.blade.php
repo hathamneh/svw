@@ -30,11 +30,11 @@
                 @guest
                 @else
                     @if(!isset($wizard))
-                        <div class="header-search-form">
+                        <form action="{{ route("search") }}" class="header-search-form">
                             <input type="text" placeholder="Find Organization, Events, Volunteers ..."
-                                   class="form-control">
-                            <button class="search-button"><i class="fa fa-search"></i></button>
-                        </div>
+                                   name="s" value="{{ $s ?? "" }}" class="form-control">
+                            <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
                     @endif
                 @endguest
                 <div class="navbar-nav ml-auto ">
@@ -93,10 +93,13 @@
             </div>
         </div>
     </nav>
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 </div>
 
 <!-- Scripts -->
+<script src="{{ route("assets.lang") }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
 
 /**
@@ -18,7 +19,9 @@ use Illuminate\Support\Pluralizer;
  * @property String profile_picture
  * @property String cover_picture
  * @property String bio
- * @property mixed capabilities
+ * @property Collection[Capability] capabilities
+ * @property User user
+ * @property string profile_url
  */
 class Volunteer extends Model
 {
@@ -114,5 +117,10 @@ class Volunteer extends Model
     public function getGenderAttribute($val)
     {
         return ucfirst($val);
+    }
+
+    public function getProfileUrlAttribute()
+    {
+        return route("profile.main", ["username" => $this->user->username ]);
     }
 }
