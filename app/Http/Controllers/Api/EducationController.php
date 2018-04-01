@@ -8,6 +8,7 @@ use App\Volunteer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -47,6 +48,7 @@ class EducationController extends Controller
             ]);
             return $newEducation;
         } catch (\Exception $ex) {
+            Log::error($ex);
             return $this->jsonException($ex);
         }
     }
