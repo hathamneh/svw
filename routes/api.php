@@ -32,10 +32,15 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/education', "EducationController@index");
         Route::get('/volunteer/{user}/education', "EducationController@show");
 
+        Route::resource('/volunteer/{user}/profile', "ProfileController", ['except' => ['index','show']]);
+        Route::get('/volunteer/profile', "EducationController@index");
+        Route::get('/volunteer/{user}/profile', "EducationController@show");
+
         Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index','show']]);
         Route::get('/volunteer/experience', "ExperienceController@index");
         Route::get('/volunteer/{user}/experience', "ExperienceController@show");
 
+        Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index','show']]);
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
     });
