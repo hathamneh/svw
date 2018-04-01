@@ -47,9 +47,10 @@ class ExperienceController extends Controller
             /** @var Volunteer $volunteer */
             $volunteer = Auth::user()->volunteer;
             $newEducation = $volunteer->experiences()->create([
-                'school'         => $request->school,
-                'field_of_study' => $request->field_of_study,
-                'gdate'          => $request->gdate,
+                'position'         => $request->position,
+                'organization_name' => $request->organization,
+                'period'          => $request->period,
+                'desc'          => $request->desc,
             ]);
             return $newEducation;
         } catch (\Exception $ex) {
