@@ -49,6 +49,7 @@ class EducationController extends Controller
             return $newEducation;
         } catch (\Exception $ex) {
             Log::error($ex);
+            Log::info("hi");
             return $this->jsonException($ex);
         }
     }
@@ -76,14 +77,12 @@ class EducationController extends Controller
 
     }
 
-    public function destroy(Request $request)
+    public function destroy(User $user, Education $education)
     {
         try {
 
-            $education = Education::findOrFail($request->id);
-            
             /** @var Education $education */
-            if (Auth::user()->has("volunteer") && Auth::user()->volunteer->id == $education->volunteer_id) {
+            if (Auth::user()->has("volunteer") && Auth::user()->id == $user->id && $education->volunteer_id == $user->volunteer->id) {
 
                 $education->delete();
 
