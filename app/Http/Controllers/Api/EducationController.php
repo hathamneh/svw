@@ -48,8 +48,6 @@ class EducationController extends Controller
             ]);
             return $newEducation;
         } catch (\Exception $ex) {
-            Log::error($ex);
-            Log::info("hi");
             return $this->jsonException($ex);
         }
     }

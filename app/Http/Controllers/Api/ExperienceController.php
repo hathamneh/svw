@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\UnauthorizedException;
+use Mockery\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExperienceController extends Controller
@@ -81,12 +82,11 @@ class ExperienceController extends Controller
 
     }
 
-    public function destroy(Request $request)
+    public function destroy(User $user, Exception $experience)
     {
         try {
-            $experience = Experience::findOrFail($request->id);
             /** @var Experience $experience */
-            if (Auth::user()->has("volunteer") && Auth::user()->volunteer->id == $experience->volunteer_id) {
+            if (Auth::user()->has("volunteer") && Auth::user()->id == $user->id && $experience->volunteer_id == $user->volunteer->id) {
 
                 $experience->delete();
 
