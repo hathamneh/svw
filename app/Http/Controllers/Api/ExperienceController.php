@@ -82,7 +82,7 @@ class ExperienceController extends Controller
 
     }
 
-    public function destroy(User $user, Exception $experience)
+    public function destroy(User $user, Experience $experience)
     {
         try {
             /** @var Experience $experience */
