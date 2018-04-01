@@ -25,6 +25,9 @@
     color: darken($warning, 20);
     background-color: #eae6e3;
   }
+  &.active {
+    color: #000 !important;
+  }
 }
 
 hr {

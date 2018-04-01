@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::namespace("Api")->group(function () {
     Route::post('/login', "AuthController@login");
     Route::post('/register', "AuthController@register");
+    Route::get('/countries', "CountriesController@index");
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/registration/wizard', "WizardController@store");
@@ -32,9 +33,9 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/education', "EducationController@index");
         Route::get('/volunteer/{user}/education', "EducationController@show");
 
-        Route::resource('/volunteer/{user}/profile', "ProfileController", ['except' => ['index','show']]);
-        Route::get('/volunteer/profile', "EducationController@index");
-        Route::get('/volunteer/{user}/profile', "EducationController@show");
+        Route::get('/volunteer/profile', "ProfileController@index");
+        Route::get('/volunteer/{user}/profile', "ProfileController@show");
+        Route::put('/volunteer/{user}/profile', "ProfileController@update");
 
         Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index','show']]);
         Route::get('/volunteer/experience', "ExperienceController@index");

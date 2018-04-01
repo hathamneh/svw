@@ -18,8 +18,8 @@
                 <label class="control-label">Birthday
                     <small>(required)</small>
                 </label>
-                <el-date-picker type="date" v-model="aboutForm.birthday" value-format="yyyy-MM-dd HH:mm:ss"
-                                placeholder="Birthday">
+                <el-date-picker type="date" v-model="aboutForm.birthday" value-format="dd/MM/yyyy"
+                                placeholder="Birthday" :default-value="new Date('2000-01-01')">
                 </el-date-picker>
 
             </div>
@@ -62,9 +62,7 @@
         </div>
         <div class="col-sm-5 offset-sm-1">
             <div class="form-group">
-                <label for="phone" class="control-label">Phone Number
-                    <small>(required)</small>
-                </label>
+                <label for="phone" class="control-label">Phone Number</label>
                 <el-input name="phone" v-model="aboutForm.phone" placeholder="Phone Number"></el-input>
             </div>
         </div>

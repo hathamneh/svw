@@ -12,17 +12,19 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function jsonException(\Exception $e) {
+    protected function jsonException(\Exception $e)
+    {
         // Define the response
         $response = [
-            'errors' => 'Sorry, something went wrong.'
+            'errors'  => 'Sorry, something went wrong.',
+            'message' => $e->getMessage(),
+
         ];
 
         // If the app is in debug mode
         if (config('app.debug')) {
             // Add the exception class name, message and stack trace to response
             $response['exception'] = get_class($e); // Reflection might be better here
-            $response['message'] = $e->getMessage();
             $response['trace'] = $e->getTrace();
         }
 

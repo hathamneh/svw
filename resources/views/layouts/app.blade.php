@@ -96,6 +96,7 @@
     <main>
         @yield('content')
     </main>
+    @yield("page_footer")
 </div>
 
 <!-- Scripts -->

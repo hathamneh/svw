@@ -77,9 +77,6 @@
                         errors.push("Country is required")
                     if (personal_info.city === undefined || personal_info.city === "")
                         errors.push("City is required")
-                    if (personal_info.phone === undefined || personal_info.phone === "")
-                        errors.push("Phone number is required")
-
 
                     if (errors.length)
                         reject(errors)

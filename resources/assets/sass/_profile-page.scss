@@ -227,3 +227,12 @@
   height: 70px;
   background-color: #ddd;
 }
+
+.edit-profile {
+  .form-group label {
+    display: block;
+  }
+  .card-header {
+    background-color: #f7f7f7;
+  }
+}
