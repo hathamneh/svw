@@ -142,10 +142,14 @@ class Volunteer extends Model
         $uploaded_url = Storage::disk('public')->url($file_name);
         switch ($target) {
             case "profile":
-                $this->profile_picture = $uploaded_url;
+                $this->update([
+                    'profile_picture' => $uploaded_url
+                ]);
                 break;
             case "cover":
-                $this->cover_picture = $uploaded_url;
+                $this->update([
+                    'cover_picture' => $uploaded_url
+                ]);
                 break;
         }
     }
