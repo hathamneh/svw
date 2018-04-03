@@ -32,6 +32,9 @@ class ProfileController extends Controller
     {
         $user = User::has("volunteer")->where('username', $username)->first();
         $volunteer = $user->volunteer;
-        return view("profile.edit")->with("volunteer",$volunteer);
+        return view("profile.edit")->with([
+            "volunteer" => $volunteer,
+            "user"      => $user,
+        ]);
     }
 }

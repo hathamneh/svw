@@ -44,6 +44,8 @@ Route::namespace("Api")->group(function () {
         Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index','show']]);
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
+
+        Route::get("/search", "SearchController@show");
     });
 
 });

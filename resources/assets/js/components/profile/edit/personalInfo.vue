@@ -92,10 +92,8 @@
                     lock: true,
                 });
                 axios.put("/api/volunteer/"+this.userId+"/profile" ,this.pinfo).then((res) => {
-                    console.log(res.data)
                     loading.close()
                 }).catch((err) => {
-                    console.error(err)
                     loading.close()
                 }).finally(()=> {
                     loading.close()

@@ -4,7 +4,7 @@
         <br>
         <i>Graduation date: {{ educationItem.gdate }}</i>
         <div class="item-tools" v-if="editable">
-            <a href="#" @click.prevent="$emit('eduItemEdit')" class="item-edit"><i class="fa fa-pencil"></i></a>
+            <a href="#" @click.prevent="$emit('eduItemEdit')" class="item-edit"><i class="fa fa-edit"></i></a>
             <a href="#" @click.prevent="$emit('eduItemDelete')" class="item-delete"><i class="fa fa-times"></i></a>
         </div>
     </div>

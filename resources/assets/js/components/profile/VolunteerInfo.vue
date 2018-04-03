@@ -40,7 +40,7 @@
                     id_url = "/" + this.user_id
                 axios.get('/api/volunteer' + id_url)
                     .then((response) => {
-                        console.log(response.data)
+                        //console.log(response.data)
                         this.volunteer = response.data
                     })
                     .catch(function (response) {

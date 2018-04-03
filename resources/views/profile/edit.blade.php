@@ -47,9 +47,25 @@
                     <div class="tab-pane fade show active" id="nav-pinfo" role="tabpanel" aria-labelledby="nav-pinfo-tab">
                         <edit-personal-info :volunteer-id="{{ $volunteer->id }}"></edit-personal-info>
                     </div>
-                    <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">hi
+                    <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-graduation-cap"></i> {{ trans("profile.education") }}
+                            </div>
+                            <div class="card-body">
+                                <w-education :is-profile="true" :user_id="{{ $user->id }}"></w-education>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-experience" role="tabpanel" aria-labelledby="nav-experience-tab">how are you
+                    <div class="tab-pane fade" id="nav-experience" role="tabpanel" aria-labelledby="nav-experience-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-hand-rock"></i> {{ trans("profile.experience") }}
+                            </div>
+                            <div class="card-body">
+                                <w-experience :is-profile="true" :user_id="{{ $user->id }}"></w-experience>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="nav-more" role="tabpanel" aria-labelledby="nav-more-tab">are you okay?
                     </div>

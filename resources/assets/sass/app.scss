@@ -55,7 +55,10 @@ body.nav-fixed main {
     display: flex;
     align-items: center;
     right: 0;
-    width: 36px;
+    padding-right: 0.5rem;
+    [class*="item-"] {
+      padding: 0.2rem;
+    }
   }
 
 }

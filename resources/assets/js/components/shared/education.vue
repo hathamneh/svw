@@ -9,7 +9,9 @@
                                 @eduItemDelete="deleteEduItem(index)"></education-item>
 
             </div>
-            <list-message v-if="!added.length">No Education added!</list-message>
+            <div v-else>
+                <list-message>No Education added!</list-message>
+            </div>
         </div>
         <div class="col-md-12" v-else>
             <list-message>Not Authorized!</list-message>
@@ -78,7 +80,8 @@
                     ]
                 },
                 added: [],
-                formLabelWidth: '130px',
+                formLabelWidth: '190px',
+                apiUrl: '/api/volunteer' + (this.user_id ? "/" + this.user_id : "") + '/education',
                 currentUser: false,
                 editable: false
             }
@@ -143,7 +146,7 @@
                     lock: true,
                 });
                 if (update !== false) {
-                    axios.put('/api/volunteer/education', item)
+                    axios.put(this.apiUrl, item)
                         .then((response) => {
                             this.added[update] = response.data
 
@@ -153,7 +156,7 @@
                         loading.close();
                     })
                 } else {
-                    axios.post('/api/volunteer/education', item)
+                    axios.post(this.apiUrl, item)
                         .then((response) => {
                             this.added.push(response.data)
                         }).catch((response) => {
@@ -217,7 +220,7 @@
                             lock: true,
                         });
 
-                        axios.delete('/api/volunteer/education', {params: {id: this.added[index].id}})
+                        axios.delete(this.apiUrl + "/" + this.added[index].id)
                             .then((response) => {
                                 if (response.data && response.data.deleted)
                                     deleting = true
@@ -233,10 +236,7 @@
                 }
             },
             loadOldItems() {
-                let id_url = ""
-                if (this.user_id)
-                    id_url = "/" + this.user_id
-                axios.get('/api/volunteer/education' + id_url)
+                axios.get(this.apiUrl)
                     .then((response) => {
                         //console.log(response.data)error
                         this.added = response.data

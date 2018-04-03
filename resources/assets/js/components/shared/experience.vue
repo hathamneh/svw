@@ -71,6 +71,7 @@
                         {required: true, message: 'Please input Organization Name', trigger: 'blur'}
                     ]
                 },
+                apiUrl: '/api/volunteer'+(this.user_id ? "/" + this.user_id : "")+'/experience',
                 currentUser: false,
                 editable: false
             }
@@ -137,7 +138,7 @@
                     lock: true,
                 });
                 if (update !== false) {
-                    axios.put('/api/volunteer/experience', item)
+                    axios.put(this.apiUrl, item)
                         .then((response) => {
                             this.added[update] = response.data
 
@@ -147,7 +148,7 @@
                         loading.close();
                     })
                 } else {
-                    axios.post('/api/volunteer/experience', item)
+                    axios.post(this.apiUrl, item)
                         .then((response) => {
                             this.added.push(response.data)
                         }).catch((response) => {
@@ -171,7 +172,7 @@
                             lock: true,
                         });
 
-                        axios.delete('/api/volunteer/experience', {params: {id: this.added[index].id}})
+                        axios.delete(this.apiUrl + "/" + this.added[index].id)
                             .then((response) => {
                                 if (response.data && response.data.deleted)
                                     deleting = true
@@ -187,10 +188,7 @@
                 }
             },
             loadOldItems() {
-                let id_url = ""
-                if (this.user_id)
-                    id_url = "/" + this.user_id
-                axios.get('/api/volunteer/experience' + id_url)
+                axios.get(this.apiUrl)
                     .then((response) => {
                         //console.log(response.data)
                         this.added = response.data
