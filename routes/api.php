@@ -45,7 +45,7 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
 
-        Route::get("/search", "SearchController@show");
+        Route::get("/search/{s}/{type?}", "SearchController@show");
 
         Route::post("/upload/{target}", "ImagesUploadController@upload");
     });

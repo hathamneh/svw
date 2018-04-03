@@ -11,29 +11,28 @@
                 <div class="col-sm-3">
                     <small class="text-muted font-weight-bold">@lang("Search Tools")</small>
                     <hr>
-                    <ul class="nav nav-pills flex-column nav-pills-warning mb-3" id="pills-tab" role="tablist" data-toggle="pills">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-events-tab" data-toggle="pill" href="#pills-events"
-                               role="tab" aria-controls="pills-events" aria-selected="true"><i
-                                        class="fa fa-calendar-alt"></i> @lang("Events")</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-volunteers-tab" data-toggle="pill" href="#pills-volunteers"
+                    <nav>
+                        <div class="nav nav-pills nav-pills-warning flex-column" id="searchTabs" role="tablist">
+
+                            <a class="nav-item nav-link active" id="pills-volunteers-tab" data-toggle="pill" href="#pills-volunteers"
                                role="tab" aria-controls="pills-volunteers" aria-selected="false"><i
                                         class="fa fa-user-circle"></i> @lang("Volunteers")</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-organizations-tab" data-toggle="pill"
+
+                            <a class="nav-item nav-link" id="pills-events-tab" data-toggle="pill" href="#pills-events"
+                               role="tab" aria-controls="pills-events" aria-selected="true"><i
+                                        class="fa fa-calendar-alt"></i> @lang("Events")</a>
+
+                            <a class="nav-item nav-link" id="pills-organizations-tab" data-toggle="pill"
                                href="#pills-organizations" role="tab" aria-controls="pills-organizations"
                                aria-selected="false"><i class="fa fa-building"></i> @lang("Organizations")</a>
-                        </li>
-                    </ul>
+                        </div>
+                    </nav>
 
                 </div>
                 <div class="col-sm-9">
                     <div class="tab-content search-results" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-events" role="tabpanel"
-                             aria-labelledby="pills-events-tab">
+                        <div class="tab-pane fade show active" id="pills-volunteers" role="tabpanel"
+                             aria-labelledby="pills-volunteers-tab">
                             <ul class="row">
                                 <li class="search-results__item col-sm-6">
                                     <a href="#" class="card">
@@ -149,8 +148,9 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="tab-pane fade" id="pills-volunteers" role="tabpanel"
-                             aria-labelledby="pills-volunteers-tab">...
+                        <div class="tab-pane fade" id="pills-events" role="tabpanel"
+                             aria-labelledby="pills-events-tab">
+
                         </div>
                         <div class="tab-pane fade" id="pills-organizations" role="tabpanel"
                              aria-labelledby="pills-organizations-tab">...
