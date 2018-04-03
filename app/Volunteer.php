@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Pluralizer;
 
 /**
@@ -64,7 +65,7 @@ class Volunteer extends Model
 
     public function saveEducations($educations)
     {
-        if(is_array($educations)) {
+        if (is_array($educations)) {
             $arr = [];
             foreach ($educations as $item) {
                 $arr[] = [
@@ -74,7 +75,7 @@ class Volunteer extends Model
                 ];
             }
             return $this->educations()->createMany($arr);
-        } elseif(is_object($educations)) {
+        } elseif (is_object($educations)) {
             return $this->educations()->create((array)$educations);
         }
         return false;
@@ -85,10 +86,10 @@ class Volunteer extends Model
         $arr = [];
         foreach ($experiences as $item) {
             $arr[] = [
-                'position' => $item->position,
+                'position'          => $item->position,
                 'organization_name' => $item->organization,
-                'period' => $item->period,
-                'description' => $item->desc,
+                'period'            => $item->period,
+                'description'       => $item->desc,
             ];
         }
         return $this->experiences()->createMany($arr);
@@ -101,7 +102,7 @@ class Volunteer extends Model
             $type_singular = Pluralizer::singular($type);
             foreach ($values as $value) {
                 $arr[] = [
-                    'type' => $type_singular,
+                    'type'  => $type_singular,
                     'value' => json_encode($value),
                 ];
             }
@@ -121,6 +122,31 @@ class Volunteer extends Model
 
     public function getProfileUrlAttribute()
     {
-        return route("profile.main", ["username" => $this->user->username ]);
+        return route("profile.main", ["username" => $this->user->username]);
+    }
+
+
+    /**
+     * @param $target
+     * @param $image_data
+     * @param $extension
+     */
+    public function uploadImage($target, $image_data, $extension)
+    {
+        $target = in_array($target, ['profile', 'cover']) ? $target : false;
+        if (!$target)
+            throw new \InvalidArgumentException("Target should be profile or cover picture");
+
+        $file_name = md5($this->user->username . time()) . "." . $extension;
+        Storage::disk('public')->put($file_name, $image_data);
+        $uploaded_url = Storage::disk('public')->url($file_name);
+        switch ($target) {
+            case "profile":
+                $this->profile_picture = $uploaded_url;
+                break;
+            case "cover":
+                $this->cover_picture = $uploaded_url;
+                break;
+        }
     }
 }

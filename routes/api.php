@@ -46,7 +46,9 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
 
         Route::get("/search", "SearchController@show");
+
     });
+    Route::post("/upload/{target}", "ImagesUploadController@upload");
 
 });
 
@@ -54,3 +56,4 @@ Route::post("/logging/{type}", function($type) {
     if($type == "error")
         Log::error("Javascript Error: ".json_encode(Input::get()));
 });
+

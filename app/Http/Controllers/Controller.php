@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function jsonException(\Exception $e)
+    public static function jsonException(\Exception $e)
     {
         // Define the response
         $response = [
