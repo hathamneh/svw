@@ -17,7 +17,10 @@ class SearchController extends Controller
         $query = $request->get("s");
         switch ($type) {
             case "volunteer":
-                $results = Volunteer::where("first_name", "LIKE", "%$query%")->orWhere("last_name", "LIKE", "%$query%")->get();
+                $results = Volunteer::where("first_name", "LIKE", "%$query%")
+                        ->orWhere("last_name", "LIKE", "%$query%")
+                        ->with("user")
+                        ->get();
                 return $results;
                 break;
         }
