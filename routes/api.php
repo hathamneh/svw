@@ -47,8 +47,8 @@ Route::namespace("Api")->group(function () {
 
         Route::get("/search", "SearchController@show");
 
+        Route::post("/upload/{target}", "ImagesUploadController@upload");
     });
-    Route::post("/upload/{target}", "ImagesUploadController@upload");
 
 });
 

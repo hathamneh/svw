@@ -17,9 +17,6 @@ class ImagesUploadController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-        $user = User::find(1);
-
-
         /** @var Volunteer $volunteer */
         if(is_null($volunteer = $user->volunteer))
             throw new ModelNotFoundException("Volunteer with this user is not found");

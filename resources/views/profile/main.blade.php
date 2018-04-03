@@ -4,7 +4,7 @@
     <main style="margin-bottom: 6rem;">
         <div class="profile-header">
             <div class="profile-header__cover"
-                 style="background-image: url({{ asset('/images/cover.jpg') }});">
+                 style="background-image: url({{ !is_null($volunteer->cover_picture) ? $volunteer->cover_picture : asset('/images/cover.jpg') }});">
                 @if($view_mode === "self")
                     <a href="#" class="btn btn-secondary btn-change-cover"><i class="fa fa-camera"></i> Change Cover</a>
                 @endif
@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="profile-header__user">
                     <div class="profile-picture">
-                        <img src="{{ asset("/images/default-avatar.jpg") }}" alt="{{ $volunteer->first_name }}">
+                        <img src="{{ !is_null($volunteer->profile_picture) ? $volunteer->profile_picture : asset("/images/default-avatar.jpg") }}" alt="{{ $volunteer->first_name }}">
                     </div>
                     <div class="profile-header__right">
                         <div class="user-full_name">
