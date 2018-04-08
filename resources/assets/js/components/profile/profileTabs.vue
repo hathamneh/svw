@@ -2,6 +2,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="Posts" name="posts">
             <new-post></new-post>
+            <post-list :user-id="user_id"></post-list>
         </el-tab-pane>
         <el-tab-pane label="Membership" name="membership">Membership</el-tab-pane>
         <el-tab-pane label="Experience" name="experience">

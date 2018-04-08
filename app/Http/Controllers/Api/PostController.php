@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\PostsCollection;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PostController extends Controller
@@ -14,11 +16,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param User|null $user
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(User $user = null)
     {
-        return Auth::user()->posts;
+        if (is_null($user))
+            return PostsCollection::collection(Auth()->user()->posts);
+        else
+            return PostsCollection::collection($user->posts);
     }
 
     /**
@@ -34,36 +40,41 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response|Post
+     * @throws \Exception
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            'content' => 'required|max:1000',
+        ])->validate();
         /** @var User $user */
         $user = Auth::user();
-        if(!$request->has("content"))
-            throw new BadRequestHttpException("Post must have content");
 
         $newPost = new Post;
         $newPost->content = $request->get("content");
-        $user->posts->create();
+        $newPost->user()->associate($user);
+        if ($newPost->save())
+            return $newPost;
+        throw new \Exception("Post insertion Error");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Post $post
+     * @return \Illuminate\Http\Response|Post
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -74,8 +85,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,7 +97,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
