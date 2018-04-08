@@ -18,7 +18,7 @@ class PostsCollection extends JsonResource
         $return = [
             'id'         => $this->id,
             'content'    => $this->content,
-            'username'   => $this->user->username,
+            'user_id'   => $this->user->id,
             'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),
         ];
 
