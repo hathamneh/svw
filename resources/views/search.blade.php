@@ -12,149 +12,45 @@
                     <small class="text-muted font-weight-bold">@lang("Search Tools")</small>
                     <hr>
                     <nav>
-                        <div class="nav nav-pills nav-pills-warning flex-column" id="searchTabs" role="tablist">
+                        <div class="nav nav-pills nav-pills-warning flex-column" id="searchTabs">
 
-                            <a class="nav-item nav-link active" id="pills-volunteers-tab" data-toggle="pill" href="#pills-volunteers"
-                               role="tab" aria-controls="pills-volunteers" aria-selected="false"><i
+                            <a class="nav-item nav-link {{ $type == "volunteer" ? "active" : "" }}" id="pills-volunteers-tab"
+                               href="{{ route("search",["s"=>$s, "type"=>"volunteer"]) }}"><i
                                         class="fa fa-user-circle"></i> @lang("Volunteers")</a>
 
-                            <a class="nav-item nav-link" id="pills-events-tab" data-toggle="pill" href="#pills-events"
-                               role="tab" aria-controls="pills-events" aria-selected="true"><i
+                            <a class="nav-item nav-link {{ $type == "event" ? "active" : "" }}" id="pills-events-tab"
+                               href="{{ route("search",["s"=>$s, "type"=>"event"]) }}"><i
                                         class="fa fa-calendar-alt"></i> @lang("Events")</a>
 
-                            <a class="nav-item nav-link" id="pills-organizations-tab" data-toggle="pill"
-                               href="#pills-organizations" role="tab" aria-controls="pills-organizations"
-                               aria-selected="false"><i class="fa fa-building"></i> @lang("Organizations")</a>
+                            <a class="nav-item nav-link {{ $type == "organization" ? "active" : "" }}" id="pills-organizations-tab"
+                               href="{{ route("search",["s"=>$s, "type"=>"organization"]) }}"><i class="fa fa-building"></i> @lang("Organizations")</a>
                         </div>
                     </nav>
 
                 </div>
                 <div class="col-sm-9">
-                    <div class="tab-content search-results" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-volunteers" role="tabpanel"
-                             aria-labelledby="pills-volunteers-tab">
+                    <div class="search-results">
                             <ul class="row">
+                                @foreach($results as $result)
+                                    <?php /** Volunteer $result */ ?>
                                 <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
+                                    <a href="{{ $result->profile_url }}" class="card">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
+                                                    <img src="{{ $result->profile_picture }}" alt="">
                                                 </div>
                                                 <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
+                                                    <h3>{{ $result->full_name }}</h3>
+                                                    <p class="text-muted">{{ "@".$result->user->username }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="#" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ asset("images/default-avatar.jpg") }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>Title of result</h3>
-                                                    <p class="text-muted">Description goes in this area below the title of this item of
-                                                        search result</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                @endforeach
                             </ul>
-                        </div>
-                        <div class="tab-pane fade" id="pills-events" role="tabpanel"
-                             aria-labelledby="pills-events-tab">
 
-                        </div>
-                        <div class="tab-pane fade" id="pills-organizations" role="tabpanel"
-                             aria-labelledby="pills-organizations-tab">...
-                        </div>
                     </div>
                 </div>
             </div>

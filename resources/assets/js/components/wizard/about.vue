@@ -18,7 +18,7 @@
                 <label class="control-label">Birthday
                     <small>(required)</small>
                 </label>
-                <el-date-picker type="date" v-model="aboutForm.birthday" value-format="dd/MM/yyyy"
+                <el-date-picker type="date" v-model="aboutForm.birthday" format="dd/MM/yyyy"
                                 placeholder="Birthday" :default-value="new Date('2000-01-01')">
                 </el-date-picker>
 
@@ -30,9 +30,11 @@
                     <small>(required)</small>
                 </label>
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <el-radio v-model="aboutForm.gender" label="male" border>Male</el-radio>
-                    <el-radio v-model="aboutForm.gender" label="female" border>Female</el-radio>
+                <div class="btn-group btn-group-toggle">
+                    <el-radio-group v-model="aboutForm.gender">
+                        <el-radio label="male" border>Male</el-radio>
+                        <el-radio label="female" border>Female</el-radio>
+                    </el-radio-group>
                 </div>
             </div>
         </div>

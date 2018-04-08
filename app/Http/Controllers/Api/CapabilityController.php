@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -55,11 +56,27 @@ class CapabilityController extends Controller
                 throw new UnauthorizedException();
             /** @var Volunteer $volunteer */
             $volunteer = $user->volunteer;
+            $value = is_array($request->get("value")) ? json_encode($request->get("value")) : $request->get("value");
             $newCapability = $volunteer->capabilities()->create([
-                'type'  => $request->type,
-                'value' => $request->value,
+                'type'  => $request->get("type"),
+                'value' => $value
             ]);
             return $newCapability;
+
+        } catch (\Exception $ex) {
+            return $this->jsonException($ex);
+        }
+    }
+
+    public function update(User $user, Capability $capability, Request $request)
+    {
+        try {
+            if (!Auth::check() || Auth::user()->id != $user->id)
+                throw new UnauthorizedException();
+            $capability->update([
+                'value' => $request->value,
+            ]);
+            return $capability;
 
         } catch (\Exception $ex) {
             return $this->jsonException($ex);

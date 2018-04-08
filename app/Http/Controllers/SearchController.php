@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
 
-    public function show($s, $type = "volunteer")
+    public function show(Request $request)
     {
+        $s = $request->get("s");
+        $type = $request->get("type");
         $results = $this->doSearch($s, $type);
+        /** @var User $user */
+        $user = Auth::user();
+        /** @var Volunteer $volunteer */
+        $volunteer = !is_null($user) ? $user->volunteer : null;
 
-
+        return view("search")->with([
+            's'         => $s,
+            'type'      => $type,
+            'results'   => $results,
+            'user'      => $user,
+            'volunteer' => $volunteer,
+        ]);
     }
 
     public static function escapeLike($str)
@@ -28,7 +42,6 @@ class SearchController extends Controller
                 return [];
             case "organization":
                 return [];
-            case "volunteer":
             default:
                 return Volunteer::search($query);
         }

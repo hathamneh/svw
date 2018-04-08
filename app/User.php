@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -11,6 +12,8 @@ use Laravel\Passport\HasApiTokens;
  * @property bool is_org
  * @property Organization organization
  * @property Volunteer volunteer
+ * @property Collection[User] followers
+ * @property Collection[User] following
  */
 class User extends Authenticatable
 {
@@ -61,4 +64,17 @@ class User extends Authenticatable
         return $this->username;
     }
 
+    public function following()
+    {
+        return $this->belongsToMany(User::class, "followers","follower_id","following_id");
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, "followers","following_id","follower_id");
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -26,8 +27,9 @@ Route::namespace("Api")->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+
         Route::resource('/volunteer', "VolunteerController", ['except' => ['show']]);
-        Route::get('/volunteer/{id}', "VolunteerController@show")->where(['id' => '[0-9]+']);
+        Route::get('/volunteer/{user}', "VolunteerController@show")->where(['user' => '[0-9]+']);
 
         Route::resource('/volunteer/{user}/education', "EducationController", ['except' => ['index','show']]);
         Route::get('/volunteer/education', "EducationController@index");
@@ -45,9 +47,22 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
 
+        Route::post("/upload/{target}", "ImagesUploadController@upload");
+
+        // search
         Route::get("/search/{s}/{type?}", "SearchController@show");
 
-        Route::post("/upload/{target}", "ImagesUploadController@upload");
+        // follow
+        Route::post('/user/follow', "FollowController@followUser");
+        Route::post('/user/unfollow', "FollowController@unfollowUser");
+        Route::get('/user/followers', "FollowController@getFollowers");
+        Route::get('/user/following', "FollowController@getFollowing");
+        Route::get('/user/{user}/followers', "FollowController@getFollowers");
+        Route::get('/user/{user}/following', "FollowController@getFollowing");
+
+        Route::get('/user/following/check/{user}', "FollowController@isFollowing");
+
+        Route::resource("/post","PostController");
     });
 
 });

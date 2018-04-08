@@ -1,6 +1,6 @@
 <template>
     <div class="experience-item list-group-item">
-        <b>{{ experienceItem.position }}</b> in <span>{{ experienceItem.organization }}</span>
+        <b>{{ experienceItem.position }}</b> in <span>{{ experienceItem.organization_name }}</span>
         <br>
         <i>Worked for {{ experienceItem.period }} months</i>
         <div class="item-tools" v-if="editable">
@@ -16,7 +16,7 @@
             experienceItem: {
                 default: () => ({
                     position: '',
-                    organization: '',
+                    organization_name: '',
                     period: 0,
                     desc: ''
                 })

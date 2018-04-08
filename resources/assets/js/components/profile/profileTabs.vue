@@ -11,7 +11,9 @@
             <w-education :is-profile="true" :user_id="user_id"></w-education>
             <!--<education-item :educationItem="{field_of_study:'Computer Engineering', school:'University of Jordan', gdate:'2018-5-30'}"></education-item>-->
         </el-tab-pane>
-        <el-tab-pane label="More" name="more">More</el-tab-pane>
+        <el-tab-pane label="More" name="more">
+            <w-more :is-profile="true" :user-id="user_id"></w-more>
+        </el-tab-pane>
     </el-tabs>
 </template>
 

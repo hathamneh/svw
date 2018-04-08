@@ -115,6 +115,16 @@ class Volunteer extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function getProfilePictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-avatar.jpg");
+    }
+
+    public function getCoverPictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-cover.jpg");
+    }
+
     public function getGenderAttribute($val)
     {
         return ucfirst($val);
@@ -162,4 +172,5 @@ class Volunteer extends Model
             ->get();
         return $results;
     }
+
 }

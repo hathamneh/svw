@@ -36,11 +36,11 @@ Vue.prototype.trans = (string, args) => {
     return value;
 };
 
-require('./Auth')
-require('./shared-components')
-require('./registration-wizard')
-require('./profile-components')
-require('./post-components')
+require('./Auth') 
+require('./register-components/shared-components')
+require('./register-components/registration-wizard')
+require('./register-components/profile-components')
+require('./register-components/post-components')
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

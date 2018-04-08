@@ -41,6 +41,6 @@ class VolunteerController extends Controller
             $out['user'] = $volunteer->user;
             return response()->json($out);
         }
-        return response()->json(["error"], 401);
+        return response()->json(["error"], 500);
     }
 }

@@ -3,7 +3,8 @@
         <div class="card-body">
             <div class="sidebar-section section-bio">
                 <div class="section-title">Bio</div>
-                {{ volunteer.bio }}
+                <template v-if="volunteer.bio != null">{{ volunteer.bio }}</template>
+                <normal-message v-else>{{ trans("profile.no_bio") }}</normal-message>
             </div>
             <div class="sidebar-section section-personalInfo">
                 <div class="section-title" style="margin: 1rem 0;">Personal Information</div>

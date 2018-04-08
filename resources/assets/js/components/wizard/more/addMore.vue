@@ -1,9 +1,9 @@
 <template>
     <el-row :gutter="4">
-        <el-col :span="16">
+        <el-col :span="16" v-if="editable">
             {{ message }}
         </el-col>
-        <el-col :span="8">
+        <el-col :span="8" v-if="editable">
             <el-dialog
                     width="30%"
                     :title="modalTitle"
@@ -24,14 +24,24 @@
             </el-button>
         </el-col>
         <el-col :span="24">
-            <div class="list-group mt-2" v-if="values.length">
+            <div class="list-group mt-2" v-if="values.length || oldItems.length">
+                <div class="list-group-item d-flex" v-for="(value, index) in oldItems" :key="index">
+                    <div v-for="item in type.modal" class="mr-1 small">
+                        <b>{{ item.label }}</b>: {{ value[item.name] }}
+                    </div>
+                    <div class="ml-auto" v-if="editable">
+                        <a href="#" type="text" class="text-danger" title="Delete"
+                           @click.prevent="deleteOldItem(index,value.id)"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+
                 <div class="list-group-item d-flex" v-for="(value, index) in values" :key="index">
                     <div v-for="item in type.modal" class="mr-1 small">
                         <b>{{ item.label }}</b>: {{ value.value[item.name] }}
                     </div>
-                    <div class="ml-auto">
+                    <div class="ml-auto" v-if="editable">
                         <a href="#" type="text" class="text-danger" title="Delete"
-                                   @click.prevent="$delete(values, index)"><i class="fa fa-times"></i></a>
+                           @click.prevent="$delete(values, index)"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
             </div>
@@ -44,7 +54,7 @@
     export default {
         data() {
             return {
-                inputPlaceholder: "Enter "+this.capitalizeFirstLetter(this.type.name)+" name",
+                inputPlaceholder: "Enter " + this.capitalizeFirstLetter(this.type.name) + " name",
                 values: [],
                 toAdd: {},
                 modalVisible: false,
@@ -54,6 +64,13 @@
         props: {
             message: String,
             type: Object,
+            editable: {
+                type: Boolean,
+                default: () => false
+            },
+            oldItems: {
+                type: Array,
+            }
         },
         methods: {
             addValue() {
@@ -67,6 +84,10 @@
             },
             capitalizeFirstLetter(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
+            },
+            deleteOldItem(index, id) {
+                this.$emit('deleteCapItem', id)
+                $delete(this.oldItems, index)
             }
         }
     }

@@ -1,28 +1,33 @@
 <template>
-    <el-tabs tab-position="left">
+    <el-tabs tab-position="left" @deleteCapItem="deleteItem(id)">
         <el-tab-pane>
             <span slot="label"><b>Skills</b> <i class="fa fa-lightbulb-o"></i></span>
-            <add-more :type="types.skills" message="What skills do you have?"
+            <add-more :editable="editable" :type="types.skills" :old-items="caps.skills"
+                      message="What skills do you have?"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><b>Courses</b> <i class="fa fa-graduation-cap"></i></span>
-            <add-more :type="types.course" message="Add courses you have taken"
+            <add-more :editable="editable" :type="types.course" :old-items="caps.courses"
+                      message="Add courses you have taken"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><b>Certificates</b> <i class="fa fa-certificate"></i></span>
-            <add-more :type="types.certificate" message="Add names of certificates you have"
+            <add-more :editable="editable" :type="types.certificate" :old-items="caps.certificates"
+                      message="Add names of certificates you have"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><b>Projects</b> <i class="fa fa-cogs"></i></span>
-            <add-more :type="types.project" message="Add your projects"
+            <add-more :editable="editable" :type="types.project" :old-items="caps.projects"
+                      message="Add your projects"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><b>Languages</b> <i class="fa fa-globe"></i></span>
-            <add-more :type="types.language" message="What languages can you speak?"
+            <add-more :editable="editable" :type="types.language" :old-items="caps.languages"
+                      message="What languages can you speak?"
                       @capabilitiesUpdated="(val) => { pushCaps(val) }"></add-more>
         </el-tab-pane>
     </el-tabs>
@@ -69,7 +74,7 @@
                             {
                                 name: "desc",
                                 label: "description",
-                                "placeholder": "Who has given oy yo you?",
+                                placeholder: "Talk about your project",
                                 type: "textarea"
                             },
                             {name: "url", label: "Url", "placeholder": "input url"}
@@ -82,14 +87,72 @@
                             {name: "level", label: "Level", "placeholder": "Native, Excellent, Good?"},
                         ]
                     }
-                }
+                },
+                apiUrl: '/api/volunteer' + (this.userId ? "/" + this.userId : "") + '/capability',
+                currentUser: false,
+                editable: false,
             };
+        },
+        props: {
+            isProfile: {
+                type: Boolean,
+                default: () => (false)
+            },
+            userId: {
+                type: Number,
+                default: () => (0)
+            }
         },
         methods: {
             pushCaps(val) {
                 let type = val.type;
-                this.caps[type].push(val.value);
-            }
+                if (this.isProfile)
+                    this.save(val, false)
+                else
+                    this.caps[type].push(val.value);
+
+            },
+            save(item, update) {
+                const loading = this.$loading({
+                    lock: true,
+                });
+                if (update !== false) {
+                    axios.put(this.apiUrl, item)
+                        .then((response) => {
+                            this.added[update] = response.data
+
+                        }).catch((response) => {
+                        console.log(response)
+                    }).finally(() => {
+                        loading.close();
+                    })
+                } else {
+                    axios.post(this.apiUrl, item)
+                        .then((response) => {
+                            //this.caps[response.data.type].push(response.data.value);
+                            console.log(response)
+                        }).catch((response) => {
+                        console.log(response)
+                    }).finally(() => {
+                        loading.close();
+                    })
+                }
+            },
+            deleteItem(id) {
+                if(id && id > 0)
+                    axios.delete(this.apiUrl + "/" + id)
+            },
+            loadOldItems() {
+                axios.get(this.apiUrl)
+                    .then((response) => {
+                        console.log(response.data)
+                        this.caps = response.data
+                    })
+                    .catch(function (response) {
+                        logError(response.data, "unauthorized")
+                        this.currentUser = false
+                    });
+            },
         },
         watch: {
             caps: {
@@ -97,6 +160,17 @@
                     this.$emit("newCaps", val);
                 },
                 deep: true
+            }
+        },
+        mounted() {
+            if (this.isProfile) {
+                window.currentUser().then((response) => {
+                    this.currentUser = response.data
+                    this.editable = Number.parseInt(this.currentUser.id) === this.userId;
+                }).catch((response) => {
+                    logError(response.data, "unauthorized")
+                })
+                this.loadOldItems()
             }
         }
     }

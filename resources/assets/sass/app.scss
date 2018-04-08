@@ -83,9 +83,13 @@ a.card:hover {
   }
 }
 
-
-.list-message {
-  padding: 3rem;
+.normal-message {
   text-align: center;
   color: #aaa;
+  padding: 0.75rem;
+}
+
+.list-message {
+  @extend .normal-message;
+  padding: 3rem;
 }

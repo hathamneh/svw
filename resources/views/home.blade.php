@@ -9,8 +9,8 @@
                 <div class="home-sidebar-left sidebar-sticky">
                     <div class="sidebar_user-details">
                         <div class="sidebar_user-details__image">
-                            <div class="avatar-thumb">
-                                <img src="{{ asset("/images/default-avatar.jpg") }}" alt="User">
+                            <div class="avatar-thumb large">
+                                <img src="{{ $volunteer->profile_picture }}" alt="User">
                             </div>
                         </div>
                         <div class="sidebar_user-details__text">
@@ -20,7 +20,7 @@
                             <small>{{ "@" . $user->username }}</small>
                         </div>
                     </div>
-                    <profile-numbers class="profile-numbers-sm"></profile-numbers>
+                    <profile-numbers class="profile-numbers-sm" :user-id="{{ $user->id }}"></profile-numbers>
                 </div>
             </div>
             <div class="col-md-7">

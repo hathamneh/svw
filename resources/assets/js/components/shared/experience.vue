@@ -26,8 +26,8 @@
                         <el-input v-model="experience.position" placeholder="Please input"
                                   auto-complete="true"></el-input>
                     </el-form-item>
-                    <el-form-item label="Organization" :label-width="formLabelWidth" prop="organization">
-                        <el-input v-model="experience.organization" placeholder="Organization"
+                    <el-form-item label="Organization" :label-width="formLabelWidth" prop="organization_name">
+                        <el-input v-model="experience.organization_name" placeholder="Organization"
                                   auto-complete="true"></el-input>
                     </el-form-item>
                     <el-form-item label="Period (Months)" :label-width="formLabelWidth">
@@ -56,7 +56,7 @@
                 edit: false,
                 experience: {
                     position: '',
-                    organization: '',
+                    organization_name: '',
                     period: 0,
                     desc: ''
                 },
@@ -67,7 +67,7 @@
                     position: [
                         {required: true, message: 'Please input Your position', trigger: 'blur'}
                     ],
-                    organization: [
+                    organization_name: [
                         {required: true, message: 'Please input Organization Name', trigger: 'blur'}
                     ]
                 },
@@ -102,7 +102,7 @@
                     if (valid) {
                         this.addExpDialogVisible = false;
                         const position = this.experience.position
-                        const organization = this.experience.organization
+                        const organization_name = this.experience.organization_name
                         const period = this.experience.period * 30
                         const desc = this.experience.desc
                         if (this.isProfile) {
@@ -111,7 +111,7 @@
                             if (this.edit === false) {
                                 this.added.push({
                                     position: position,
-                                    organization: organization,
+                                    organization_name: organization_name,
                                     period: period,
                                     desc: desc,
                                 })
@@ -119,7 +119,7 @@
                             else {
                                 this.added[this.edit] = {
                                     position: position,
-                                    organization: organization,
+                                    organization_name: organization_name,
                                     period: period,
                                     desc: desc,
                                 }
