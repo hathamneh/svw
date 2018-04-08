@@ -1,6 +1,6 @@
 <template>
     <div class="posts-group">
-        <post v-for="(post, key) in posts" :key="key" :post-data="post"></post>
+        <post v-for="(post, key) in posts.slice().reverse()" :key="key" :post-data="post"></post>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
         name: "post-list",
         data() {
             return {
-                posts: []
+                posts: [],
             }
         },
         props: {
@@ -33,7 +33,7 @@
                     })
             },
             addPost(postData) {
-                this.posts.unshift(postData)
+                this.posts.push(postData)
             }
         },
         mounted() {

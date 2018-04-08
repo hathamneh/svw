@@ -15,4 +15,18 @@ class Post extends Model
     {
         return $query->orderBy('created_at', 'desc')->get();
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function addLike(User $user)
+    {
+        $user->likes()->attach($this);
+    }
+    public function removeLike(User $user)
+    {
+        $user->likes()->detach($this);
+    }
 }
