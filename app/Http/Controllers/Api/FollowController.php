@@ -57,6 +57,16 @@ class FollowController extends Controller
         return $request->has("count") ? ["following" => $following->count()] : $following;
     }
 
+    public function getNumbers(User $user = null) {
+        if (is_null($user))
+            $user = Auth::user();
+        $following = $user->following;
+        $out = ["following" => $following->count()];
+        $followers = $user->followers;
+        $out += ["followers" => $followers->count()];
+        return $out;
+    }
+
     public function isFollowing(User $user)
     {
         try {

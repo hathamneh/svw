@@ -60,6 +60,9 @@ Route::namespace("Api")->group(function () {
         Route::get('/user/{user}/followers', "FollowController@getFollowers");
         Route::get('/user/{user}/following', "FollowController@getFollowing");
 
+        Route::get('/user/follow/numbers', "FollowController@getNumbers");
+        Route::get('/user/{user}/follow/numbers', "FollowController@getNumbers");
+
         Route::get('/user/following/check/{user}', "FollowController@isFollowing");
 
         Route::resource("/post","PostController", ["except" => ['index']]);
