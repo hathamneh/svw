@@ -31,11 +31,11 @@
         methods: {
             refresh() {
                 if(this.userId > 0) {
-                    axios.get("/api/user/"+this.userId+"/followers?count").then((res)=>{
-                        this.followers = res.data;
-                    })
-                    axios.get("/api/user/"+this.userId+"/following?count").then((res)=>{
-                        this.following = res.data;
+                    axios.get("/api/user/"+this.userId+"/follow/numbers").then((res)=>{
+                        if(res.data) {
+                            if(res.data.followers) this.followers = res.data.followers;
+                            if(res.data.following) this.following = res.data.following;
+                        }
                     })
                 }
             }

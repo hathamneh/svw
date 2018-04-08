@@ -5,6 +5,8 @@
 </template>
 
 <script>
+    import {EventBus} from "../../event-bus";
+
     export default {
         name: "post-list",
         data() {
@@ -25,14 +27,18 @@
                     postsFor = "/" + this.userId
                 axios.get("/api/posts" + postsFor)
                     .then((res) => {
-                        if(res.data && Array.isArray(res.data)) {
+                        if (res.data && Array.isArray(res.data)) {
                             this.posts = res.data;
                         }
                     })
+            },
+            addPost(postData) {
+                this.posts.unshift(postData)
             }
         },
         mounted() {
             this.loadPosts()
+            EventBus.$on("postAdded", this.addPost)
         }
     }
 </script>

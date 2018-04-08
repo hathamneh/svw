@@ -41,7 +41,7 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response|Post
+     * @return PostsCollection|Post|\Illuminate\Http\Response
      * @throws \Exception
      */
     public function store(Request $request)
@@ -56,7 +56,7 @@ class PostController extends Controller
         $newPost->content = $request->get("content");
         $newPost->user()->associate($user);
         if ($newPost->save())
-            return $newPost;
+            return new PostsCollection($newPost);
         throw new \Exception("Post insertion Error");
     }
 
@@ -97,11 +97,15 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return array
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        try {
+            return ["deleted" => $post->delete()];
+        } catch (\Exception $e) {
+            return ["deleted" => false];
+        }
     }
 }
