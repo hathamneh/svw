@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostsCollection extends JsonResource
 {
@@ -18,7 +19,9 @@ class PostsCollection extends JsonResource
         $return = [
             'id'         => $this->id,
             'content'    => $this->content,
-            'user_id'   => $this->user->id,
+            'user_id'    => $this->user->id,
+            'likes'      => $this->likes->count(),
+            'liked'      => $this->liked(Auth::user()),
             'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),
         ];
 

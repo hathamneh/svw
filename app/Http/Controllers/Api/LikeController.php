@@ -16,7 +16,7 @@ class LikeController extends Controller
             /** @var User $user */
             $user = Auth::user();
             $user->likePost($post);
-            return ['liked' => true];
+            return ['success' => true];
         } catch (\Exception $ex) {
             return self::jsonException($ex);
         }
@@ -27,7 +27,7 @@ class LikeController extends Controller
             /** @var User $user */
             $user = Auth::user();
             $user->unlikePost($post);
-            return ['unliked' => true];
+            return ['success' => true];
         } catch (\Exception $ex) {
             return self::jsonException($ex);
         }

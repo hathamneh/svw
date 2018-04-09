@@ -126,10 +126,10 @@
       display: block;
       font-size: 0.75rem;
       color: $secondary;
-      &:hover {
+      &:hover, &:active, &:focus {
         color: darken($secondary, 10);
         text-decoration: none;
-        background-color: #eee;
+        background-color: #fefefe;
       }
       svg + span, img + span, .fa + span {
         margin-left: 0.25rem;
