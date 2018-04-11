@@ -1,6 +1,6 @@
 <template>
     <div class="posts-group">
-        <post v-for="(post, key) in posts.slice().reverse()" :key="key" :post-data="post"></post>
+        <post v-for="(post, key) in posts" :key="key" :post-data="post"></post>
     </div>
 </template>
 

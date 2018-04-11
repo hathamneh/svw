@@ -13,7 +13,7 @@
                 <span class="Comment_date"> - <a href="#">{{ comment.created_at }}</a></span>
             </div>
             <div class="Comment_text">
-                {{ comment.content }}
+                <nl2br tag="p" :text="comment.content"></nl2br>
             </div>
         </div>
     </div>

@@ -21,6 +21,7 @@ class PostsCollection extends JsonResource
             'content'    => $this->content,
             'user_id'    => $this->user->id,
             'user_url'    => $this->user->profile_url,
+            'post_url'    => $this->post_url,
             'likes'      => $this->likes->count(),
             'liked'      => $this->liked(Auth::user()),
             'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),

@@ -2,6 +2,10 @@
   .comments-group-item:first-child {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    padding-top: 2rem;
+    .Comment_menu-icon {
+      top: 1.5rem;
+    }
   }
 }
 
@@ -18,6 +22,7 @@
 
 .Comment {
   position: relative;
+  font-size: 0.8rem;
   &_menu-icon {
     position: absolute;
     top: 0;
@@ -47,6 +52,10 @@
   }
   &_content {
     margin-left: 1rem;
+
+  }
+  &_text p {
+    margin-bottom: 0;
   }
 }
 
@@ -60,6 +69,18 @@
     font-size: 0.875rem;
   }
   &__button {
-
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: none;
+    background-color: transparent;
+    color: #aaa;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    &:hover, &:focus {
+      color: #333;
+      outline: none;
+    }
   }
 }

@@ -52,10 +52,15 @@ class Post extends Model
 
     public function addComment($content, User $user = null)
     {
-        if(is_null($user)) $user = Auth::user();
+        if (is_null($user)) $user = Auth::user();
         $comment = new Comment;
         $comment->content = $content;
         $comment->user()->associate($user);
         return $this->comments()->save($comment);
+    }
+
+    public function getPostUrlAttribute()
+    {
+        return route("posts.show", $this->id);
     }
 }

@@ -3,7 +3,7 @@
         <div class="comments-group">
             <comment-item v-for="(comment, i) in comments" :key="i" :comment-data="comment"></comment-item>
             <div class="comments-group-item new-comment-wrapper">
-                <new-comment></new-comment>
+                <new-comment :post-id="postId" @newCommentAdded="appendComment"></new-comment>
             </div>
         </div>
     </div>
@@ -14,12 +14,17 @@
         name: "comments-list",
         data() {
             return {
-                comments: this.commentsData
+                comments: this.commentsData || []
             }
         },
         props: {
             commentsData: Array,
             postId: Number
+        },
+        methods: {
+            appendComment(val) {
+                this.comments.push(val)
+            }
         }
     }
 </script>

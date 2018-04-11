@@ -1,8 +1,14 @@
 <template>
     <div class="post-wrapper">
-        <div class="posts-group-item Post">
-            <a href="#" class="Post_menu-icon">
-                <i class="fas fa-angle-down"></i></a>
+        <div :class="['posts-group-item', 'Post', withComments ? 'withComments' : '']">
+            <el-dropdown trigger="click">
+                <span class="Post_menu-icon el-dropdown-link">
+                    <i class="fas fa-angle-down"></i></span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item @click="deletePost"><i class="fa fa-trash"></i> {{ trans("common.delete") }}</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+
             <div class="Post_profile-picture">
                 <a :href="post.user_url" class="avatar-thumb">
                     <img :src="post.profile_picture" alt="">
@@ -11,10 +17,10 @@
             <div class="Post_content">
                 <div class="Post_content-top">
                     <a :href="post.user_url" class="Post_username">{{ post.name }}</a>
-                    <span class="Post_date"> - <a href="#">{{ post.created_at }}</a></span>
+                    <span class="Post_date"> - <a :href="post.post_url">{{ post.created_at }}</a></span>
                 </div>
                 <div class="Post_text">
-                    {{ post.content }}
+                    <nl2br tag="p" :text="post.content"></nl2br>
                 </div>
                 <div class="Post_actions">
                     <div :class="['Post_action', 'Post_action-like', post.liked ? 'liked' : '']">
@@ -22,13 +28,13 @@
                             <img src="/images/like.svg" alt="">
                             <span class="Post_action-number">{{ post.likes }}</span></button>
                     </div>
-                    <div class="Post_action Post_action-comment">
-                        <a href="" class="btn-link btn"><i class="far fa-comment-alt"></i></a>
+                    <div class="Post_action Post_action-comment" v-if="!withComments">
+                        <a :href="post.post_url" class="btn-link btn"><i class="far fa-comment-alt"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <comments-list v-if="withComments" :comments-data="post.comments"></comments-list>
+        <comments-list v-if="withComments" :comments-data="post.comments" :post-id="post.id"></comments-list>
     </div>
 </template>
 
@@ -75,6 +81,11 @@
                             $(event.target).closest(".Post_action-like").toggleClass("liked");
                         })
                 }
+            },
+            deletePost() {
+                axios.delete("/api/post/"+this.post.id).then(res => {
+
+                })
             }
         },
         mounted() {

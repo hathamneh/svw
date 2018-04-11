@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'save' => "Save"
+    'save' => "Save",
+    'delete' => "Delete"
 ];
