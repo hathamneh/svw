@@ -37,14 +37,18 @@ class CommentController extends Controller
      *
      * @param Post $post
      * @param  \Illuminate\Http\Request $request
-     * @return false|\Illuminate\Database\Eloquent\Model
+     * @return CommentCollection
      */
     public function store(Post $post, Request $request)
     {
         Validator::make($request->all(), [
             'content' => 'required|max:1000',
         ])->validate();
-        return $post->addComment($request->get("content"));
+        $comment = $post->addComment($request->get("content"));
+        if($comment instanceof Comment)
+            return new CommentCollection($comment);
+        else
+            return $comment;
     }
 
     /**
