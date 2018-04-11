@@ -42,6 +42,14 @@ class User extends Authenticatable
         return $this->hasOne(Volunteer::class);
     }
 
+    public function getProfileUrlAttribute()
+    {
+        if($this->is_org)
+            return "";
+        else
+            return $this->volunteer->profile_url;
+    }
+
     public function organization()
     {
         return $this->hasOne(Volunteer::class);
@@ -92,5 +100,10 @@ class User extends Authenticatable
     public function unlikePost(Post $post)
     {
         $post->likes()->detach($this);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

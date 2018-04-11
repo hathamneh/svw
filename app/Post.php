@@ -3,8 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @property mixed comments
+ */
 class Post extends Model
 {
     public function user()
@@ -39,5 +43,19 @@ class Post extends Model
                 ->whereUserId($user->id)
                 ->count() > 0;
 
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function addComment($content, User $user = null)
+    {
+        if(is_null($user)) $user = Auth::user();
+        $comment = new Comment;
+        $comment->content = $content;
+        $comment->user()->associate($user);
+        return $this->comments()->save($comment);
     }
 }

@@ -68,6 +68,8 @@ Route::namespace("Api")->group(function () {
         Route::resource("/post","PostController", ["except" => ['index']]);
         Route::get("/posts/{user?}","PostController@index");
 
+        Route::resource("/post/{post}/comment","CommentController");
+
         Route::post("/post/like/{post}", "LikeController@like");
         Route::post("/post/unlike/{post}", "LikeController@unlike");
     });

@@ -16,9 +16,9 @@
                         <h3 class="card-title text-center">Register</h3>
                         <div class="social">
                             <a href="#paper-kit" class="btn btn-just-icon btn-neutral btn-facebook"><i
-                                        class="fa fa-facebook"></i></a>
+                                        class="fab fa-facebook-f"></i></a>
                             <a href="#paper-kit" class="btn btn-just-icon btn-neutral btn-google"><i
-                                        class="fa fa-google"></i></a>
+                                        class="fab fa-google"></i></a>
                         </div>
 
                         <div class="division">

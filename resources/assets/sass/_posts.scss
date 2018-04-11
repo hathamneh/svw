@@ -69,6 +69,7 @@
   }
 }
 
+
 .Post {
   transition: all 0.5s;
   opacity: 1;
@@ -140,15 +141,18 @@
     }
     &-like {
       &.unliked img, img {
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         object-fit: cover;
-        object-position: 100% 100%;
+        object-position: 50% 50%;
         transition: opacity 0.5s;
+      }
+      button:hover img {
+        object-position: 100% 100%;
       }
       &.liked  {
         img {
-          object-position: 0 0;
+          object-position: 0 0 !important;
           opacity: 0.75;
         }
       }

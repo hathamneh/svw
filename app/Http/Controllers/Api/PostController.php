@@ -64,11 +64,12 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  Post $post
-     * @return \Illuminate\Http\Response|Post
+     * @return PostsCollection
      */
     public function show(Post $post)
     {
-        return $post;
+        $post->load("comments");
+        return new PostsCollection($post);
     }
 
     /**
