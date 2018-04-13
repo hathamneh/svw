@@ -23,6 +23,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $success['token'] =  $user->createToken('SVW APP')->accessToken;
             $success['user_id'] = $user->id;
+            $success['is_org'] = $user->is_org;
             return response()->json(['success' => $success], $this->successStatus);
         }
         else{
