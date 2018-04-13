@@ -17,7 +17,7 @@
                         <div class="social">
                             <a href="/redirect/facebook" class="btn btn-just-icon btn-neutral btn-facebook"><i
                                         class="fab fa-facebook-f"></i></a>
-                            <a href="#paper-kit" class="btn btn-just-icon btn-neutral btn-google"><i
+                            <a href="/redirect/google" class="btn btn-just-icon btn-neutral btn-google"><i
                                         class="fab fa-google"></i></a>
                         </div>
 
