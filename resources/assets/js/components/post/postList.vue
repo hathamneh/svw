@@ -1,6 +1,8 @@
 <template>
     <div class="posts-group">
-        <post v-for="(post, key) in posts" :key="key" :post-data="post"></post>
+        <transition-group name="fade">
+            <post v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post>
+        </transition-group>
     </div>
 </template>
 
@@ -33,7 +35,12 @@
                     })
             },
             addPost(postData) {
-                this.posts.push(postData)
+                this.posts.unshift(postData)
+            },
+            deletePost(id) {
+                this.posts = this.posts.filter(n => {
+                    return n.id !== id
+                })
             }
         },
         mounted() {

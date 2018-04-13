@@ -1,11 +1,12 @@
 <template>
-    <div class="post-wrapper">
-        <div :class="['posts-group-item', 'Post', withComments ? 'withComments' : '']">
-            <el-dropdown trigger="click">
+    <div :class="['posts-group-item', withComments ? 'withComments' : '']">
+        <div class="post-wrapper Post">
+            <el-dropdown trigger="click" @command="handlePostMenu">
                 <span class="Post_menu-icon el-dropdown-link">
                     <i class="fas fa-angle-down"></i></span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click="deletePost"><i class="fa fa-trash"></i> {{ trans("common.delete") }}</el-dropdown-item>
+                    <el-dropdown-item command="delete"><i class="fa fa-trash"></i> {{ trans("common.delete") }}
+                    </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
 
@@ -82,9 +83,21 @@
                         })
                 }
             },
+            handlePostMenu(command) {
+                switch (command) {
+                    case "delete":
+                        this.deletePost()
+                        break
+                }
+            },
             deletePost() {
-                axios.delete("/api/post/"+this.post.id).then(res => {
-
+                axios.delete("/api/post/" + this.post.id).then(res => {
+                    this.$emit("postDeleted", this.post.id);
+                    console.log(res.data)
+                    if (this.withComments)
+                        window.location.href = "/"
+                }).catch(res => {
+                    console.log(res.data)
                 })
             }
         },

@@ -52,7 +52,12 @@ class User extends Authenticatable
 
     public function organization()
     {
-        return $this->hasOne(Volunteer::class);
+        return $this->hasOne(Organization::class);
+    }
+
+    public function ready()
+    {
+        return !is_null($this->volunteer) || !is_null($this->organization);
     }
 
     public function accountType(string $type)
@@ -61,6 +66,7 @@ class User extends Authenticatable
             $this->is_org = false;
         elseif ($type === "organization")
             $this->is_org = true;
+        $this->save();
     }
 
     public function getNameAttribute()

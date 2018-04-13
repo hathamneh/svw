@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
  */
 class Post extends Model
 {
+
+    // this is a recommended way to declare event handlers
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function(Post $post) { // before delete() method call this
+            $post->comments()->delete();
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -63,4 +73,5 @@ class Post extends Model
     {
         return route("posts.show", $this->id);
     }
+
 }

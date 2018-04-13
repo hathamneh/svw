@@ -23,7 +23,7 @@ Route::namespace("Api")->group(function () {
     Route::get('/countries', "CountriesController@index");
 
     Route::middleware('auth:api')->group(function () {
-        Route::post('/registration/wizard', "WizardController@store");
+        Route::post('/registration/{type}', "WizardController@store")->where(['type' => 'volunteer|organization']);
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
@@ -72,6 +72,8 @@ Route::namespace("Api")->group(function () {
 
         Route::post("/post/like/{post}", "LikeController@like");
         Route::post("/post/unlike/{post}", "LikeController@unlike");
+
+        Route::get("/categories", "CategoryController@index");
     });
 
 });

@@ -13,3 +13,6 @@ Vue.component('w-step3', require('../components/wizard/step3'));
 Vue.component('w-more', require('../components/wizard/more/more'));
 Vue.component('add-more', require('../components/wizard/more/addMore'));
 
+Vue.component("w-org-about", require('../components/wizard/organization/about'));
+Vue.component("org-category", require('../components/wizard/organization/category'));
+Vue.component("org-specialities", require('../components/wizard/organization/specialities'));

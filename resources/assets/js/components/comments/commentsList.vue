@@ -1,7 +1,9 @@
 <template>
     <div class="comments-wrapper">
         <div class="comments-group">
-            <comment-item v-for="(comment, i) in comments" :key="i" :comment-data="comment"></comment-item>
+            <transition-group name="fade">
+                <comment-item v-for="(comment, i) in comments" :key="i" :comment-data="comment"></comment-item>
+            </transition-group>
             <div class="comments-group-item new-comment-wrapper">
                 <new-comment :post-id="postId" @newCommentAdded="appendComment"></new-comment>
             </div>

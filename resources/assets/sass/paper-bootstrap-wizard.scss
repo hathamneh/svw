@@ -32,7 +32,11 @@
 
 .vue-form-wizard .wizard-icon-circle .wizard-icon {
   margin: auto !important;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 1rem;
 }
 .vue-form-wizard li.active .wizard-icon-circle {
   background-color: $primary-color;
+  font-size: 1rem;
 }

@@ -53,6 +53,7 @@
                         console.error(res)
                     }).finally(()=>{
                         this.editEnabled = true
+                        this.content = ""
                     })
                 }
             }

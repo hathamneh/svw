@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -31,13 +32,19 @@ class LandingController extends Controller
      */
     public function indexLoggedIn()
     {
-        $user = auth()->user();
-        $volunteer = $user->volunteer;
-        if (is_null($volunteer))
+        /** @var User $user */
+        $user = Auth::user();
+        if(!$user->ready())
             return redirect("/register/wizard");
+
+
+        $personal = $user->is_org ? $user->organization : $user->volunteer;
+
+        Log::debug($user->is_org);
+
         return view('home')->with([
             'user'      => $user,
-            'volunteer' => $volunteer,
+            'personal' => $personal,
         ]);
     }
 }

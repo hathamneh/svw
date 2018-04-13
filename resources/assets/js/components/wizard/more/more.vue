@@ -90,7 +90,7 @@
                 },
                 apiUrl: '/api/volunteer' + (this.userId ? "/" + this.userId : "") + '/capability',
                 currentUser: false,
-                editable: false,
+                editable: !this.isProfile,
             };
         },
         props: {

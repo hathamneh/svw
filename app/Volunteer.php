@@ -87,7 +87,7 @@ class Volunteer extends Model
         foreach ($experiences as $item) {
             $arr[] = [
                 'position'          => $item->position,
-                'organization_name' => $item->organization,
+                'organization_name' => $item->organization_name,
                 'period'            => $item->period,
                 'description'       => $item->desc,
             ];

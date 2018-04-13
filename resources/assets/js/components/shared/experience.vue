@@ -106,7 +106,7 @@
                         const period = this.experience.period * 30
                         const desc = this.experience.desc
                         if (this.isProfile) {
-                            this.save(this.education, this.edit);
+                            this.save(this.experience, this.edit);
                         } else {
                             if (this.edit === false) {
                                 this.added.push({

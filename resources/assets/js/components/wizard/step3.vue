@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-6">
             <b>Experience</b><br>
-            <span style="font-size: 0.8rem;">Do you have any previous experience in a voluntary organization?</span>
+            <span style="font-size: 0.8rem;">Do you have any previous experience in a volunteering?</span>
             <hr>
             <w-experience @experienceAdded="(val) => { step3.experience = val }"></w-experience>
         </div>

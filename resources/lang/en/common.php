@@ -2,5 +2,9 @@
 
 return [
     'save' => "Save",
-    'delete' => "Delete"
+    'delete' => "Delete",
+    "about" => "About",
+    "city" => "City",
+    "country" => "Country",
+    "address" => "Address"
 ];
