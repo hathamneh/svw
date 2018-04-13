@@ -37,6 +37,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'is_org' => 'boolean',
+    ];
+
     public function volunteer()
     {
         return $this->hasOne(Volunteer::class);
