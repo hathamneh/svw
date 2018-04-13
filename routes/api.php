@@ -74,6 +74,7 @@ Route::namespace("Api")->group(function () {
         Route::post("/post/unlike/{post}", "LikeController@unlike");
 
         Route::get("/categories", "CategoryController@index");
+        Route::get("/specialities", "SpecialityController@index");
     });
 
 });

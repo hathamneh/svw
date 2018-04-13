@@ -27,18 +27,22 @@
         data() {
             return {
                 specialities: [],
-                loadedSpecialities: [
-                    {id: 1, name: "Youth"},
-                    {id: 2, name: "Science"},
-                    {id: 3, name: "Orphans"},
-                    {id: 4, name: "Education"},
-                ]
+                loadedSpecialities: []
             }
         },
         methods: {
             specialityChanged() {
                 this.$emit("specialityChanged", this.specialities)
+            },
+            loadSpecialities() {
+                axios.get("/api/specialities").then(res => {
+                    if(res.data && Array.isArray(res.data))
+                        this.loadedSpecialities = res.data;
+                })
             }
+        },
+        mounted() {
+            this.loadSpecialities()
         }
     }
 </script>

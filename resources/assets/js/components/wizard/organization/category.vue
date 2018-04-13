@@ -22,21 +22,27 @@
 
 <script>
     export default {
-        name: "org-category-select",
+        name: "org-category",
         data() {
             return {
                 category: "",
-                categories: [
-                    {id: 1, name: "Education"},
-                    {id: 2, name: "Charity"},
-                    {id: 3, name: "Culture"},
-                ]
+                categories: []
             }
         },
         methods: {
             categoryChanged() {
                 this.$emit("categoryChanged", this.category)
+            },
+            loadCategories() {
+                axios.get("/api/categories").then( res => {
+                    console.log(res.data)
+                    if(res.data && Array.isArray(res.data))
+                        this.categories = res.data;
+                })
             }
+        },
+        mounted() {
+            this.loadCategories()
         }
     }
 </script>
