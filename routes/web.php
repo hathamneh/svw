@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingController@index')->name('home');
+Route::get ( '/redirect/{service}', 'SocialLoginController@redirect' );
+Route::get ( '/callback/{service}', 'SocialLoginController@callback' );
 
 Auth::routes();
 

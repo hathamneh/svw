@@ -126,7 +126,7 @@ class WizardController extends Controller
         if (is_int($user_data->category) && !is_null($category = Category::find($user_data->category)))
             $organization->category()->associate($category);
         elseif(is_string($user_data->category))
-            $organization->category()->associate(Category::firstOrFail(['name' => $user_data->category]));
+            $organization->category()->associate(Category::where('name', '=', $user_data->category)->firstOrFail());
 
 
         $organization->user()->associate($user);
