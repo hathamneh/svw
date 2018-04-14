@@ -23,7 +23,7 @@
                             @if($view_mode === "self")
                                 <a href="{{ route("profile.edit", ["volunteer"=>$user->username]) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i> Edit Profile</a>
                             @elseif($view_mode === "other")
-                                <follow-button :user-id="{{ $user->id }}"></follow-button>
+                                <follow-button type="organization" :user-id="{{ $user->id }}"></follow-button>
                             @endif
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <org-info :user_id="{{ $user->id }}"></org-info>
                 </div>
                 <div class="col-md-7 profile-main">
-                    <profile-tabs :user_id="{{ $user->id }}"></profile-tabs>
+                    <profile-tabs mode="{{ $view_mode }}" :user_id="{{ $user->id }}"></profile-tabs>
                 </div>
                 <div class="col-md-2">
                     <small class="text-muted"><b>Suggestions</b></small>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Organization;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class SearchController extends Controller
             case "event":
                 return [];
             case "organization":
-                return [];
+                return Organization::search($query);
             default:
                 return Volunteer::search($query);
         }

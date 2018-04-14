@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PostController extends Controller
@@ -104,7 +105,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         try {
-            return ["deleted" => $post->delete()];
+            if (Auth::user()->id == $post->user_id)
+                return ["deleted" => $post->delete()];
+            throw new UnauthorizedException();
         } catch (\Exception $e) {
             return ["deleted" => false];
         }

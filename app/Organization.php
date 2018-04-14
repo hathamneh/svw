@@ -32,7 +32,8 @@ class Organization extends Model
         return $this->belongsToMany(Speciality::class);
     }
 
-    public function getFullNameAttribute() {
+    public function getFullNameAttribute()
+    {
         return $this->name;
     }
 
@@ -48,12 +49,20 @@ class Organization extends Model
 
     public function getProfileUrlAttribute()
     {
-        return route("profile.organization", ["username"=>$this->user->username]);
+        return route("profile.organization", ["username" => $this->user->username]);
     }
 
     public function getSpecialitiesAttribute()
     {
         return $this->specialities()->pluck("name")->toArray();
 
+    }
+
+    public static function search($s)
+    {
+        $results = self::where("name", "LIKE", "%$s%")
+            ->with("user")
+            ->get();
+        return $results;
     }
 }

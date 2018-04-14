@@ -1,7 +1,7 @@
 <template>
     <div class="posts-group">
         <transition-group name="fade">
-            <post v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post>
+            <post :mode="mode" v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post>
         </transition-group>
     </div>
 </template>
@@ -20,7 +20,8 @@
             userId: {
                 type: Number,
                 required: false
-            }
+            },
+            mode: String
         },
         methods: {
             loadPosts() {

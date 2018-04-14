@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -16,7 +17,7 @@ class ProfileController extends Controller
             $data['user'] = $user;
             $data['volunteer'] = $user->volunteer;
             if (Auth()->user())
-                if (Auth()->user()->id == $user->id)
+                if (Auth::user()->id == $user->id)
                     $data['view_mode'] = "self";
                 else
                     $data['view_mode'] = "other";

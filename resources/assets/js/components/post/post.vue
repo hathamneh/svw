@@ -1,7 +1,7 @@
 <template>
     <div :class="['posts-group-item', withComments ? 'withComments' : '']">
         <div class="post-wrapper Post">
-            <el-dropdown trigger="click" @command="handlePostMenu">
+            <el-dropdown v-if="mode === 'self'" trigger="click" @command="handlePostMenu">
                 <span class="Post_menu-icon el-dropdown-link">
                     <i class="fas fa-angle-down"></i></span>
                 <el-dropdown-menu slot="dropdown">
@@ -57,7 +57,8 @@
             withComments: {
                 type: Boolean,
                 default: false
-            }
+            },
+            mode: String
         },
         methods: {
             likePost(event) {
@@ -92,10 +93,12 @@
             },
             deletePost() {
                 axios.delete("/api/post/" + this.post.id).then(res => {
-                    this.$emit("postDeleted", this.post.id);
-                    console.log(res.data)
-                    if (this.withComments)
-                        window.location.href = "/"
+                    if (res.data && res.deleted) {
+                        this.$emit("postDeleted", this.post.id);
+                        console.log(res.data)
+                        if (this.withComments)
+                            window.location.href = "/"
+                    }
                 }).catch(res => {
                     console.log(res.data)
                 })

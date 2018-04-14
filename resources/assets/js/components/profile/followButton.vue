@@ -1,9 +1,15 @@
 <template>
     <div>
     <button v-if="!followed" @click="follow" :disabled="disabled"
-            class="btn btn-primary btn-follow"><i class="fa fa-user"></i> Follow</button>
+            class="btn btn-primary btn-follow"><i class="fa fa-user-plus"></i>
+        <template v-if="isOrg">Join</template>
+        <template v-else>Follow</template>
+    </button>
     <button v-else @click="unfollow" :disabled="disabled"
-            class="btn btn-light btn-unfollow"><i class="fa fa-user"></i> Unfollow</button>
+            class="btn btn-light btn-unfollow"><i class="fa fa-user"></i>
+        <template v-if="isOrg">Leave</template>
+        <template v-else>Unfollow</template>
+    </button>
     </div>
 </template>
 
@@ -15,14 +21,16 @@
         data() {
             return {
                 followed: false,
-                disabled: false
+                disabled: false,
+                isOrg: this.type == 'organization'
             }
         },
         props: {
             userId: {
                 type: Number,
                 required: true
-            }
+            },
+            type: String
         },
         methods: {
             follow() {
