@@ -31,8 +31,10 @@ Route::middleware(["auth", "lang"])->group(function () {
     Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
 
 
-    Route::get('/volunteer/{username}', 'ProfileController@index')->name('profile.main');
+    Route::get('/volunteer/{username}', 'ProfileController@show')->name('profile.volunteer');
     Route::get('/volunteer/{username}/edit', 'ProfileController@edit')->name('profile.edit');
+
+    Route::get('/organization/{username}', 'OrganizationProfileController@show')->name('profile.organization');
 
     Route::get('/search', "SearchController@show")->name("search");
 

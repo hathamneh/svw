@@ -72,7 +72,7 @@
                         <el-menu mode="horizontal">
                             <el-submenu index="1">
                                 <template slot="title">
-                                    <a href="/volunteer/{{{ auth()->user()->username }}}"><img
+                                    <a href="{{{ auth()->user()->profile_url }}}"><img
                                                 src="{{ asset("/images/default-avatar.jpg") }}" width="25"
                                                 alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
                                 </template>

@@ -73,6 +73,10 @@ Route::namespace("Api")->group(function () {
         Route::post("/post/like/{post}", "LikeController@like");
         Route::post("/post/unlike/{post}", "LikeController@unlike");
 
+
+        // organizations
+        Route::get("/organization/{user}", "OrganizationProfileController@show");
+
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
     });

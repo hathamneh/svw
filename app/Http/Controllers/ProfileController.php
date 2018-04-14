@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function index($username)
+    public function show($username)
     {
         $user = User::where('username', $username)->first();
         $data = [];
@@ -23,7 +23,7 @@ class ProfileController extends Controller
             else
                 $data['view_mode'] = "guest";
 
-            return view("profile.main")->with($data);
+            return view("profile.volunteer")->with($data);
         } else
             return redirect("home");
     }

@@ -32,7 +32,7 @@ class Volunteer extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'birthday'];
 
     protected $fillable = ['first_name', 'last_name', 'birthday',
         'gender', 'country', 'city', 'phone', 'profile_picture',
@@ -132,7 +132,7 @@ class Volunteer extends Model
 
     public function getProfileUrlAttribute()
     {
-        return route("profile.main", ["username" => $this->user->username]);
+        return route("profile.volunteer", ["username" => $this->user->username]);
     }
 
 

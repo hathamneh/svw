@@ -49,7 +49,7 @@ class User extends Authenticatable
     public function getProfileUrlAttribute()
     {
         if($this->is_org)
-            return "";
+            return $this->organization->profile_url;
         else
             return $this->volunteer->profile_url;
     }

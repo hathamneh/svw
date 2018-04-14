@@ -13,7 +13,7 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'founded_at'];
 
     protected $fillable = ['name', 'founded_at', 'website', 'about', 'country', 'city', 'address'];
 
@@ -34,5 +34,10 @@ class Organization extends Model
 
     public function getFullNameAttribute() {
         return $this->name;
+    }
+
+    public function getProfileUrlAttribute()
+    {
+        return route("profile.organization", ["username"=>$this->user->username]);
     }
 }

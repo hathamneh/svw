@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Capability;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VolunteerCollection;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -32,14 +33,8 @@ class VolunteerController extends Controller
         $user = User::findOrFail($user);
         if (!is_null($volunteer = $user->volunteer)) {
             /** @var Volunteer $volunteer */
-            $out = $volunteer->toArray();
-            if ($request->get("all", false) == true) {
-                $volunteer->load('educations', 'experiences');
-                $out = $volunteer->toArray();
-                $out['capabilities'] = Capability::groupify($volunteer->capabilities);
-            }
-            $out['user'] = $volunteer->user;
-            return response()->json($out);
+
+            return new VolunteerCollection($volunteer);
         }
         return response()->json(["error"], 500);
     }

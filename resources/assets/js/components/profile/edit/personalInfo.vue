@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label>{{ trans("profile.birthday") }}</label>
-                    <el-date-picker type="date" v-model="pinfo.birthday" value-format="dd/MM/yyyy" style="width: 100%;"
+                    <el-date-picker type="date" v-model="pinfo.birthday" format="dd/MM/yyyy" value-format="yyyy-MM-dd HH:mm:ss" style="width: 100%;"
                                     :placeholder="trans('profile.birthday')" :default-value="new Date('2000-01-01')">
                     </el-date-picker>
                 </div>

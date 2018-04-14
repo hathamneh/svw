@@ -7,3 +7,7 @@ Vue.component('follow-button', require('../components/profile/followButton'))
 
 Vue.component('edit-personal-info', require('../components/profile/edit/personalInfo'))
 
+
+// organization
+Vue.component('org-info', require('../components/profile/orgInfo'))
+

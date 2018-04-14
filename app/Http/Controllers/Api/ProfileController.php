@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\UnauthorizedException;
 
 class ProfileController extends Controller
@@ -72,7 +74,8 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        try {
+        Log::debug($request);
+//        try {
             if (!Auth::check() || Auth::user()->id != $user->id)
                 throw new UnauthorizedException("You are not allowed to update another user profile");
             $volunteer = $user->volunteer;
@@ -82,7 +85,7 @@ class ProfileController extends Controller
             if($request->has("last_name"))
                 $data['last_name'] = $request->get("last_name");
             if($request->has("birthday"))
-                $data['birthday'] = $request->get("birthday");
+                $data['birthday'] = strtotime($request->get("birthday"));
             if($request->has("country"))
                 $data['country'] = $request->get("country");
             if($request->has("city"))
@@ -95,9 +98,9 @@ class ProfileController extends Controller
 
             return response()->json(['updated' => $result]);
 
-        } catch (\Exception $ex) {
-            return $this->jsonException($ex);
-        }
+//        } catch (\Exception $ex) {
+//            return $this->jsonException($ex);
+//        }
     }
 
     /**
