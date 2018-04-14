@@ -11,7 +11,7 @@
         <div class="col-sm-5 offset-sm-1">
             <div class="form-group">
                 <label>{{ trans("organization.foundation_date") }}:</label>
-                <el-date-picker type="date" v-model="aboutForm.founded_date" format="dd/MM/yyyy" style="width: 100%;"
+                <el-date-picker type="date" v-model="aboutForm.founded_date" value-format="yyyy-MM-dd HH:mm:ss" format="dd/MM/yyyy" style="width: 100%;"
                                 placeholder="When have you founded?">
                 </el-date-picker>
             </div>

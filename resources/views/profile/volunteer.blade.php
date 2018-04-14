@@ -40,7 +40,7 @@
                     <volunteer-info :user_id="{{ $user->id }}"></volunteer-info>
                 </div>
                 <div class="col-md-7 profile-main">
-                    <profile-tabs :user_id="{{ $user->id }}"></profile-tabs>
+                    <profile-tabs mode="{{ $view_mode }}" :user_id="{{ $user->id }}"></profile-tabs>
                 </div>
                 <div class="col-md-2">
                     <small class="text-muted"><b>Suggestions</b></small>

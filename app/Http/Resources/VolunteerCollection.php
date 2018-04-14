@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Capability;
 use Illuminate\Http\Resources\Json\JsonResource;
+use PeterColes\Countries\CountriesFacade;
 
 class VolunteerCollection extends JsonResource
 {
@@ -19,11 +20,11 @@ class VolunteerCollection extends JsonResource
             'id'              => $this->id,
             'user_id'         => $this->user_id,
             'full_name'       => $this->full_name,
-            'first_name'       => $this->full_name,
-            'last_name'       => $this->full_name,
+            'first_name'      => $this->first_name,
+            'last_name'       => $this->last_name,
             "birthday"        => $this->birthday->toFormattedDateString(),
             "gender"          => $this->gender,
-            "country"         => $this->country,
+            "country"         => CountriesFacade::lookup()[$this->country],
             "city"            => $this->city,
             "phone"           => $this->phone,
             "profile_picture" => $this->profile_picture,

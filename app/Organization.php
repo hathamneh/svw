@@ -36,8 +36,24 @@ class Organization extends Model
         return $this->name;
     }
 
+    public function getProfilePictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-avatar.jpg");
+    }
+
+    public function getCoverPictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-cover.jpg");
+    }
+
     public function getProfileUrlAttribute()
     {
         return route("profile.organization", ["username"=>$this->user->username]);
+    }
+
+    public function getSpecialitiesAttribute()
+    {
+        return $this->specialities()->pluck("name")->toArray();
+
     }
 }

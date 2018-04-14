@@ -20,20 +20,22 @@ class PostsCollection extends JsonResource
             'id'         => $this->id,
             'content'    => $this->content,
             'user_id'    => $this->user->id,
-            'user_url'    => $this->user->profile_url,
-            'post_url'    => $this->post_url,
+            'user_url'   => $this->user->profile_url,
+            'post_url'   => $this->post_url,
             'likes'      => $this->likes->count(),
             'liked'      => $this->liked(Auth::user()),
             'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),
         ];
 
-        if (!$this->user->is_org) {
-            $volunteer = $this->user->volunteer;
-            $return += [
-                'name'            => $volunteer->full_name,
-                'profile_picture' => $volunteer->profile_picture,
-            ];
-        }
+        if (!$this->user->is_org)
+            $poster = $this->user->volunteer;
+        else
+            $poster = $this->user->organization;
+        $return += [
+            'name'            => $poster->full_name,
+            'profile_picture' => $poster->profile_picture,
+        ];
+
         $return['comments'] = CommentCollection::collection($this->whenLoaded('comments'));
 
         return $return;

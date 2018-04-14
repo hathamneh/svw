@@ -1,18 +1,18 @@
 <template>
     <div class="card sidebar-card">
         <div class="card-body">
-            <div class="sidebar-section section-bio">
-                <div class="section-title">Bio</div>
-                <template v-if="volunteer.bio != null">{{ volunteer.bio }}</template>
-                <normal-message v-else>{{ trans("profile.no_bio") }}</normal-message>
+            <div class="sidebar-section section-bio" v-if="organization.about != null">
+                <div class="section-title">About</div>
+                {{ organization.about }}
             </div>
             <div class="sidebar-section section-personalInfo">
-                <div class="section-title" style="margin: 1rem 0;">Personal Information</div>
                 <ul>
-                    <li><i class="fa fa-birthday-cake"></i> Born in {{ volunteer.birthday }}</li>
-                    <li><i class="fa fa-male"></i> {{ volunteer.gender }}</li>
-                    <li><i class="fa fa-map-marker"></i> Lives in {{ volunteer.city }}, {{ volunteer.country }}</li>
-                    <li><i class="fa fa-phone"></i> <a :href="'tel://' + volunteer.phone">Contact {{ volunteer.phone }}</a></li>
+                    <li v-if="organization.founded_date != null"><b>Founded at</b>: <span>{{ organization.founded_date
+                        }}</span></li>
+                    <li v-if="organization.city != null"><b>Location</b>: <span>{{ organization.city }}, {{ organization.country }}</span></li>
+                    <li v-else><b>Location</b>: <span>{{ organization.country }}</span></li>
+                    <li><b>Category</b>: <span>{{ organization.category }}</span></li>
+                    <li v-if="organization.specialities != ''"><b>Specialities</b>: <span>{{ organization.specialities }}</span></li>
                 </ul>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 axios.get('/api/organization' + id_url)
                     .then((response) => {
                         //console.log(response.data)
-                        this.volunteer = response.data
+                        this.organization = response.data
                     })
                     .catch(function (response) {
                         logError(response.data, "unauthorized")
