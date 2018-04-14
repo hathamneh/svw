@@ -48,10 +48,12 @@ class User extends Authenticatable
 
     public function getProfileUrlAttribute()
     {
-        if($this->is_org)
-            return $this->organization->profile_url;
-        else
-            return $this->volunteer->profile_url;
+        if ($this->ready())
+            if ($this->is_org)
+                return $this->organization->profile_url;
+            else
+                return $this->volunteer->profile_url;
+        return "#";
     }
 
     public function organization()
@@ -99,7 +101,7 @@ class User extends Authenticatable
 
     public function likes()
     {
-        return $this->belongsToMany(Post::class, "likes", "user_id","post_id");
+        return $this->belongsToMany(Post::class, "likes", "user_id", "post_id");
     }
 
     public function likePost(Post $post)
