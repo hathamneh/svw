@@ -35,12 +35,12 @@
             <div class="row">
 
                 <div class="col-md-3 profile-sidebar">
-                    <profile-numbers :user-id="{{ $user->id }}"></profile-numbers>
+                    <profile-numbers :is-org="true" :user-id="{{ $user->id }}"></profile-numbers>
 
                     <org-info :user_id="{{ $user->id }}"></org-info>
                 </div>
                 <div class="col-md-7 profile-main">
-                    <profile-tabs mode="{{ $view_mode }}" :user_id="{{ $user->id }}"></profile-tabs>
+                    <profile-tabs :is-org="true" mode="{{ $view_mode }}" :user_id="{{ $user->id }}"></profile-tabs>
                 </div>
                 <div class="col-md-2">
                     <small class="text-muted"><b>Suggestions</b></small>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 
+Vue.component('volunteer-tabs', require('../components/profile/volunteerTabs'))
 Vue.component('volunteer-info', require('../components/profile/VolunteerInfo'))
 Vue.component('profile-tabs', require('../components/profile/profileTabs'))
 Vue.component('profile-numbers', require('../components/profile/numbers'))
@@ -9,5 +10,6 @@ Vue.component('edit-personal-info', require('../components/profile/edit/personal
 
 
 // organization
+Vue.component('organization-tabs', require('../components/profile/organizationTabs'))
 Vue.component('org-info', require('../components/profile/orgInfo'))
 

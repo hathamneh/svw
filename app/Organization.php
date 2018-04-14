@@ -32,6 +32,16 @@ class Organization extends Model
         return $this->belongsToMany(Speciality::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function eventsCount()
+    {
+        return $this->hasMany(Event::class)->count();
+    }
+
     public function getFullNameAttribute()
     {
         return $this->name;
