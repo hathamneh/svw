@@ -2,14 +2,14 @@
     <div class="profile-numbers">
         <div class="profile-numbers_item followers">
             <div class="item-number">{{ followers }}</div>
-            <div v-if="isOrg">Member</div>
-            <div v-else>Follower</div>
+            <div v-if="isOrg">Members</div>
+            <div v-else>Followers</div>
         </div>
-        <div class="profile-numbers_item events" v-else>
+        <div class="profile-numbers_item events" v-if="showEvents">
             <span class="item-number">{{ events }}</span>
             <div>Events</div>
         </div>
-        <div class="profile-numbers_item followers" v-if="showEvents">
+        <div class="profile-numbers_item followers" v-else>
             <span class="item-number">{{ following }}</span>
             <div>Following</div>
         </div>
