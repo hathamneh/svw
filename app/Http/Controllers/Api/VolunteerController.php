@@ -16,14 +16,7 @@ class VolunteerController extends Controller
     {
         if (Auth::check() && !is_null($volunteer = Auth::user()->volunteer)) {
             /** @var Volunteer $volunteer */
-            $out = $volunteer->toArray();
-            if ($request->get("all", false) == true) {
-                $volunteer->load('educations', 'experiences');
-                $out = $volunteer->toArray();
-                $out['capabilities'] = Capability::groupify($volunteer->capabilities);
-            }
-            $out['user'] = $volunteer->user;
-            return response()->json($out);
+            return new VolunteerCollection($volunteer);
         }
         return response()->json(["error"], 401);
     }
