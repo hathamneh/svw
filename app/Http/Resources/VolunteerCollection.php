@@ -24,7 +24,7 @@ class VolunteerCollection extends JsonResource
             'last_name'       => $this->last_name,
             "birthday"        => $this->birthday->toFormattedDateString(),
             "gender"          => $this->gender,
-            "country"         => CountriesFacade::lookup()[$this->country],
+            "country"         => CountriesFacade::lookup()[$this->country] ?? $this->country,
             "city"            => $this->city,
             "phone"           => $this->phone,
             "profile_picture" => $this->profile_picture,
