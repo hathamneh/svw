@@ -32,9 +32,10 @@ Route::middleware(["auth", "lang"])->group(function () {
 
 
     Route::get('/volunteer/{username}', 'ProfileController@show')->name('profile.volunteer');
-    Route::get('/volunteer/{username}/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::get('/volunteer/{username}/edit', 'ProfileController@edit')->name('profile.volunteer.edit');
 
     Route::get('/organization/{username}', 'OrganizationProfileController@show')->name('profile.organization');
+    Route::get('/organization/{username}/edit', 'OrganizationProfileController@edit')->name('profile.organization.edit');
 
     Route::get('/search', "SearchController@show")->name("search");
 

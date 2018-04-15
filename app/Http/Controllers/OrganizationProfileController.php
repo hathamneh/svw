@@ -27,4 +27,13 @@ class OrganizationProfileController extends Controller
         } else
             return redirect("home");
     }
+
+    public function edit(User $user)
+    {
+        try {
+
+        } catch (\Exception $ex) {
+            return self::jsonException($ex);
+        }
+    }
 }

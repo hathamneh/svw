@@ -53,7 +53,7 @@ Route::namespace("Api")->group(function () {
         Route::post("/upload/{target}", "ImagesUploadController@upload");
 
         // search
-        Route::get("/search/{s}/{type?}", "SearchController@show");
+        Route::get("/search/{s}/{type?}", "SearchController@doSearch");
 
         // follow
         Route::post('/user/follow', "FollowController@followUser");

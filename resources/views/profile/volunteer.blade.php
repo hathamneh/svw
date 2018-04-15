@@ -21,7 +21,7 @@
                         </div>
                         <div class="user-actions">
                             @if($view_mode === "self")
-                                <a href="{{ route("profile.edit", ["volunteer"=>$user->username]) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i> Edit Profile</a>
+                                <a href="{{ route("profile.volunteer.edit", ["volunteer"=>$user->username]) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i> Edit Profile</a>
                             @elseif($view_mode === "other")
                                 <follow-button :user-id="{{ $user->id }}"></follow-button>
                             @endif
