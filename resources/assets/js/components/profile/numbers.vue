@@ -42,6 +42,7 @@
                 if (this.userId > 0) {
                     axios.get("/api/user/" + this.userId + "/follow/numbers").then((res) => {
                         if (res.data) {
+                            console.log(res.data)
                             if (res.data.followers) this.followers = res.data.followers
                             if (res.data.following) this.following = res.data.following
                             if (this.isOrg && res.data.events) this.events = res.data.events

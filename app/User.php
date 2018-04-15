@@ -111,7 +111,7 @@ class User extends Authenticatable
     public function memberOf()
     {
         return $this->belongsToMany(User::class, "followers", "follower_id", "following_id")
-            ->where("is_org", "=", true)->organization();
+            ->where("is_org", "=", true);
     }
 
     public function likePost(Post $post)

@@ -67,7 +67,7 @@ class FollowController extends Controller
         $out += ["followers" => $followers->count()];
 
         if ($user->is_org) {
-            $out = ['events' => $user->organization->eventsCount()];
+            $out += ['events' => $user->organization->eventsCount()];
         }
 
         return $out;
