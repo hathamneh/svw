@@ -1,15 +1,14 @@
 <template>
     <div class="card sidebar-card">
         <div class="card-body">
-            <div class="sidebar-section section-bio" v-if="organization.about != null">
-                <div class="section-title">About</div>
+            <div class="sidebar-section section-bio" v-if="organization.about != ''">
                 {{ organization.about }}
             </div>
             <div class="sidebar-section section-personalInfo">
                 <ul>
-                    <li v-if="organization.founded_date != null"><b>Founded at</b>: <span>{{ organization.founded_date
+                    <li v-if="organization.founded_date != ''"><b>Founded in</b>: <span>{{ organization.founded_date
                         }}</span></li>
-                    <li v-if="organization.city != null"><b>Location</b>: <span>{{ organization.city }}, {{ organization.country }}</span></li>
+                    <li v-if="organization.city != ''"><b>Location</b>: <span>{{ organization.city }}, {{ organization.country }}</span></li>
                     <li v-else><b>Location</b>: <span>{{ organization.country }}</span></li>
                     <li><b>Category</b>: <span>{{ organization.category }}</span></li>
                     <li v-if="organization.specialities != ''"><b>Specialities</b>: <span>{{ organization.specialities }}</span></li>

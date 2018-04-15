@@ -86,7 +86,11 @@ class User extends Authenticatable
 
     public function following()
     {
-        return $this->belongsToMany(User::class, "followers", "follower_id", "following_id");
+        if ($this->is_org)
+            return $this->belongsToMany(User::class, "followers", "follower_id", "following_id");
+        else
+            return $this->belongsToMany(User::class, "followers", "follower_id", "following_id")
+                ->where("is_org", "!=", true);
     }
 
     public function followers()
@@ -104,6 +108,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, "likes", "user_id", "post_id");
     }
 
+    public function memberOf()
+    {
+        return $this->belongsToMany(User::class, "followers", "follower_id", "following_id")
+            ->where("is_org", "=", true)->organization();
+    }
+
     public function likePost(Post $post)
     {
         $post->likes()->attach($this);
@@ -119,7 +129,8 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function events() {
+    public function events()
+    {
         return $this->belongsToMany(Event::class);
     }
 }

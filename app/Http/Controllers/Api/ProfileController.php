@@ -113,4 +113,10 @@ class ProfileController extends Controller
     {
         //
     }
+
+
+    public function getMembership(User $user)
+    {
+        return $user->memberOf;
+    }
 }

@@ -38,4 +38,5 @@ class ProfileController extends Controller
             "user"      => $user,
         ]);
     }
+
 }

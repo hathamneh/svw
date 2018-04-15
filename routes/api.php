@@ -39,6 +39,8 @@ Route::namespace("Api")->group(function () {
         Route::get('/volunteer/{user}/profile', "ProfileController@show");
         Route::put('/volunteer/{user}/profile', "ProfileController@update");
 
+        Route::get('/volunteer/{user}/memberships', "ProfileController@getMembership");
+
         Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index','show']]);
         Route::get('/volunteer/experience', "ExperienceController@index");
         Route::get('/volunteer/{user}/experience', "ExperienceController@show");
@@ -46,6 +48,7 @@ Route::namespace("Api")->group(function () {
         Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index','show']]);
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
+
 
         Route::post("/upload/{target}", "ImagesUploadController@upload");
 
