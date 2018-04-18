@@ -3,12 +3,8 @@
 @section("content")
     <main style="margin-bottom: 6rem;">
         <div class="profile-header">
-            <div class="profile-header__cover"
-                 style="background-image: url({{ $user->cover_picture }});">
-                @if($view_mode === "self")
-                    <a href="#" class="btn btn-secondary btn-change-cover"><i class="fa fa-camera"></i> Change Cover</a>
-                @endif
-            </div>
+
+            <cover-picture src="{{ $user->cover_picture }}" :editable="{{ $view_mode === "self" }}"></cover-picture>
             <div class="container">
                 <div class="profile-header__user">
                     <profile-picture src="{{ $user->profile_picture }}"></profile-picture>

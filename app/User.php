@@ -179,6 +179,7 @@ class User extends Authenticatable
         $file_name = md5($this->username . time()) . "." . $extension;
         Storage::disk('public')->put($file_name, $image_data);
         $uploaded_url = Storage::disk('public')->url($file_name);
+        logger($uploaded_url);
         switch ($target) {
             case "profile":
                 $this->profile_picture = $uploaded_url;
