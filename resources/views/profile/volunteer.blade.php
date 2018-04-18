@@ -4,16 +4,14 @@
     <main style="margin-bottom: 6rem;">
         <div class="profile-header">
             <div class="profile-header__cover"
-                 style="background-image: url({{ $volunteer->cover_picture }});">
+                 style="background-image: url({{ $user->cover_picture }});">
                 @if($view_mode === "self")
                     <a href="#" class="btn btn-secondary btn-change-cover"><i class="fa fa-camera"></i> Change Cover</a>
                 @endif
             </div>
             <div class="container">
                 <div class="profile-header__user">
-                    <div class="profile-picture">
-                        <img src="{{ $volunteer->profile_picture }}" alt="{{ $volunteer->first_name }}">
-                    </div>
+                    <profile-picture src="{{ $user->profile_picture }}"></profile-picture>
                     <div class="profile-header__right">
                         <div class="user-full_name">
                             <h2>{{ $volunteer->full_name }}</h2>

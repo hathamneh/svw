@@ -17,16 +17,26 @@ class ImagesUploadController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-        /** @var Volunteer $volunteer */
-        if(is_null($volunteer = $user->volunteer))
-            throw new ModelNotFoundException("Volunteer with this user is not found");
-
-        if($request->has("image_data") && $request->has("image_ext")) {
+        if ($request->has("image_data") && $request->has("image_ext")) {
             $image_data = base64_decode($request->get("image_data"));
             $file_extension = $request->get("image_ext");
-            $volunteer->uploadImage($target,$image_data,$file_extension);
-            return ["uploaded"=>true];
+            $user->uploadImageEncoded($target, $image_data, $file_extension);
+            return ["uploaded" => true];
         }
-        return ["uploaded"=>false];
+        return ["uploaded" => false];
+
+    }
+
+    public function uploadImage($target, Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        if ($request->hasFile('image')) {
+            return [
+                'result' => true,
+                'url'    => $user->uploadImage($target, $request->file("image")),
+            ];
+        }
+        return ['result' => false];
     }
 }

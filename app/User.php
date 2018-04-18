@@ -3,8 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
 /**
@@ -132,5 +134,62 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+
+    public function getProfilePictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-avatar.jpg");
+    }
+
+    public function getCoverPictureAttribute($val)
+    {
+        return !is_null($val) ? $val : asset("images/default-cover.jpg");
+    }
+
+    public function uploadImage($target, UploadedFile $file)
+    {
+        $fname = md5($this->username . time()) . '.' . $file->getClientOriginalExtension();
+        Storage::putFileAs('public', $file, $fname);
+        $uploadedUrl = Storage::disk("public")->url($fname);
+        switch ($target) {
+            case "profile":
+                $this->profile_picture = $uploadedUrl;
+                $this->save();
+                break;
+            case "cover":
+                $this->cover_picture = $uploadedUrl;
+                $this->save();
+                break;
+        }
+        return $uploadedUrl;
+    }
+
+    /**
+     * @param $target
+     * @param $image_data
+     * @param $extension
+     */
+    public function uploadImageEncoded($target, $image_data, $extension)
+    {
+        $target = in_array($target, ['profile', 'cover']) ? $target : false;
+        if (!$target)
+            throw new \InvalidArgumentException("Target should be profile or cover picture");
+
+        $file_name = md5($this->username . time()) . "." . $extension;
+        Storage::disk('public')->put($file_name, $image_data);
+        $uploaded_url = Storage::disk('public')->url($file_name);
+        switch ($target) {
+            case "profile":
+                $this->update([
+                    'profile_picture' => $uploaded_url,
+                ]);
+                break;
+            case "cover":
+                $this->update([
+                    'cover_picture' => $uploaded_url,
+                ]);
+                break;
+        }
     }
 }

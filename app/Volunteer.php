@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Pluralizer;
@@ -115,15 +116,6 @@ class Volunteer extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function getProfilePictureAttribute($val)
-    {
-        return !is_null($val) ? $val : asset("images/default-avatar.jpg");
-    }
-
-    public function getCoverPictureAttribute($val)
-    {
-        return !is_null($val) ? $val : asset("images/default-cover.jpg");
-    }
 
     public function getGenderAttribute($val)
     {
@@ -136,33 +128,6 @@ class Volunteer extends Model
     }
 
 
-    /**
-     * @param $target
-     * @param $image_data
-     * @param $extension
-     */
-    public function uploadImage($target, $image_data, $extension)
-    {
-        $target = in_array($target, ['profile', 'cover']) ? $target : false;
-        if (!$target)
-            throw new \InvalidArgumentException("Target should be profile or cover picture");
-
-        $file_name = md5($this->user->username . time()) . "." . $extension;
-        Storage::disk('public')->put($file_name, $image_data);
-        $uploaded_url = Storage::disk('public')->url($file_name);
-        switch ($target) {
-            case "profile":
-                $this->update([
-                    'profile_picture' => $uploaded_url
-                ]);
-                break;
-            case "cover":
-                $this->update([
-                    'cover_picture' => $uploaded_url
-                ]);
-                break;
-        }
-    }
 
     public static function search($s)
     {

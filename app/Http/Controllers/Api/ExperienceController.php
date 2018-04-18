@@ -49,7 +49,7 @@ class ExperienceController extends Controller
             $volunteer = Auth::user()->volunteer;
             $newEducation = $volunteer->experiences()->create([
                 'position'         => $request->position,
-                'organization_name' => $request->organization,
+                'organization_name' => $request->organization_name,
                 'period'          => $request->period,
                 'desc'          => $request->desc,
             ]);

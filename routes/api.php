@@ -51,6 +51,7 @@ Route::namespace("Api")->group(function () {
 
 
         Route::post("/upload/{target}", "ImagesUploadController@upload");
+        Route::post("/upload_image/{target}", "ImagesUploadController@uploadImage");
 
         // search
         Route::get("/search/{s}/{type?}", "SearchController@doSearch");
