@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Resources\VolunteerCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\UploadedFile;
@@ -135,7 +136,7 @@ class Volunteer extends Model
             ->orWhere("last_name", "LIKE", "%$s%")
             ->with("user")
             ->get();
-        return $results;
+        return VolunteerCollection::collection($results);
     }
 
 }

@@ -1,24 +1,4 @@
 let mix = require('laravel-mix');
-const BabiliPlugin = require('babili-webpack-plugin');
-const webpack = require('webpack');
-const webpackConfig = {};
-
-
-if (mix.config.inProduction) {
-    webpackConfig.plugins.push(new BabiliPlugin());
-
-    mix.options({
-        uglify: false
-    });
-    mix.disableNotifications();
-    //    mix.version();
-
-} else {
-    mix.sourceMaps().version()
-}
-
-
-mix.webpackConfig(webpackConfig);
 
 /*
  |--------------------------------------------------------------------------
@@ -35,6 +15,6 @@ mix.js(['resources/assets/js/app.js',
     'resources/assets/js/bootstrap-datetimepicker.min.js',
     'resources/assets/js/bootstrap-switch.min.js',
     'resources/assets/js/paper-kit.js',], 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .copyDirectory('resources/assets/images', 'public/images');
-
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .sourceMaps().version()
+    .copyDirectory('resources/assets/images', 'public/images');

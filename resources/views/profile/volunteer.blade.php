@@ -4,7 +4,7 @@
     <main style="margin-bottom: 6rem;">
         <div class="profile-header">
 
-            <cover-picture src="{{ $user->cover_picture }}" :editable="{{ $view_mode === "self" }}"></cover-picture>
+            <cover-picture src="{{ $user->cover_picture }}" :editable="{{ $view_mode === "self" ? "true" : "false" }}"></cover-picture>
             <div class="container">
                 <div class="profile-header__user">
                     <profile-picture src="{{ $user->profile_picture }}"></profile-picture>

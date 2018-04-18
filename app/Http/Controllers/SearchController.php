@@ -14,7 +14,7 @@ class SearchController extends Controller
     public function show(Request $request)
     {
         $s = $request->get("s");
-        $type = $request->get("type");
+        $type = $request->get("type", "volunteer");
         $results = $this->doSearch($s, $type);
         /** @var User $user */
         $user = Auth::user();
