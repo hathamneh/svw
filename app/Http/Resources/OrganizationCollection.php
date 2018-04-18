@@ -17,6 +17,7 @@ class OrganizationCollection extends JsonResource
     {
         return [
             'id'              => $this->id,
+            'user_id'         => $this->user_id,
             'name'            => $this->name,
             'country'         => CountriesFacade::lookup()[$this->country] ?? $this->country,
             'city'            => is_null($this->city) ? "" : $this->city,
