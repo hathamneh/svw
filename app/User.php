@@ -181,14 +181,12 @@ class User extends Authenticatable
         $uploaded_url = Storage::disk('public')->url($file_name);
         switch ($target) {
             case "profile":
-                $this->update([
-                    'profile_picture' => $uploaded_url,
-                ]);
+                $this->profile_picture = $uploaded_url;
+                $this->save();
                 break;
             case "cover":
-                $this->update([
-                    'cover_picture' => $uploaded_url,
-                ]);
+                $this->cover_picture = $uploaded_url;
+                $this->save();
                 break;
         }
     }
