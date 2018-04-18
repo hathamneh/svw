@@ -15,6 +15,7 @@ class SocialLoginController extends Controller
     public function callback($service)
     {
         $user = Socialite::with($service)->user();
-        dd($user);
+
+        
     }
 }
