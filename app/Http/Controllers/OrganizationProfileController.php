@@ -28,12 +28,13 @@ class OrganizationProfileController extends Controller
             return redirect("home");
     }
 
-    public function edit(User $user)
+    public function edit($username)
     {
-        try {
-
-        } catch (\Exception $ex) {
-            return self::jsonException($ex);
-        }
+        $user = User::has("organization")->where('username', $username)->first();
+        $organization = $user->organization;
+        return view("profile.organization.edit")->with([
+            "organization" => $organization,
+            "user"      => $user,
+        ]);
     }
 }
