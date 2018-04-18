@@ -27,8 +27,8 @@ class VolunteerCollection extends JsonResource
             "country"         => CountriesFacade::lookup()[$this->country] ?? $this->country,
             "city"            => $this->city,
             "phone"           => $this->phone,
-            "profile_picture" => $this->profile_picture,
-            "cover_picture"   => $this->cover_picture,
+            "profile_picture" => $this->user->profile_picture,
+            "cover_picture"   => $this->user->cover_picture,
             "bio"             => $this->bio,
             "user"            => $this->user,
         ];
