@@ -139,12 +139,12 @@ class User extends Authenticatable
 
     public function getProfilePictureAttribute($val)
     {
-        return !is_null($val) ? $val : asset("images/default-avatar.jpg");
+        return !is_null($val) && $val !== "" ? $val : asset("images/default-avatar.jpg");
     }
 
     public function getCoverPictureAttribute($val)
     {
-        return !is_null($val) ? $val : asset("images/default-cover.jpg");
+        return !is_null($val) && $val !== "" ? $val : asset("images/default-cover.jpg");
     }
 
     public function uploadImage($target, UploadedFile $file)
