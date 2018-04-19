@@ -3,12 +3,16 @@
          :style="'background-image: url(' + imageUrl + ');'">
 
         <el-upload v-if="editable"
-                class="avatar-uploader"
-                action="/api/upload_image/cover"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
-                :http-request="uploadImage">
+                   class="avatar-uploader"
+                   action="/api/upload_image/cover"
+                   :show-file-list="false"
+                   :on-success="handleAvatarSuccess"
+                   :before-upload="beforeAvatarUpload"
+                   :http-request="uploadImage"
+                   v-loading="isUploading"
+                   element-loading-text="Uploading..."
+                   element-loading-spinner="el-icon-loading"
+                   element-loading-background="rgba(0, 0, 0, 0.8)">
             <a href="#" class="btn btn-secondary btn-change-cover"><i class="fa fa-camera"></i> Change Cover</a>
         </el-upload>
         <!--<img :src="imageUrl">-->
@@ -21,8 +25,8 @@
         data() {
             return {
                 imageUrl: this.src,
-                showUploadDialog: false
-
+                showUploadDialog: false,
+                isUploading: false
             }
         },
         props: {
@@ -31,10 +35,10 @@
         },
         methods: {
             beforeAvatarUpload() {
-
+                this.isUploading = true
             },
             handleAvatarSuccess() {
-
+                this.isUploading = false
             },
             uploadImage(file) {
 
@@ -45,11 +49,12 @@
                 axios
                     .post("/api/upload_image/cover", formData)
                     .then(response => {
-                        if(response.data.result && response.data.url)
+                        if (response.data.result && response.data.url)
                             this.imageUrl = response.data.url
 
                     })
-                    .catch(response => {});
+                    .catch(response => {
+                    }).finally(() => this.isUploading = false)
             }
         }
     }

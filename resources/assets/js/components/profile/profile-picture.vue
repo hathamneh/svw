@@ -8,7 +8,7 @@
                    :before-upload="beforeAvatarUpload"
                    :http-request="uploadImage"
                    v-loading="isUploading"
-                   element-loading-text="Loading..."
+                   element-loading-text="Uploading..."
                    element-loading-spinner="el-icon-loading"
                    element-loading-background="rgba(0, 0, 0, 0.8)">
             <img v-if="imageUrl" :src="imageUrl" class="avatar">
