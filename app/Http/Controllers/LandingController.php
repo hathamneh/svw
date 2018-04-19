@@ -18,7 +18,6 @@ class LandingController extends Controller
             return $this->indexGuest();
     }
 
-
     public function indexGuest()
     {
         return view('landing', [
