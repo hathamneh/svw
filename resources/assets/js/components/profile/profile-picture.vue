@@ -51,10 +51,9 @@
                     .then(response => {
                         if (response.data.result && response.data.url)
                             this.imageUrl = response.data.url
-
                     })
                     .catch(response => {
-                    });
+                    }).finally(() => this.isUploading = false);
             }
         }
     }
