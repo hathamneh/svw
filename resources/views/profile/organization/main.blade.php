@@ -6,9 +6,7 @@
             <cover-picture src="{{ $user->cover_picture }}" :editable="{{ $view_mode === "self" ? "true" : "false" }}"></cover-picture>
             <div class="container">
                 <div class="profile-header__user">
-                    <div class="profile-picture">
-                        <profile-picture src="{{ $user->profile_picture }}" :editable="{{ $view_mode === "self" ? "true" : "false" }}"></profile-picture>
-                    </div>
+                    <profile-picture src="{{ $user->profile_picture }}" :editable="{{ $view_mode === "self" ? "true" : "false" }}"></profile-picture>
                     <div class="profile-header__right">
                         <div class="user-full_name">
                             <h2>{{ $org->full_name }}</h2>
