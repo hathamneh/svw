@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    @yield("extraStyles")
 </head>
 <body class="{{ $body_classes ?? "" }}{{ isset($wizard) ?: " nav-fixed" }}">
 @yield("after_body")

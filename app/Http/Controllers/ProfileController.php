@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Volunteer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class ProfileController extends Controller
         $data = [];
         if (!is_null($user)) {
             $data['user'] = $user;
-            $data['volunteer'] = $user->volunteer;
+            $data['volunteer'] = $volunteer = $user->volunteer;
+            if (is_null($volunteer))
+                throw new ModelNotFoundException("Volunteer Not Found!");
             if (Auth()->user())
                 if (Auth::user()->id == $user->id)
                     $data['view_mode'] = "self";
@@ -24,9 +27,9 @@ class ProfileController extends Controller
             else
                 $data['view_mode'] = "guest";
 
-            return view("profile.volunteer")->with($data);
+            return view("profile.volunteer.main")->with($data);
         } else
-            return redirect("home");
+            throw new ModelNotFoundException("Volunteer Not Found!");
     }
 
     public function edit($username)
