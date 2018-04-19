@@ -54,6 +54,7 @@
                     })
                     .catch(response => {
                     }).finally(() => this.isUploading = false);
+
             }
         }
     }
