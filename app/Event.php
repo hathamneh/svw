@@ -3,6 +3,7 @@
 namespace App;
 
 use App\MyModel as Model;
+use Illuminate\Support\Facades\Storage;
 
 class Event extends Model
 {
