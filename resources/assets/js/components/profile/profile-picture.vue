@@ -6,7 +6,7 @@
                    :show-file-list="false"
                    :on-success="handleAvatarSuccess"
                    :before-upload="beforeAvatarUpload"
-                   :http-request="uploadImage"
+                   name="image"
                    v-loading="isUploading"
                    element-loading-text="Uploading..."
                    element-loading-spinner="el-icon-loading"
@@ -26,7 +26,8 @@
             return {
                 imageUrl: this.src,
                 showUploadDialog: false,
-                isUploading: false
+                isUploading: false,
+                uploadHeaders: window.intReqHeaders
             }
         },
         props: {
@@ -37,25 +38,12 @@
             beforeAvatarUpload() {
                 this.isUploading = true
             },
-            handleAvatarSuccess() {
+            handleAvatarSuccess(res, file) {
                 this.isUploading = false
+                if (res.result)
+                    this.imageUrl = res.url
             },
-            uploadImage(file) {
 
-                let formData = new FormData();
-
-                formData.append('image', file.file);
-
-                axios
-                    .post("/api/upload_image/profile", formData)
-                    .then(response => {
-                        if (response.data.result && response.data.url)
-                            this.imageUrl = response.data.url
-                    })
-                    .catch(response => {
-                    }).finally(() => this.isUploading = false);
-
-            }
         }
     }
 </script>

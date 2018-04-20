@@ -17,26 +17,18 @@ class PostsCollection extends JsonResource
     public function toArray($request)
     {
         $return = [
-            'id'         => $this->id,
-            'content'    => $this->content,
-            'user_id'    => $this->user->id,
-            'user_url'   => $this->user->profile_url,
-            'post_url'   => $this->post_url,
-            'likes'      => $this->likes->count(),
-            'liked'      => $this->liked(Auth::user()),
-            'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),
+            'id'              => $this->id,
+            'name'            => $this->user->name,
+            'content'         => $this->content,
+            'user_id'         => $this->user->id,
+            'user_url'        => $this->user->profile_url,
+            'profile_picture' => $this->user->profile_picture,
+            'post_url'        => $this->post_url,
+            'likes'           => $this->likes->count(),
+            'liked'           => $this->liked(Auth::user()),
+            'created_at'      => $this->created_at->diffForHumans(Carbon::now(), true, true),
+            'comments'        => CommentCollection::collection($this->whenLoaded('comments')),
         ];
-
-        if (!$this->user->is_org)
-            $poster = $this->user->volunteer;
-        else
-            $poster = $this->user->organization;
-        $return += [
-            'name'            => $poster->full_name,
-            'profile_picture' => $poster->profile_picture,
-        ];
-
-        $return['comments'] = CommentCollection::collection($this->whenLoaded('comments'));
 
         return $return;
     }

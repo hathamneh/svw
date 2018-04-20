@@ -8,7 +8,6 @@
                    :show-file-list="false"
                    :on-success="handleAvatarSuccess"
                    :before-upload="beforeAvatarUpload"
-                   :http-request="uploadImage"
                    v-loading="isUploading"
                    element-loading-text="Uploading..."
                    element-loading-spinner="el-icon-loading"
@@ -26,7 +25,7 @@
             return {
                 imageUrl: this.src,
                 showUploadDialog: false,
-                isUploading: false
+                isUploading: false,
             }
         },
         props: {
@@ -40,22 +39,6 @@
             handleAvatarSuccess() {
                 this.isUploading = false
             },
-            uploadImage(file) {
-
-                let formData = new FormData();
-
-                formData.append('image', file.file);
-
-                axios
-                    .post("/api/upload_image/cover", formData)
-                    .then(response => {
-                        if (response.data.result && response.data.url)
-                            this.imageUrl = response.data.url
-
-                    })
-                    .catch(response => {
-                    }).finally(() => this.isUploading = false)
-            }
         }
     }
 </script>

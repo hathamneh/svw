@@ -68,6 +68,8 @@ class FollowController extends Controller
 
         if ($user->is_org) {
             $out += ['events' => $user->organization->eventsCount()];
+        } else {
+            $out += ['memberOf' => $user->memberOf->count()];
         }
 
         return $out;
@@ -78,7 +80,10 @@ class FollowController extends Controller
         try {
             /** @var User $follower */
             $follower = Auth::user();
-            $check = !is_null($follower->following->find($user->id));
+            if ($user->is_org)
+                $check = !is_null($follower->memberOf->find($user));
+            else
+                $check = !is_null($follower->following->find($user));
             return response()->json(["followed" => $check]);
         } catch (\Exception $ex) {
             return self::jsonException($ex);

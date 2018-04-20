@@ -75,7 +75,7 @@
                             <el-submenu index="1">
                                 <template slot="title">
                                     <a href="{{{ auth()->user()->profile_url }}}"><img
-                                                src="{{ asset("/images/default-avatar.jpg") }}" width="25"
+                                                src="{{ auth()->user()->profile_picture }}" width="25"
                                                 alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
                                 </template>
                                 <el-menu-item index="1-1">

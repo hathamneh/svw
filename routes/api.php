@@ -83,6 +83,8 @@ Route::namespace("Api")->group(function () {
 
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
+
+        Route::resource('/event', "EventController");
     });
 
 });

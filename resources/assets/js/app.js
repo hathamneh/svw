@@ -8,6 +8,10 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import brands from '@fortawesome/fontawesome-free-brands'
 import VueAutosize from 'vue-autosize'
 import Nl2br from 'vue-nl2br'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
+
 
 Vue.component('nl2br', Nl2br)
 fontawesome.library.add(regular)
@@ -25,6 +29,7 @@ import '../sass/element-vars.scss';
  */
 
 require('./bootstrap');
+Vue.prototype.$http = window.axios;
 
 Vue.use(Element,{ locale })
 Vue.use(VueAutosize)
@@ -43,6 +48,8 @@ require('./register-components/shared-components')
 require('./register-components/registration-wizard')
 require('./register-components/profile-components')
 require('./register-components/post-components')
+require('./register-components/events-components')
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

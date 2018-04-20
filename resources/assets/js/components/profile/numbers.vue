@@ -43,8 +43,14 @@
                     axios.get("/api/user/" + this.userId + "/follow/numbers").then((res) => {
                         if (res.data) {
                             if (res.data.followers) this.followers = res.data.followers
+                            else this.followers = 0
+
                             if (res.data.following) this.following = res.data.following
-                            if (this.isOrg && res.data.events) this.events = res.data.events
+                            else this.following = 0
+
+                            if (this.isOrg)
+                                if (res.data.events) this.events = res.data.events
+                                else this.events = 0
                         }
                     })
                 }

@@ -40,6 +40,8 @@ Route::middleware(["auth", "lang"])->group(function () {
     Route::get('/search', "SearchController@show")->name("search");
 
     Route::get("/post/{post}", "PostController@show")->name("posts.show");
+
+    Route::get("/event/create", "EventController@create");
 });
 
 
