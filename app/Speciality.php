@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Speciality extends Model

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Pluralizer;
 

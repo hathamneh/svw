@@ -32,7 +32,6 @@ class SetLanguage
 
         app()->setLocale(Session::get('locale'));
 
-
         return $next($request);
     }
 

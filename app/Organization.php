@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Http\Resources\OrganizationCollection;
-use Illuminate\Database\Eloquent\Model;
+use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Organization extends Model

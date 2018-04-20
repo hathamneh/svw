@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Http\Resources\VolunteerCollection;
-use Illuminate\Database\Eloquent\Model;
+use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;

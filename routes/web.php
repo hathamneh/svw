@@ -42,6 +42,7 @@ Route::middleware(["auth", "lang"])->group(function () {
     Route::get("/post/{post}", "PostController@show")->name("posts.show");
 
     Route::get("/event/create", "EventController@create");
+    Route::get("/event/{event}", "EventController@show")->name('event.show');
 });
 
 

@@ -60,13 +60,13 @@
                     <img v-if="imageUrl != null" :src="imageUrl" class="event-picture">
                     <div v-else class="event-picture-uploader-icon">
                         <i class="el-icon-plus"></i>
-                        <span>{{ trans('Choose your event Picture') }}</span>
+                        <span>{{ trans('Select picture for your event') }}</span>
                     </div>
                 </el-upload>
                 <hr class="my-4">
                 <b-form-group>
                     <b-button type="submit" size="lg" variant="secondary">
-                        {{ trans('Save Event') }}
+                        <i class="fa fa-calendar-alt"></i> {{ trans('Publish Event') }}
                     </b-button>
                 </b-form-group>
             </div>
@@ -121,6 +121,8 @@
 
                 let formData = new FormData()
 
+                if(this.event.country === "null") this.event.country = null;
+
                 formData.append('name', this.event.name)
                 formData.append('description', this.event.description)
                 formData.append('date_from', this.event.dateRange[0])
@@ -142,9 +144,22 @@
                     .finally(() => {
                         loading.close()
                     });
+            },
+            loadCountries() {
+                let placeholder = this.countryList[0]
+                this.$http.get('/api/countries/keyValue')
+                    .then((res) => {
+                        if(res.data) {
+                            this.countryList = res.data
+                            this.countryList.unshift(placeholder)
+                        }
+                    }).catch((res) => console.error(res))
             }
         },
         created() {
+        },
+        mounted() {
+            this.loadCountries()
         }
     }
 </script>

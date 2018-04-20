@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\MyModel as Model;
 
 class PostMedia extends Model
 {

@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::namespace("Api")->group(function () {
+Route::namespace("Api")->middleware("lang")->group(function () {
     Route::post('/login', "AuthController@login");
     Route::post('/register', "AuthController@register");
     Route::get('/countries', "CountriesController@index");
+    Route::get('/countries/keyValue', "CountriesController@keyValue");
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/registration/{type}', "WizardController@store")->where(['type' => 'volunteer|organization']);

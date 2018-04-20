@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Event;
 use App\Http\Requests\EventRequest;
+use App\Http\Resources\EventCollection;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -14,6 +15,11 @@ use Illuminate\Validation\UnauthorizedException;
 
 class EventController extends Controller
 {
+
+    public function show(Event $event)
+    {
+        return new EventCollection($event);
+    }
 
     public function store(EventRequest $request)
     {
@@ -41,9 +47,15 @@ class EventController extends Controller
             $tmpFile = $request->file('picture');
             $fileName = $tmpFile->hashName();
             $request->file('picture')->storeAs('events', $fileName);
-            $eventData['picture'] = Storage::url('events/'.$fileName);
+            $eventData['picture'] = Storage::url('events/' . $fileName);
         }
 
-        return $org->events()->create($eventData);
+        /** @var Event $event */
+        $event = $org->events()->create($eventData);
+
+        if ($request->has('imageEncoded') && $request->has('imageExt'))
+            $event->uploadImageEncoded($request->get('imageEncoded'), $request->get('imageExt'));
+
+        return new EventCollection($event);
     }
 }

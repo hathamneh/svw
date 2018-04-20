@@ -40,10 +40,7 @@ class LandingController extends Controller
 
         $personal = $user->is_org ? $user->organization : $user->volunteer;
 
-        Log::debug($user->is_org);
-
         return view('home')->with([
-            'user'      => $user,
             'personal' => $personal,
         ]);
     }
