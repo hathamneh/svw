@@ -34,7 +34,8 @@
             <div class="col-sm-9">
                 <div class="search-results">
                     <ul class="row">
-                        @if($type !== "event")
+
+                    @if($type !== "event")
                             @foreach($results as $result)
                                 <?php /** Volunteer $result */ ?>
                                 <li class="search-results__item col-sm-6">
@@ -42,11 +43,11 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-3 item-image">
-                                                    <img src="{{ $result->profile_picture }}" alt="">
+                                                    <img src="{{ $result->user->profile_picture }}" alt="">
                                                 </div>
                                                 <div class="col-sm-9 item-content">
                                                     <h3>{{ $result->full_name }}</h3>
-                                                    <p class="text-muted">{{ "@".$result->user->username }}</p>
+                                                    <p class="text-muted">{{ "@".$result->user['username'] }}</p>
                                                 </div>
                                             </div>
                                         </div>

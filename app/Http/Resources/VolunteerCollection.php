@@ -19,6 +19,7 @@ class VolunteerCollection extends JsonResource
         $out = [
             'id'              => $this->id,
             'user_id'         => $this->user_id,
+            'username'         => $this->user['username'],
             'full_name'       => $this->full_name,
             'first_name'      => $this->first_name,
             'last_name'       => $this->last_name,
@@ -27,8 +28,8 @@ class VolunteerCollection extends JsonResource
             "country"         => CountriesFacade::lookup()[$this->country] ?? $this->country,
             "city"            => $this->city,
             "phone"           => $this->phone,
-            "profile_picture" => $this->user->profile_picture,
-            "cover_picture"   => $this->user->cover_picture,
+            "profile_picture" => $this->user['profile_picture'],
+            "cover_picture"   => $this->user['cover_picture'],
             "bio"             => $this->bio,
             "user"            => $this->user,
         ];

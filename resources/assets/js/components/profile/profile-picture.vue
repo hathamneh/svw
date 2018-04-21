@@ -36,8 +36,31 @@
             editable: Boolean
         },
         methods: {
-            beforeAvatarUpload() {
-                this.isUploading = true
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isPNG = file.type === 'image/png';
+                const isLt5M = file.size / 1024 / 1024 < 10;
+                let allowed = true
+                let message = []
+                if (!isJPG && !isPNG) {
+                    allowed = false
+                    message.push('Avatar picture must be JPG or PNG format!')
+                }
+                if (!isLt5M) {
+                    allowed = false
+                    message.push('Avatar picture size can not exceed 5MB!');
+                }
+                if (allowed) {
+                    this.isUploading = true
+                }
+                if (message.length) {
+                    this.$notify.error({
+                        title: 'Error',
+                        dangerouslyUseHTMLString: true,
+                        message: "<ul><li>" + message.join("</li><li>") + "</li></ul>"
+                    });
+                }
+                return allowed
             },
             handleAvatarSuccess(res, file) {
                 this.isUploading = false

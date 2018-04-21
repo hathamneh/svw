@@ -125,18 +125,20 @@ class Volunteer extends Model
 
     public function getProfileUrlAttribute()
     {
-        return route("profile.volunteer", ["username" => $this->user->username]);
-    }
 
+            return route("profile.volunteer", ["username" => $this->user->username]);
+
+    }
 
 
     public static function search($s)
     {
         $results = self::where("first_name", "LIKE", "%$s%")
             ->orWhere("last_name", "LIKE", "%$s%")
-            ->with("user")
+            ->with('user')
             ->simplePaginate(15);
-        return VolunteerCollection::collection($results);
+        logger($results->count());
+        return $results;
     }
 
 }

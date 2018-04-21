@@ -95,3 +95,9 @@ a.card:hover {
   @extend .normal-message;
   padding: 3rem;
 }
+
+.el-notification__content {
+  ul {
+    padding: 0 1rem;
+  }
+}

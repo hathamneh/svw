@@ -79,6 +79,9 @@
                                                 alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
                                 </template>
                                 <el-menu-item index="1-1">
+                                    <a href="{{ $user->edit_url }}">{{ __('Edit Profile') }}</a>
+                                </el-menu-item>
+                                <el-menu-item index="2-1">
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                     >Logout</a>

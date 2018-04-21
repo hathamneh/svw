@@ -99,7 +99,7 @@
             beforeAvatarUpload(file) {
                 const isJPG = file.type === 'image/jpeg';
                 const isPNG = file.type === 'image/png';
-                const isLt5M = file.size / 1024 / 1024 < 5;
+                const isLt5M = file.size / 1024 / 1024 < 10;
 
                 if (!isJPG && !isPNG) {
                     this.$message.error('Avatar picture must be JPG or PNG format!');

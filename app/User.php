@@ -86,6 +86,14 @@ class User extends Authenticatable
         return $this->username;
     }
 
+    public function getEditUrlAttribute()
+    {
+        if($this->is_org)
+            return route("profile.organization.edit", ['username' => $this->username]);
+        else
+            return route("profile.volunteer.edit", ['username' => $this->username]);
+    }
+
     public function following()
     {
         if ($this->is_org)
