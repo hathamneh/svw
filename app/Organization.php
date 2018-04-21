@@ -72,8 +72,7 @@ class Organization extends Model
     public static function search($s)
     {
         $results = self::where("name", "LIKE", "%$s%")
-            ->with("user")
-            ->get();
+            ->simplePaginate(15);
         return OrganizationCollection::collection($results);
     }
 }

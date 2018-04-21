@@ -7,3 +7,25 @@
     margin-bottom: 1rem;
   }
 }
+
+.event-result {
+  .card {
+    overflow: hidden;
+  }
+  .item-image {
+    margin: -1.25rem -1.25rem 0.5rem;
+    height: 150px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .item-content {
+    p {
+      margin-bottom: 0;
+      font-size: 0.75rem;
+    }
+  }
+}

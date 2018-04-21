@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Organization;
 use App\User;
 use App\Volunteer;
@@ -40,7 +41,7 @@ class SearchController extends Controller
         $query = self::escapeLike($s);
         switch ($type) {
             case "event":
-                return [];
+                return Event::search($query);
             case "organization":
                 return Organization::search($query);
             default:

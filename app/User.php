@@ -150,8 +150,8 @@ class User extends Authenticatable
     public function uploadImage($target, UploadedFile $file)
     {
         $fname = md5($this->username . time()) . '.' . $file->getClientOriginalExtension();
-        Storage::putFileAs('public', $file, $fname);
-        $uploadedUrl = Storage::disk("public")->url($fname);
+        Storage::putFileAs('public/avatars/' . $this->id . '/', $file, $fname);
+        $uploadedUrl = Storage::disk("public")->url('/avatars/' . $this->id . '/' . $fname);
         switch ($target) {
             case "profile":
                 $this->profile_picture = $uploadedUrl;
@@ -176,7 +176,7 @@ class User extends Authenticatable
         if (!$target)
             throw new \InvalidArgumentException("Target should be profile or cover picture");
 
-        $file_name = md5($this->username . time()) . "." . $extension;
+        $file_name = 'avatars/' . $this->id . '/' . md5($this->username . time()) . "." . $extension;
         Storage::disk('public')->put($file_name, $image_data);
         $uploaded_url = Storage::disk('public')->url($file_name);
         logger($uploaded_url);

@@ -135,7 +135,7 @@ class Volunteer extends Model
         $results = self::where("first_name", "LIKE", "%$s%")
             ->orWhere("last_name", "LIKE", "%$s%")
             ->with("user")
-            ->get();
+            ->simplePaginate(15);
         return VolunteerCollection::collection($results);
     }
 

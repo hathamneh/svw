@@ -17,6 +17,7 @@ class EventCollection extends JsonResource
         $out = [
             'id' => $this->id,
             'name' => $this->name,
+            'subscribers' => $this->subscribers->count(),
             'organization' => $this->organization->name,
             'description' => $this->description,
             'date_from' => $this->date_from->toFormattedDateString(),
@@ -27,9 +28,7 @@ class EventCollection extends JsonResource
             'picture' => $this->picture,
             'url' => $this->url
         ];
-        $out['date_range'] = $this->date_from->eq($this->date_to) ?
-            $this->date_from->toFormattedDateString() :
-            $this->date_from->toFormattedDateString() . " " . trans("to") . " " . $this->date_to->toFormattedDateString();
+        $out['date_range'] = $this->date_range;
 
         return $out;
     }

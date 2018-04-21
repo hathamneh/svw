@@ -3,6 +3,7 @@
         <el-upload v-if="editable"
                    class="avatar-uploader"
                    action="/api/upload_image/profile"
+                   :headers="uploadHeaders"
                    :show-file-list="false"
                    :on-success="handleAvatarSuccess"
                    :before-upload="beforeAvatarUpload"
@@ -40,6 +41,7 @@
             },
             handleAvatarSuccess(res, file) {
                 this.isUploading = false
+                console.log(res)
                 if (res.result)
                     this.imageUrl = res.url
             },

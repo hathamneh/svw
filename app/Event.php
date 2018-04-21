@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Resources\EventCollection;
 use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,16 @@ class Event extends Model
 
     public function getPictureAttribute($val)
     {
+        if(is_null($val) || empty($val))
+            return asset('images/event-default.jpg');
         return url($val);
+    }
+
+    public function getDateRangeAttribute()
+    {
+        return $this->date_from->eq($this->date_to) ?
+            $this->date_from->toFormattedDateString() :
+            $this->date_from->toFormattedDateString() . " " . trans("to") . " " . $this->date_to->toFormattedDateString();
     }
 
     /**
@@ -52,9 +62,22 @@ class Event extends Model
     {
         if ($user instanceof User)
             return $this->organization->user->id == $user->id;
-        elseif($user instanceof Organization)
+        elseif ($user instanceof Organization)
             return $this->organization_id == $user->id;
         else
             throw new \InvalidArgumentException();
+    }
+
+    public static function search($s)
+    {
+        $orgs = Organization::where('name', 'LIKE', "%$s%")->pluck('id');
+
+        $results = self::where("name", "LIKE", "%$s%")
+            ->orWhere("city", "LIKE", "%$s%")
+            ->orWhere("country", "LIKE", "%$s%")
+            ->orWhere("address", "LIKE", "%$s%")
+            ->whereIn("organization_id", $orgs, "or")
+            ->simplePaginate(15);
+        return EventCollection::collection($results);
     }
 }
