@@ -62,7 +62,7 @@ class EventController extends Controller
 
         /** @var Event $event */
         $event = $org->events()->create($eventData);
-
+        logger("CREATE EVENT");
         if ($request->has('imageEncoded') && $request->has('imageExt'))
             $event->uploadImageEncoded($request->get('imageEncoded'), $request->get('imageExt'));
 
