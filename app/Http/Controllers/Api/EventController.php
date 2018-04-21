@@ -79,7 +79,7 @@ class EventController extends Controller
             throw new UnauthorizedException();
 
         try {
-            return ['deleted', $event->delete()];
+            return ['deleted' => $event->delete()];
         } catch (\Exception $e) {
             return self::jsonException($e);
         }
