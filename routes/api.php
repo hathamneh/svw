@@ -32,7 +32,7 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::resource('/volunteer', "VolunteerController", ['except' => ['show']]);
         Route::get('/volunteer/{user}', "VolunteerController@show")->where(['user' => '[0-9]+']);
 
-        Route::resource('/volunteer/{user}/education', "EducationController", ['except' => ['index','show']]);
+        Route::resource('/volunteer/{user}/education', "EducationController", ['except' => ['index', 'show']]);
         Route::get('/volunteer/education', "EducationController@index");
         Route::get('/volunteer/{user}/education', "EducationController@show");
 
@@ -42,11 +42,11 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
         Route::get('/volunteer/{user}/memberships', "ProfileController@getMembership");
 
-        Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index','show']]);
+        Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index', 'show']]);
         Route::get('/volunteer/experience', "ExperienceController@index");
         Route::get('/volunteer/{user}/experience', "ExperienceController@show");
 
-        Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index','show']]);
+        Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index', 'show']]);
         Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
         Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
 
@@ -70,10 +70,10 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
         Route::get('/user/following/check/{user}', "FollowController@isFollowing");
 
-        Route::resource("/post","PostController", ["except" => ['index']]);
-        Route::get("/posts/{user?}","PostController@index");
+        Route::resource("/post", "PostController", ["except" => ['index']]);
+        Route::get("/posts/{user?}", "PostController@index");
 
-        Route::resource("/post/{post}/comment","CommentController");
+        Route::resource("/post/{post}/comment", "CommentController");
 
         Route::post("/post/like/{post}", "LikeController@like");
         Route::post("/post/unlike/{post}", "LikeController@unlike");
@@ -85,13 +85,14 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
 
-        Route::resource('/event', "EventController");
+        Route::resource('/event', "EventController", ['except' => ['index']]);
+        Route::get('/user/{user}/events', "EventController@index");
     });
 
 });
 
-Route::post("/logging/{type}", function($type) {
-    if($type == "error")
-        Log::error("Javascript Error: ".json_encode(Input::get()));
+Route::post("/logging/{type}", function ($type) {
+    if ($type == "error")
+        Log::error("Javascript Error: " . json_encode(Input::get()));
 });
 

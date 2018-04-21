@@ -3,14 +3,16 @@
 namespace App;
 
 use App\MyModel as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
 class Event extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = ['name', 'description', 'picture', "date_from", "date_to", "address", "city", "country"];
 
-    protected $dates = ['date_from', 'date_to'];
+    protected $dates = ['date_from', 'date_to', 'deleted_at'];
 
     public function organization()
     {
@@ -44,5 +46,15 @@ class Event extends Model
         Storage::disk('events')->put($file_name, base64_decode($image_data));
         $uploaded_url = Storage::disk('events')->url($file_name);
         $this->update(['picture' => $uploaded_url]);
+    }
+
+    public function isOwner($user)
+    {
+        if ($user instanceof User)
+            return $this->organization->user->id == $user->id;
+        elseif($user instanceof Organization)
+            return $this->organization_id == $user->id;
+        else
+            throw new \InvalidArgumentException();
     }
 }

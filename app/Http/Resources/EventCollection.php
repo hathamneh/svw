@@ -17,6 +17,7 @@ class EventCollection extends JsonResource
         $out = [
             'id' => $this->id,
             'name' => $this->name,
+            'organization' => $this->organization->name,
             'description' => $this->description,
             'date_from' => $this->date_from->toFormattedDateString(),
             'date_to' => $this->date_to->toFormattedDateString(),
