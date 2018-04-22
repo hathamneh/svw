@@ -80,13 +80,17 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
 
         // organizations
+        Route::get("/organization", "OrganizationProfileController@index");
         Route::get("/organization/{user}", "OrganizationProfileController@show");
+        Route::put("/organization/{user}", "OrganizationProfileController@update");
 
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
 
         Route::resource('/event', "EventController", ['except' => ['index']]);
         Route::get('/user/{user}/events', "EventController@index");
+
+        Route::get("/newsfeed","NewsfeedController@index");
     });
 
 });

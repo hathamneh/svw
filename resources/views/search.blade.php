@@ -33,53 +33,56 @@
             </div>
             <div class="col-sm-9">
                 <div class="search-results">
-                    <ul class="row">
-
-                    @if($type !== "event")
-                            @foreach($results as $result)
-                                <?php /** Volunteer $result */ ?>
-                                <li class="search-results__item col-sm-6">
-                                    <a href="{{ $result->profile_url }}" class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-3 item-image">
-                                                    <img src="{{ $result->user->profile_picture }}" alt="">
-                                                </div>
-                                                <div class="col-sm-9 item-content">
-                                                    <h3>{{ $result->full_name }}</h3>
-                                                    <p class="text-muted">{{ "@".$result->user['username'] }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            @endforeach
-                        @else
-                            @foreach($results as $result)
-                                <?php /** Event $result */ ?>
-                                <li class="search-results__item event-result col-sm-6">
-                                    <a href="{{ $result->url }}" class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-column">
-                                                <div class="item-image">
-                                                    <img src="{{ $result->picture }}" alt="">
-                                                </div>
-                                                <div class="item-content">
-                                                    <h3>{{ $result->name }}</h3>
-                                                    <p class="text-muted">
-                                                        {{ __("By") }}: {{ $result->organization->name }}
-                                                        <br>
-                                                        {{ __("When") }}: {{ $result->date_range }}
-                                                    </p>
+                    @if($results->count())
+                        <ul class="row">
+                            @if($type !== "event")
+                                @foreach($results as $result)
+                                    <?php /** Volunteer $result */ ?>
+                                    <li class="search-results__item col-sm-6">
+                                        <a href="{{ $result->profile_url }}" class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-3 item-image">
+                                                        <img src="{{ $result->user->profile_picture }}" alt="">
+                                                    </div>
+                                                    <div class="col-sm-9 item-content">
+                                                        <h3>{{ $result->full_name }}</h3>
+                                                        <p class="text-muted">{{ "@".$result->user['username'] }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
-
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                @foreach($results as $result)
+                                    <?php /** Event $result */ ?>
+                                    <li class="search-results__item event-result col-sm-6">
+                                        <a href="{{ $result->url }}" class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-column">
+                                                    <div class="item-image">
+                                                        <img src="{{ $result->picture }}" alt="">
+                                                    </div>
+                                                    <div class="item-content">
+                                                        <h3>{{ $result->name }}</h3>
+                                                        <p class="text-muted">
+                                                            {{ __("By") }}: {{ $result->organization->name }}
+                                                            <br>
+                                                            {{ __("When") }}: {{ $result->date_range }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                        {!! $results->appends(['s' => $s, 'type'=>$type])->links() !!}
+                    @else
+                        <normal-message class="mt-4">{{ __("No Results") }}</normal-message>
+                    @endif
                 </div>
             </div>
         </div>

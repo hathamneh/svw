@@ -15,3 +15,5 @@ Vue.component('edit-personal-info', require('../components/profile/volunteer/per
 Vue.component('organization-tabs', require('../components/profile/organizationTabs'))
 Vue.component('org-info', require('../components/profile/orgInfo'))
 
+Vue.component('edit-org-details', require('../components/profile/organization/details'))
+

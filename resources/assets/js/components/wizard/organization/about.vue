@@ -19,7 +19,7 @@
         <div class="col-sm-5">
             <div class="form-group">
                 <label>{{ trans("organization.website") }}:</label>
-                <el-input v-model="aboutForm.website" placeholder="Website URL...">
+                <el-input type="url" v-model="aboutForm.website" placeholder="Website URL...">
                 </el-input>
             </div>
         </div>

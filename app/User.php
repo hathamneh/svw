@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Http\Resources\PostsCollection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
@@ -142,6 +144,14 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function newsfeed()
+    {
+        $ids = DB::table('followers')->where('follower_id','=',$this->id)->pluck('following_id')->toArray();
+        array_push($ids, $this->id);
+        $posts = Post::whereIn("user_id",$ids)->latest()->get();
+        return $posts;
     }
 
 

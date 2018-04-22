@@ -14,9 +14,9 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at', 'founded_at'];
+    protected $dates = ['deleted_at', 'founded_date'];
 
-    protected $fillable = ['name', 'founded_at', 'website', 'about', 'country', 'city', 'address'];
+    protected $fillable = ['name', 'founded_date', 'website', 'about', 'country', 'city', 'address'];
 
     public function user()
     {

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class VolunteerController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         if (Auth::check() && !is_null($volunteer = Auth::user()->volunteer)) {
             /** @var Volunteer $volunteer */

@@ -21,19 +21,29 @@
                 type: Number,
                 required: false
             },
-            mode: String
+            mode: String,
+            newsfeed: Boolean
         },
         methods: {
             loadPosts() {
-                let postsFor = "";
-                if (this.userId)
-                    postsFor = "/" + this.userId
-                axios.get("/api/posts" + postsFor)
-                    .then((res) => {
-                        if (res.data && Array.isArray(res.data)) {
-                            this.posts = res.data;
-                        }
-                    })
+                if(this.newsfeed) {
+                    axios.get("/api/newsfeed")
+                        .then((res) => {
+                            if (res.data && Array.isArray(res.data)) {
+                                this.posts = res.data;
+                            }
+                        })
+                } else {
+                    let postsFor = "";
+                    if (this.userId)
+                        postsFor = "/" + this.userId
+                    axios.get("/api/posts" + postsFor)
+                        .then((res) => {
+                            if (res.data && Array.isArray(res.data)) {
+                                this.posts = res.data;
+                            }
+                        })
+                }
             },
             addPost(postData) {
                 this.posts.unshift(postData)

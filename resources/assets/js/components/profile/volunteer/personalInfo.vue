@@ -93,6 +93,10 @@
                 });
                 axios.put("/api/volunteer/"+this.userId+"/profile" ,this.pinfo).then((res) => {
                     loading.close()
+                    this.$notify.success({
+                        title: 'Saved!',
+                        message: "Profile Updated Successfully"
+                    });
                 }).catch((err) => {
                     loading.close()
                 }).finally(()=> {

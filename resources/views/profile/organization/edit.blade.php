@@ -34,10 +34,10 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-9">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-odetails" role="tabpanel" aria-labelledby="nav-odetails-tab">
-                        <edit-personal-info :volunteer-id="{{ $organization->id }}"></edit-personal-info>
+                        <edit-org-details></edit-org-details>
                     </div>
                     <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
                         <div class="card">
@@ -54,7 +54,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
 @endsection
