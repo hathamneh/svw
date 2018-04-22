@@ -78,6 +78,6 @@ class Event extends Model
             ->orWhere("address", "LIKE", "%$s%")
             ->whereIn("organization_id", $orgs, "or")
             ->simplePaginate(15);
-        return EventCollection::collection($results);
+        return $results;
     }
 }

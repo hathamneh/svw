@@ -73,6 +73,6 @@ class Organization extends Model
     {
         $results = self::where("name", "LIKE", "%$s%")
             ->simplePaginate(15);
-        return OrganizationCollection::collection($results);
+        return $results;
     }
 }
