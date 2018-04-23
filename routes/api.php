@@ -25,11 +25,11 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/registration/{type}', "WizardController@store")->where(['type' => 'volunteer|organization']);
-        Route::get('/user/{user}', function (User $user = null, Request $request) {
+        Route::get('/user/{user?}', function (User $user = null, Request $request) {
             if (!is_null($user))
                 return new \App\Http\Resources\UserCollection($user);
             return new \App\Http\Resources\UserCollection($request->user());
-        });
+        })->where(['user' => '[0-9]+']);;
 
         Route::resource('/volunteer', "VolunteerController", ['except' => ['show']]);
         Route::get('/volunteer/{user}', "VolunteerController@show")->where(['user' => '[0-9]+']);
@@ -67,6 +67,7 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::get('/user/{user}/followers', "FollowController@getFollowers");
         Route::get('/user/{user}/following', "FollowController@getFollowing");
 
+
         Route::get('/user/follow/numbers', "FollowController@getNumbers");
         Route::get('/user/{user}/follow/numbers', "FollowController@getNumbers");
 
@@ -85,6 +86,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::get("/organization", "OrganizationProfileController@index");
         Route::get("/organization/{user}", "OrganizationProfileController@show");
         Route::put("/organization/{user}", "OrganizationProfileController@update");
+        Route::get('/user/members', "OrganizationProfileController@getMembers");
+        Route::get('/user/{user}/members', "OrganizationProfileController@getMembers");
 
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");

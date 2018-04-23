@@ -11,6 +11,9 @@
 
     export default {
         name: "post-list",
+        components: {
+            post: require('./post')
+        },
         data() {
             return {
                 posts: [],
@@ -27,7 +30,7 @@
         methods: {
             loadPosts() {
                 if(this.newsfeed) {
-                    axios.get("/api/newsfeed")
+                    axios.get("/api/feed/posts")
                         .then((res) => {
                             if (res.data && Array.isArray(res.data)) {
                                 this.posts = res.data;

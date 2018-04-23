@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\VolunteerCollection;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,7 +48,11 @@ class FollowController extends Controller
         if (is_null($user))
             $user = Auth::user();
         $followers = $user->followers;
-        return $request->has("count") ? ["followers" => $followers->count()] : $followers;
+        if ($request->has("count"))
+            return ["followers" => $followers->count()];
+        else
+            return UserCollection::collection($followers);
+
     }
 
     public function getFollowing(User $user = null, Request $request)
@@ -54,7 +60,10 @@ class FollowController extends Controller
         if (is_null($user))
             $user = Auth::user();
         $following = $user->following;
-        return $request->has("count") ? ["following" => $following->count()] : $following;
+        if($request->has("count")) return
+            ["following" => $following->count()];
+        else
+            return UserCollection::collection($following);
     }
 
     public function getNumbers(User $user = null)

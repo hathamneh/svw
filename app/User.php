@@ -126,9 +126,9 @@ class User extends Authenticatable
             ->where("is_org", "=", true);
     }
 
-    public function members()
-    {
-
+    public function members() {
+        $ids = $this->followers->where('is_org', false)->pluck('id')->toArray();
+        return Volunteer::whereIn('user_id',$ids)->get();
     }
 
     public function memberships()

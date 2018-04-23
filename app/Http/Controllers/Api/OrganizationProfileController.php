@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\OrganizationCollection;
+use App\Http\Resources\VolunteerCollection;
 use App\Organization;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -60,5 +61,15 @@ class OrganizationProfileController extends Controller
 
         return response()->json(['updated' => $result]);
 
+    }
+
+    public function getMembers(User $user = null)
+    {
+        if(is_null($user))
+            $user = Auth::user();
+        if(!$user->is_org)
+            throw new ModelNotFoundException();
+
+        return VolunteerCollection::collection($user->members());
     }
 }

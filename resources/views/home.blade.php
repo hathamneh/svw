@@ -9,17 +9,7 @@
                 @include('layouts.mainSidebar')
             </div>
             <div class="col-md-7">
-                <b-tabs pills class="nav-fill newsfeed-tabs">
-                    <b-tab title="{{ __("Latest Posts") }}" active>
-                        <new-post></new-post>
-                        <post-list :newsfeed="true"></post-list>
-                    </b-tab>
-                    <b-tab title="{{ __("Latest Events") }}">
-                        Tab Contents 2
-                    </b-tab>
-                </b-tabs>
-
-
+                <home-tabs></home-tabs>
             </div>
             <div class="col-md-2">
                 <div class="sidebar-home-right sidebar-sticky">

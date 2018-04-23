@@ -8,3 +8,5 @@ Vue.component('w-education', require('../components/shared/education'))
 
 Vue.component('education-item', require('../components/shared/EducationItem'))
 Vue.component('experience-item', require('../components/shared/ExperienceItem'))
+
+Vue.component('home-tabs', require('../components/homeTabs'))

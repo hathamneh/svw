@@ -32,6 +32,7 @@ class VolunteerCollection extends JsonResource
             "profile_picture" => $this->user['profile_picture'],
             "cover_picture"   => $this->user['cover_picture'],
             "bio"             => $this->bio,
+            "profile_url"     => $this->profile_url,
         ];
         if ($request->has("all"))
             $out += [
