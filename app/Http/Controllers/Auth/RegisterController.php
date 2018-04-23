@@ -78,7 +78,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        $this->activationService->sendActivationMail($user);
+        //$this->activationService->sendActivationMail($user);
         return redirect($this->redirectTo);
     }
 }
