@@ -126,6 +126,11 @@ class User extends Authenticatable
             ->where("is_org", "=", true);
     }
 
+    public function members()
+    {
+
+    }
+
     public function memberships()
     {
         $ids = $this->memberOf()->pluck('users.id');
