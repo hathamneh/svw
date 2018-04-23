@@ -128,7 +128,7 @@ class User extends Authenticatable
 
     public function memberships()
     {
-        $ids = $this->memberOf()->pluck('id');
+        $ids = $this->memberOf()->pluck('user.id');
         return Organization::whereIn('user_id',$ids)->get();
     }
 
@@ -152,7 +152,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class);
     }
 
-    public function newsfeed()
+    public function postsfeed()
     {
         $ids = DB::table('followers')->where('follower_id','=',$this->id)->pluck('following_id')->toArray();
         array_push($ids, $this->id);
@@ -160,11 +160,12 @@ class User extends Authenticatable
         return $posts;
     }
 
-    public function latestEvents()
+    public function eventsfeed()
     {
-        $ids = $this->memberOf->pluck('id');
-        logger($ids);
-        $events = Event::whereIn("organization_id",$ids)->latest()->get();
+        $ids = $this->memberships()->pluck('id')->toArray();
+        if($this->is_org)
+            array_push($ids, $this->organization->id);
+        $events = Event::whereIn("organization_id",$ids)->orderBy('date_from', 'asc')->get();
         return $events;
     }
 
