@@ -9,7 +9,7 @@
                 @include('layouts.mainSidebar')
             </div>
             <div class="col-md-7">
-                <b-tabs pills>
+                <b-tabs pills class="nav-fill newsfeed-tabs">
                     <b-tab title="{{ __("Latest Posts") }}" active>
                         <new-post></new-post>
                         <post-list :newsfeed="true"></post-list>

@@ -25,3 +25,16 @@
   }
 
 }
+
+.newsfeed-tabs {
+  .nav-pills {
+    margin-bottom: 1rem;
+    .nav-link {
+      color: $gray-400;
+      &.active {
+        color: $primary;
+        background-color: #fff;
+      }
+    }
+  }
+}

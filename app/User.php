@@ -123,7 +123,7 @@ class User extends Authenticatable
     public function memberOf()
     {
         return $this->belongsToMany(User::class, "followers", "follower_id", "following_id")
-            ->where("is_org", "=", true);
+            ->where("is_org", "=", true)->organization();
     }
 
     public function likePost(Post $post)
@@ -152,6 +152,14 @@ class User extends Authenticatable
         array_push($ids, $this->id);
         $posts = Post::whereIn("user_id",$ids)->latest()->get();
         return $posts;
+    }
+
+    public function latestEvents()
+    {
+        $ids = $this->memberOf->pluck('id');
+        logger($ids);
+        $events = Event::whereIn("organization_id",$ids)->latest()->get();
+        return $events;
     }
 
 
