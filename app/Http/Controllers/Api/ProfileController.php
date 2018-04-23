@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\OrganizationCollection;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -117,6 +118,6 @@ class ProfileController extends Controller
 
     public function getMembership(User $user)
     {
-        return $user->memberOf;
+        return OrganizationCollection::collection($user->memberships());
     }
 }

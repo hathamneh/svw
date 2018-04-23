@@ -126,6 +126,12 @@ class User extends Authenticatable
             ->where("is_org", "=", true);
     }
 
+    public function memberships()
+    {
+        $ids = $this->memberOf()->pluck('id');
+        return Organization::whereIn('user_id',$ids)->get();
+    }
+
     public function likePost(Post $post)
     {
         $post->likes()->attach($this);
