@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Experience;
+use App\Http\Resources\ExperienceCollection;
 use App\User;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -17,14 +18,14 @@ class ExperienceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
         try {
             $user = Auth::user();
             $volunteer = $user->volunteer;
-            return !is_null($volunteer) && !is_null($volunteer->experiences) ? $volunteer->experiences : [];
+            return !is_null($volunteer) ? ExperienceCollection::collection($volunteer->experiences) : [];
         } catch (\Exception $ex) {
             return $this->jsonException($ex);
         }
@@ -36,7 +37,7 @@ class ExperienceController extends Controller
         try {
             $user = User::findOrFail($id);
             $volunteer = $user->volunteer;
-            return !is_null($volunteer) && !is_null($volunteer->experiences) ? $volunteer->experiences : [];
+            return !is_null($volunteer) ? ExperienceCollection::collection($volunteer->experiences) : [];
         } catch (\Exception $ex) {
             return $this->jsonException($ex);
         }
@@ -47,13 +48,13 @@ class ExperienceController extends Controller
         try {
             /** @var Volunteer $volunteer */
             $volunteer = Auth::user()->volunteer;
-            $newEducation = $volunteer->experiences()->create([
+            $newExperience = $volunteer->experiences()->create([
                 'position'         => $request->position,
                 'organization_name' => $request->organization_name,
                 'period'          => $request->period,
                 'desc'          => $request->desc,
             ]);
-            return $newEducation;
+            return new ExperienceCollection($newExperience);
         } catch (\Exception $ex) {
             return $this->jsonException($ex);
         }
@@ -72,7 +73,7 @@ class ExperienceController extends Controller
                     'field_of_study' => $request->field_of_study,
                     'gdate'          => $request->gdate,
                 ]);
-                return $experience;
+                return new ExperienceCollection($experience);
             } else
                 throw new UnauthorizedException();
 

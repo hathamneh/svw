@@ -18,7 +18,7 @@ class Experience extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['position', 'organization_name', 'period', 'description', 'attachment'];
+    protected $fillable = ['position', 'organization_name', 'period', 'description'];
 
     public function volunteer()
     {

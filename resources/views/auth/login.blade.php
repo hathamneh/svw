@@ -30,28 +30,28 @@
                             </div>
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
-                                <div class="form-group row align-items-center{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <div class="form-group row align-items-center{{ $errors->has('login_email') ? ' has-error' : '' }}">
                                     <label for="email" class="control-label col-md-3">Email: </label>
                                     <div class="col-md-9">
                                         <input id="email" type="email" class="form-control" name="login_email"
-                                               value="{{ old('email') }}"
+                                               value="{{ old('login_email') }}"
                                                placeholder="Email..." required autofocus>
-                                        @if ($errors->has('email'))
+                                        @if ($errors->has('login_email'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
+                                                <strong>{{ $errors->first('login_email') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-group row align-items-center{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <div class="form-group row align-items-center{{ $errors->has('login_password') ? ' has-error' : '' }}">
                                     <label for="password" class="control-label col-md-3">Password: </label>
                                     <div class="col-md-9">
                                         <input id="password" type="password" class="form-control" name="login_password"
                                                placeholder="Password..."
                                                required>
-                                        @if ($errors->has('password'))
+                                        @if ($errors->has('login_password'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
+                                                <strong>{{ $errors->first('login_password') }}</strong>
                                             </span>
                                         @endif
                                     </div>

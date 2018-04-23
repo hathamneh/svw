@@ -20,7 +20,7 @@
             <el-button @click="addExpDialogVisible = true" icon="el-icon-plus">Add Experience
             </el-button>
             <el-dialog title="Add Your Experience" :visible.sync="addExpDialogVisible" :append-to-body="true"
-                       @close="experience={}">
+                       @close="experience={}" class="experience-dialog">
                 <el-form :model="experience" :rules="rules" ref="experience">
                     <el-form-item label="Position" :label-width="formLabelWidth" prop="position">
                         <el-input v-model="experience.position" placeholder="Please input"
@@ -31,7 +31,12 @@
                                   auto-complete="true"></el-input>
                     </el-form-item>
                     <el-form-item label="Period (Months)" :label-width="formLabelWidth">
-                        <el-input-number v-model="experience.period" :min="1"></el-input-number>
+                        <el-input-number size="small" v-model="experience.period" :min="1"></el-input-number>
+                        <el-radio-group v-model="periodUnit" size="small">
+                            <el-radio-button :label="1">Days</el-radio-button>
+                            <el-radio-button :label="30">Months</el-radio-button>
+                            <el-radio-button :label="365">Years</el-radio-button>
+                        </el-radio-group>
                     </el-form-item>
                     <el-form-item label="Description" :label-width="formLabelWidth">
                         <el-input type="textarea" v-model="experience.desc"></el-input>
@@ -60,6 +65,7 @@
                     period: 0,
                     desc: ''
                 },
+                periodUnit: 1,
                 added: [],
                 formLabelWidth: '120px',
                 fileList: [],
@@ -103,10 +109,15 @@
                         this.addExpDialogVisible = false;
                         const position = this.experience.position
                         const organization_name = this.experience.organization_name
-                        const period = this.experience.period * 30
+                        const period = this.experience.period * this.periodUnit
                         const desc = this.experience.desc
                         if (this.isProfile) {
-                            this.save(this.experience, this.edit);
+                            this.save({
+                                position: position,
+                                organization_name: organization_name,
+                                period: period,
+                                desc: desc,
+                            }, this.edit);
                         } else {
                             if (this.edit === false) {
                                 this.added.push({

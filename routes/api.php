@@ -90,7 +90,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::resource('/event', "EventController", ['except' => ['index']]);
         Route::get('/user/{user}/events', "EventController@index");
 
-        Route::get("/newsfeed","NewsfeedController@index");
+        Route::get("/feed/posts","NewsfeedController@postsFeed");
+        Route::get("/feed/events","NewsfeedController@eventsFeed");
     });
 
 });
