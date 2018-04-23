@@ -25,8 +25,10 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/registration/{type}', "WizardController@store")->where(['type' => 'volunteer|organization']);
-        Route::get('/user', function (Request $request) {
-            return $request->user();
+        Route::get('/user/{user}', function (User $user = null, Request $request) {
+            if (!is_null($user))
+                return new \App\Http\Resources\UserCollection($user);
+            return new \App\Http\Resources\UserCollection($request->user());
         });
 
         Route::resource('/volunteer', "VolunteerController", ['except' => ['show']]);
@@ -90,8 +92,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::resource('/event', "EventController", ['except' => ['index']]);
         Route::get('/user/{user}/events', "EventController@index");
 
-        Route::get("/feed/posts","NewsfeedController@postsFeed");
-        Route::get("/feed/events","NewsfeedController@eventsFeed");
+        Route::get("/feed/posts", "NewsfeedController@postsFeed");
+        Route::get("/feed/events", "NewsfeedController@eventsFeed");
     });
 
 });
