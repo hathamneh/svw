@@ -128,7 +128,7 @@ class User extends Authenticatable
 
     public function memberships()
     {
-        $ids = $this->memberOf()->pluck('user.id');
+        $ids = $this->memberOf()->pluck('users.id');
         return Organization::whereIn('user_id',$ids)->get();
     }
 
