@@ -84,10 +84,10 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
         // organizations
         Route::get("/organization", "OrganizationProfileController@index");
-        Route::get("/organization/{user}", "OrganizationProfileController@show");
-        Route::put("/organization/{user}", "OrganizationProfileController@update");
-        Route::get('/user/members', "OrganizationProfileController@getMembers");
-        Route::get('/user/{user}/members', "OrganizationProfileController@getMembers");
+        Route::get("/organization/{user}", "OrganizationProfileController@show")->where(['user' => '[0-9]+']);
+        Route::put("/organization/{user}", "OrganizationProfileController@update")->where(['user' => '[0-9]+']);
+        Route::get('/organization/members', "OrganizationProfileController@getMembers");
+        Route::get('/organization/{user}/members', "OrganizationProfileController@getMembers")->where(['user' => '[0-9]+']);
 
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
