@@ -45,7 +45,7 @@
                                 <i class="fa fa-check-square"></i> {{ trans("profile.organization_type") }}
                             </div>
                             <div class="card-body">
-
+                                <org-cat-edit></org-cat-edit>
                             </div>
                         </div>
                     </div>

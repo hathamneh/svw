@@ -30,6 +30,10 @@ class Event extends Model
         return route('event.show', $this->id);
     }
 
+    public function going(User $user) {
+        return $this->subscribers()->attach($user);
+    }
+
     public function getPictureAttribute($val)
     {
         if(is_null($val) || empty($val))

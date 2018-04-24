@@ -23,10 +23,10 @@ class EventController extends Controller
             $user = Auth::user();
 
         /** @var Organization $org */
-        if(!$user->is_org || is_null($org = $user->organization))
+        if (!$user->is_org || is_null($org = $user->organization))
             throw new ModelNotFoundException("Organization not found");
 
-        return EventCollection::collection($org->events()->orderBy('date_from','asc')->get());
+        return EventCollection::collection($org->events()->orderBy('date_from', 'asc')->get());
     }
 
     public function show(Event $event)
@@ -86,5 +86,16 @@ class EventController extends Controller
         } catch (\Exception $e) {
             return self::jsonException($e);
         }
+    }
+
+    public function addGoing(Event $event)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $event->going($user);
+        return [
+            'success'     => true,
+            'subscribers' => $event->subscribers->count(),
+        ];
     }
 }
