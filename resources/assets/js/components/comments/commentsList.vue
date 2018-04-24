@@ -38,9 +38,18 @@
                 this.comments = this.comments.filter(n => {
                     return n.id !== id
                 })
+            },
+            loadComments() {
+                let url = '/api/post/'+this.postId+'/comment'
+                axios.get(url)
+                    .then(res => {
+                        console.log(res.data)
+                        this.comments = res.data
+                    })
             }
         },
         mounted() {
+            this.loadComments()
             EventBus.$on('commentDeleted', this.deleteComment)
         }
     }

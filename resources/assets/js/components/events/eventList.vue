@@ -25,11 +25,12 @@
         },
         methods: {
             loadEvents() {
-                let url = false
                 if(this.feed)
                     url = '/api/feed/events'
                 else if(this.userId)
                     url = '/api/user/'+this.userId+'/events'
+                else
+                    url = '/api/user/events'
                 axios.get(url)
                     .then(res => {
                         if(res.data && Array.isArray(res.data))

@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <comments-list v-if="withComments" :comments-data="post.comments" :post-id="post.id"></comments-list>
+        <comments-list v-if="withComments" :post-id="post.id"></comments-list>
     </div>
 </template>
 
