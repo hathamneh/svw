@@ -15,6 +15,8 @@ class Category extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $fillable = ['name', 'icon'];
+
     public function organizations()
     {
         return $this->hasMany(Organization::class);
