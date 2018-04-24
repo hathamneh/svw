@@ -16,9 +16,9 @@
                 // The component to load (should be a Promise)
                 component: import('../post/post'),
                 // A component to use while the async component is loading
-                loading: require('../shared/LoadingComponent'),
+                loading: import('../shared/LoadingComponent'),
                 // Delay before showing the loading component. Default: 200ms.
-                error: require('../shared/LoadingComponent'),
+                error: import('../shared/LoadingComponent'),
                 delay: 200,
                 // The error component will be displayed if a timeout is
                 // provided and exceeded. Default: Infinity.
