@@ -17,6 +17,7 @@ class EventCollection extends JsonResource
     {
         $out = [
             'id'           => $this->id,
+            'user_id'      => $this->organization->user_id,
             'name'         => $this->name,
             'subscribers'  => $this->subscribers->count(),
             'organization' => $this->organization->name,
@@ -29,6 +30,7 @@ class EventCollection extends JsonResource
             'address'      => is_null($this->address) ? "" : $this->address,
             'picture'      => $this->picture,
             'url'          => $this->url,
+            'going'     => $this->isGoing(),
         ];
         $out['date_range'] = $this->date_range;
 

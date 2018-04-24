@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Resources\EventCollection;
 use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Event extends Model
@@ -36,6 +37,11 @@ class Event extends Model
 
     public function leave(User $user) {
         return $this->subscribers()->detach($user);
+    }
+
+    public function isGoing()
+    {
+        return $this->subscribers()->where('id', Auth::user()->id)->get()->count() > 0;
     }
 
     public function getPictureAttribute($val)
