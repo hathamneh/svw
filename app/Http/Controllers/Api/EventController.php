@@ -98,4 +98,15 @@ class EventController extends Controller
             'subscribers' => $event->subscribers->count(),
         ];
     }
+
+    public function removeGoing(Event $event)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $event->leave($user);
+        return [
+            'success'     => true,
+            'subscribers' => $event->subscribers->count(),
+        ];
+    }
 }

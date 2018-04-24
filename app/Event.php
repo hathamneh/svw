@@ -34,6 +34,10 @@ class Event extends Model
         return $this->subscribers()->attach($user);
     }
 
+    public function leave(User $user) {
+        return $this->subscribers()->detach($user);
+    }
+
     public function getPictureAttribute($val)
     {
         if(is_null($val) || empty($val))
