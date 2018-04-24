@@ -18,7 +18,7 @@ class OrganizationCollection extends JsonResource
         return [
             'id'              => $this->id,
             'user_id'         => $this->user_id,
-            'username'         => $this->user['name'],
+            'username'        => $this->user->username,
             'name'            => $this->name,
             'country'         => CountriesFacade::lookup()[$this->country] ?? $this->country,
             'country_code'    => $this->country,
@@ -27,6 +27,7 @@ class OrganizationCollection extends JsonResource
             'about'           => is_null($this->about) ? "" : $this->about,
             'profile_picture' => $this->user->profile_picture,
             'cover_picture'   => $this->user->cover_picture,
+            'profile_url'     => $this->user->profile_url,
             'website'         => is_null($this->website) ? "" : $this->website,
             'founded_date'    => is_null($this->founded_date) ? "" : $this->founded_date->toFormattedDateString(),
             'category'        => $this->category->name,

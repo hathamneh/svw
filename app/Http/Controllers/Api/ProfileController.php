@@ -77,27 +77,27 @@ class ProfileController extends Controller
     {
         Log::debug($request);
 //        try {
-            if (!Auth::check() || Auth::user()->id != $user->id)
-                throw new UnauthorizedException("You are not allowed to update another user profile");
-            $volunteer = $user->volunteer;
-            $data = [];
-            if($request->has("first_name"))
-                $data['first_name'] = $request->get("first_name");
-            if($request->has("last_name"))
-                $data['last_name'] = $request->get("last_name");
-            if($request->has("birthday"))
-                $data['birthday'] = strtotime($request->get("birthday"));
-            if($request->has("country"))
-                $data['country'] = $request->get("country");
-            if($request->has("city"))
-                $data['city'] = $request->get("city");
-            if($request->has("phone"))
-                $data['phone'] = $request->get("phone");
-            if($request->has("bio"))
-                $data['bio'] = $request->get("bio");
-            $result = $volunteer->update($data);
+        if (!Auth::check() || Auth::user()->id != $user->id)
+            throw new UnauthorizedException("You are not allowed to update another user profile");
+        $volunteer = $user->volunteer;
+        $data = [];
+        if ($request->has("first_name"))
+            $data['first_name'] = $request->get("first_name");
+        if ($request->has("last_name"))
+            $data['last_name'] = $request->get("last_name");
+        if ($request->has("birthday"))
+            $data['birthday'] = strtotime($request->get("birthday"));
+        if ($request->has("country"))
+            $data['country'] = $request->get("country");
+        if ($request->has("city"))
+            $data['city'] = $request->get("city");
+        if ($request->has("phone"))
+            $data['phone'] = $request->get("phone");
+        if ($request->has("bio"))
+            $data['bio'] = $request->get("bio");
+        $result = $volunteer->update($data);
 
-            return response()->json(['updated' => $result]);
+        return response()->json(['updated' => $result]);
 
 //        } catch (\Exception $ex) {
 //            return $this->jsonException($ex);
@@ -116,8 +116,10 @@ class ProfileController extends Controller
     }
 
 
-    public function getMembership(User $user)
+    public function getMembership(User $user = null)
     {
+        if (is_null($user))
+            $user = Auth::user();
         return OrganizationCollection::collection($user->memberships());
     }
 }

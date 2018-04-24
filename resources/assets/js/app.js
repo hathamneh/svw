@@ -9,10 +9,11 @@ import brands from '@fortawesome/fontawesome-free-brands'
 import VueAutosize from 'vue-autosize'
 import BootstrapVue from 'bootstrap-vue'
 import LinkifyVue from './plugins/linkify'
+import IsEditable from './plugins/IsEditable'
 
 Vue.use(LinkifyVue)
 Vue.use(BootstrapVue);
-
+Vue.use(IsEditable)
 
 fontawesome.library.add(regular)
 fontawesome.library.add(solid)

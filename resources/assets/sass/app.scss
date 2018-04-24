@@ -32,6 +32,7 @@ b {
 body.nav-fixed main {
   margin-top: $topnav-height;
   position: relative;
+  padding-bottom: 3rem;
 }
 
 @import "utils";

@@ -284,3 +284,30 @@
   padding: 0;
 
 }
+
+.users-list {
+  &__item {
+    .item-link {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .item-main {
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+    .item-image {
+      margin-right: 0.5rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 0.875rem;
+      color: $gray-600;
+    }
+  }
+}

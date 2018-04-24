@@ -4,7 +4,9 @@
             <new-post v-if="mode == 'self'"></new-post>
             <post-list :mode="mode" :user-id="user_id"></post-list>
         </el-tab-pane>
-        <el-tab-pane label="Membership" name="membership">Membership</el-tab-pane>
+        <el-tab-pane label="Membership" name="membership">
+            <memberships></memberships>
+        </el-tab-pane>
         <el-tab-pane label="Experience" name="experience">
             <w-experience :is-profile="true" :user_id="user_id"></w-experience>
         </el-tab-pane>
@@ -23,15 +25,17 @@
         name: "volunteerTabs",
         components: {
             postList: () => ({
-                // The component to load (should be a Promise)
                 component: import('../post/postList'),
-                // A component to use while the async component is loading
                 loading: require('../shared/LoadingComponent'),
-                // Delay before showing the loading component. Default: 200ms.
                 error: require('../shared/LoadingComponent'),
                 delay: 200,
-                // The error component will be displayed if a timeout is
-                // provided and exceeded. Default: Infinity.
+                timeout: 3000
+            }),
+            memberships: () => ({
+                component: import("./volunteer/membership"),
+                loading: require('../shared/LoadingComponent'),
+                error: require('../shared/LoadingComponent'),
+                delay: 200,
                 timeout: 3000
             })
         },

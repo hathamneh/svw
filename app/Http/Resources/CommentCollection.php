@@ -16,19 +16,16 @@ class CommentCollection extends JsonResource
     public function toArray($request)
     {
         $return = [
-            'id'         => $this->id,
-            'user_id'    => $this->user_id,
-            'user_url'    => $this->user->profile_url,
-            'content'    => $this->content,
-            'created_at' => $this->created_at->diffForHumans(Carbon::now(), true, true),
+            'id'              => $this->id,
+            'user_id'         => $this->user_id,
+            'post_id'         => $this->post_id,
+            'user_url'        => $this->user->profile_url,
+            'name'            => $this->user->name,
+            'profile_picture' => $this->user->profile_picture,
+            'content'         => $this->content,
+            'created_at'      => $this->created_at->diffForHumans(Carbon::now(), true, true),
         ];
-        if (!$this->user->is_org) {
-            $volunteer = $this->user->volunteer;
-            $return += [
-                'name'            => $volunteer->full_name,
-                'profile_picture' => $volunteer->profile_picture,
-            ];
-        }
+
         return $return;
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div :class="['posts-group-item', withComments ? 'withComments' : '']">
-        <div class="post-wrapper Post">
-            <el-dropdown v-if="mode === 'self'" trigger="click" @command="handlePostMenu">
+        <div class="post-wrapper Post" :id="'post-'+post.id">
+            <el-dropdown v-if="editable" trigger="click" @command="handlePostMenu">
                 <span class="Post_menu-icon el-dropdown-link">
                     <i class="fas fa-angle-down"></i></span>
                 <el-dropdown-menu slot="dropdown">
@@ -47,10 +47,21 @@
         },
         data() {
             return {
-                post: this.postData,
+                post: {
+                    id: -1,
+                    user_url: '',
+                    name: '',
+                    post_url: '',
+                    created_at: '',
+                    liked: false,
+                    likes: 0,
+                    content: '',
+                    user_id: ''
+                },
                 contentStyle: {
                     direction: 'ltr'
-                }
+                },
+                editable: false
             }
         },
         props: {
@@ -99,7 +110,7 @@
             },
             deletePost() {
                 axios.delete("/api/post/" + this.post.id).then(res => {
-                    if (res.data && res.deleted) {
+                    if (res.data && res.data.deleted) {
                         this.$emit("postDeleted", this.post.id);
                         console.log(res.data)
                         if (this.withComments)
@@ -108,6 +119,23 @@
                 }).catch(res => {
                     console.log(res.data)
                 })
+            },
+            afterGet() {
+                var rtlChar = /[\u0590-\u083F]|[\u08A0-\u08FF]|[\uFB1D-\uFDFF]|[\uFE70-\uFEFF]/mg;
+
+                var isRTL = this.post.content.match(rtlChar);
+                if (isRTL !== null) {
+                    this.contentStyle.direction = 'rtl'
+                    this.contentStyle.textAlign = 'right'
+                }
+                else {
+                    this.contentStyle.direction = 'ltr'
+                    this.contentStyle.textAlign = 'left'
+                }
+
+                this.post.content = this.$linkify(this.post.content)
+
+                this.$editable(this.post.user_id, result => this.editable = result)
             }
         },
         mounted() {
@@ -115,23 +143,13 @@
                 axios.get("/api/post/" + this.postId)
                     .then((res) => {
                         this.post = res.data
+                        this.afterGet()
                     })
             else {
                 this.post = this.postData
-            }
-            var rtlChar = /[\u0590-\u083F]|[\u08A0-\u08FF]|[\uFB1D-\uFDFF]|[\uFE70-\uFEFF]/mg;
-
-            var isRTL = this.post.content.match(rtlChar);
-            if (isRTL !== null) {
-                this.contentStyle.direction = 'rtl'
-                this.contentStyle.textAlign = 'right'
-            }
-            else {
-                this.contentStyle.direction = 'ltr'
-                this.contentStyle.textAlign = 'left'
+                this.afterGet()
             }
 
-            this.post.content = this.$linkify(this.post.content)
         }
     }
 </script>

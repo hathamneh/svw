@@ -36,21 +36,29 @@ Route::namespace("Api")->middleware("lang")->group(function () {
 
         Route::resource('/volunteer/{user}/education', "EducationController", ['except' => ['index', 'show']]);
         Route::get('/volunteer/education', "EducationController@index");
-        Route::get('/volunteer/{user}/education', "EducationController@show");
+        Route::get('/volunteer/{user}/education', "EducationController@show")
+            ->where(['user' => '[0-9]+']);
 
         Route::get('/volunteer/profile', "ProfileController@index");
-        Route::get('/volunteer/{user}/profile', "ProfileController@show");
-        Route::put('/volunteer/{user}/profile', "ProfileController@update");
+        Route::get('/volunteer/{user}/profile', "ProfileController@show")
+            ->where(['user' => '[0-9]+']);
+        Route::put('/volunteer/{user}/profile', "ProfileController@update")
+            ->where(['user' => '[0-9]+']);
 
-        Route::get('/volunteer/{user}/memberships', "ProfileController@getMembership");
+        Route::get('/volunteer/memberships', "ProfileController@getMembership");
+        Route::get('/volunteer/{user}/memberships', "ProfileController@getMembership")
+            ->where(['user' => '[0-9]+']);
 
         Route::resource('/volunteer/{user}/experience', "ExperienceController", ['except' => ['index', 'show']]);
         Route::get('/volunteer/experience', "ExperienceController@index");
-        Route::get('/volunteer/{user}/experience', "ExperienceController@show");
+        Route::get('/volunteer/{user}/experience', "ExperienceController@show")
+            ->where(['user' => '[0-9]+']);
 
         Route::resource('/volunteer/{user}/capability', "CapabilityController", ['except' => ['index', 'show']]);
-        Route::get('/volunteer/capability/{type?}', "CapabilityController@index")->where(['type' => '[a-z]+']);
-        Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")->where(['type' => '[a-z]+']);
+        Route::get('/volunteer/capability/{type?}', "CapabilityController@index")
+            ->where(['user' => '[0-9]+', 'type' => '[a-z]+']);
+        Route::get('/volunteer/{user}/capability/{type?}', "CapabilityController@show")
+            ->where(['user' => '[0-9]+', 'type' => '[a-z]+']);
 
 
         Route::post("/upload/{target}", "ImagesUploadController@upload");
@@ -64,12 +72,12 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::post('/user/unfollow', "FollowController@unfollowUser");
         Route::get('/user/followers', "FollowController@getFollowers");
         Route::get('/user/following', "FollowController@getFollowing");
-        Route::get('/user/{user}/followers', "FollowController@getFollowers");
-        Route::get('/user/{user}/following', "FollowController@getFollowing");
+        Route::get('/user/{user}/followers', "FollowController@getFollowers")->where(['user' => '[0-9]+']);
+        Route::get('/user/{user}/following', "FollowController@getFollowing")->where(['user' => '[0-9]+']);
 
 
         Route::get('/user/follow/numbers', "FollowController@getNumbers");
-        Route::get('/user/{user}/follow/numbers', "FollowController@getNumbers");
+        Route::get('/user/{user}/follow/numbers', "FollowController@getNumbers")->where(['user' => '[0-9]+']);
 
         Route::get('/user/following/check/{user}', "FollowController@isFollowing");
 
@@ -93,7 +101,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::get("/specialities", "SpecialityController@index");
 
         Route::resource('/event', "EventController", ['except' => ['index']]);
-        Route::get('/user/{user}/events', "EventController@index");
+        Route::get('/organization/events', "EventController@index");
+        Route::get('/organization/{user}/events', "EventController@index")->where(['user' => '[0-9]+']);
 
         Route::get("/feed/posts", "NewsfeedController@postsFeed");
         Route::get("/feed/events", "NewsfeedController@eventsFeed");

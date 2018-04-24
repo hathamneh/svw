@@ -2,7 +2,7 @@
     <div class="comments-wrapper">
         <div class="comments-group">
             <transition-group name="fade">
-                <comment-item v-for="(comment, i) in comments" :key="i" :comment-data="comment"></comment-item>
+                <comment-item v-for="(comment, i) in comments" :key="comment.id" :comment-data="comment"></comment-item>
             </transition-group>
             <div class="comments-group-item new-comment-wrapper">
                 <new-comment :post-id="postId" @newCommentAdded="appendComment"></new-comment>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+    import {EventBus} from "../../event-bus";
+
     export default {
         name: "comments-list",
         components: {
@@ -30,7 +32,16 @@
         methods: {
             appendComment(val) {
                 this.comments.push(val)
+            },
+            deleteComment(id) {
+                console.log(id)
+                this.comments = this.comments.filter(n => {
+                    return n.id !== id
+                })
             }
+        },
+        mounted() {
+            EventBus.$on('commentDeleted', this.deleteComment)
         }
     }
 </script>

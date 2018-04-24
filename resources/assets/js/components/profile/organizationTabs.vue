@@ -16,7 +16,7 @@
         name: "organizationTabs",
         components: {
             postList: require('../post/postList'),
-            Members: require('./members')
+            Members: require('./organization/members')
         },
         data() {
             return {

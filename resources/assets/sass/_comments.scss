@@ -3,6 +3,9 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     padding-top: 2rem;
+    .el-dropdown {
+      height: 40px;
+    }
     .Comment_menu-icon {
       top: 1.5rem;
     }
@@ -23,6 +26,13 @@
 .Comment {
   position: relative;
   font-size: 0.8rem;
+  .el-dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 20px;
+    width: 50px;
+  }
   &_menu-icon {
     position: absolute;
     top: 0;
@@ -44,6 +54,7 @@
   &_username {
     color: #444;
     font-weight: bold;
+    display: inline-block;
   }
   .avatar-thumb {
     width: 30px;

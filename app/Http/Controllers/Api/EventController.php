@@ -17,13 +17,16 @@ use Illuminate\Validation\UnauthorizedException;
 class EventController extends Controller
 {
 
-    public function index(User $user)
+    public function index(User $user = null)
     {
+        if (is_null($user))
+            $user = Auth::user();
+
         /** @var Organization $org */
         if(!$user->is_org || is_null($org = $user->organization))
             throw new ModelNotFoundException("Organization not found");
 
-        return EventCollection::collection($org->events);
+        return EventCollection::collection($org->events()->orderBy('date_from','asc')->get());
     }
 
     public function show(Event $event)

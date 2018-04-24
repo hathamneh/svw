@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Comment;
 use App\Http\Resources\CommentCollection;
 use App\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\UnauthorizedException;
 
 class CommentController extends Controller
 {
@@ -45,7 +48,7 @@ class CommentController extends Controller
             'content' => 'required|max:1000',
         ])->validate();
         $comment = $post->addComment($request->get("content"));
-        if($comment instanceof Comment)
+        if ($comment instanceof Comment)
             return new CommentCollection($comment);
         else
             return $comment;
@@ -67,7 +70,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -78,8 +81,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,8 +100,13 @@ class CommentController extends Controller
      */
     public function destroy(Post $post, Comment $comment)
     {
-        if($comment->post_id == $post->id)
-            return ["deleted"=> $comment->delete()];
-        return ["deleted" => false];
+        $cuser = Auth::user();
+        if ($cuser->id !== $comment->user_id)
+            throw new UnauthorizedException();
+
+        if ($comment->post_id !== $post->id)
+            throw new ModelNotFoundException("This comment was not found with this post");
+
+        return ["deleted" => $comment->delete()];
     }
 }
