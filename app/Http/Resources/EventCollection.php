@@ -26,7 +26,7 @@ class EventCollection extends JsonResource
             "country"      => CountriesFacade::lookup()[$this->country] ?? $this->country,
             'country_code' => $this->country,
             'city'         => $this->city,
-            'address'      => $this->address,
+            'address'      => is_null($this->address) ? "" : $this->address,
             'picture'      => $this->picture,
             'url'          => $this->url,
         ];
