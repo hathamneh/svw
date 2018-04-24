@@ -20,9 +20,7 @@
                     <a :href="post.user_url" class="Post_username">{{ post.name }}</a>
                     <span class="Post_date"> - <a :href="post.post_url">{{ post.created_at }}</a></span>
                 </div>
-                <div class="Post_text">
-                    <nl2br tag="p" :text="post.content"></nl2br>
-                </div>
+                <div class="Post_text" v-html="post.content"></div>
                 <div class="Post_actions">
                     <div :class="['Post_action', 'Post_action-like', post.liked ? 'liked' : '']">
                         <button class="btn-link btn" @click="likePost($event)">
@@ -40,6 +38,8 @@
 </template>
 
 <script>
+    import linkifyHtml from 'linkifyjs/html';
+
     export default {
         name: "post",
         data() {
@@ -113,6 +113,8 @@
             else {
                 this.post = this.postData
             }
+            console.log(this.post.content)
+            this.post.content = this.$linkify(this.post.content)
         }
     }
 </script>

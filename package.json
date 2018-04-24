@@ -20,6 +20,7 @@
     "jquery": "^3.3.1",
     "jquery-validation": "^1.17.0",
     "laravel-mix": "^1.7.2",
+    "linkifyjs": "^2.1.6",
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
     "popper.js": "^1.14.3",
@@ -27,6 +28,7 @@
     "vue": "^2.5.16",
     "vue-autosize": "^1.0.2",
     "vue-form-wizard": "^0.8.4",
+    "vue-linkify": "^1.0.1",
     "vue-nl2br": "^0.0.5",
     "vue-template-compiler": "^2.5.16"
   },
