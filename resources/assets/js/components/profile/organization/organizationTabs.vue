@@ -5,7 +5,7 @@
             <post-list :mode="mode" :user-id="user_id"></post-list>
         </el-tab-pane>
         <el-tab-pane label="Events" name="events">
-            <event-list></event-list>
+            <event-list :user-id="user_id"></event-list>
         </el-tab-pane>
         <el-tab-pane label="Members" name="members">
             <members></members>

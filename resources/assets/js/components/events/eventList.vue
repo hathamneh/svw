@@ -1,6 +1,6 @@
 <template>
     <ul class="events-list">
-        <event-item v-for="event in events" :key="event.id" :event-data="event"></event-item>
+        <event-item v-for="event in events" :key="event.id" :event-data="event" :id="'event-' + event.id"></event-item>
     </ul>
 </template>
 
