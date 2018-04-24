@@ -20,7 +20,7 @@
                     <a :href="post.user_url" class="Post_username">{{ post.name }}</a>
                     <span class="Post_date"> - <a :href="post.post_url">{{ post.created_at }}</a></span>
                 </div>
-                <div class="Post_text" v-html="post.content"></div>
+                <div class="Post_text" v-html="post.content" :style="contentStyle"></div>
                 <div class="Post_actions">
                     <div :class="['Post_action', 'Post_action-like', post.liked ? 'liked' : '']">
                         <button class="btn-link btn" @click="likePost($event)">
@@ -44,7 +44,10 @@
         name: "post",
         data() {
             return {
-                post: this.postData
+                post: this.postData,
+                contentStyle: {
+                    direction: 'ltr'
+                }
             }
         },
         props: {
@@ -113,7 +116,18 @@
             else {
                 this.post = this.postData
             }
-            console.log(this.post.content)
+            var rtlChar = /[\u0590-\u083F]|[\u08A0-\u08FF]|[\uFB1D-\uFDFF]|[\uFE70-\uFEFF]/mg;
+
+            var isRTL = this.post.content.match(rtlChar);
+            if (isRTL !== null) {
+                this.contentStyle.direction = 'rtl'
+                this.contentStyle.textAlign = 'right'
+            }
+            else {
+                this.contentStyle.direction = 'ltr'
+                this.contentStyle.textAlign = 'left'
+            }
+
             this.post.content = this.$linkify(this.post.content)
         }
     }
