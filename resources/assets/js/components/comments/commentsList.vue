@@ -14,6 +14,10 @@
 <script>
     export default {
         name: "comments-list",
+        components: {
+            CommentItem: () => import('./comment'),
+            NewComment: () => import('./newComment')
+        },
         data() {
             return {
                 comments: this.commentsData || []

@@ -42,6 +42,9 @@
 
     export default {
         name: "post",
+        components: {
+            CommentsList: () => import('../comments/commentsList')
+        },
         data() {
             return {
                 post: this.postData,

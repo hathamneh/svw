@@ -1,7 +1,7 @@
 <template>
     <div class="posts-group">
         <transition-group name="fade">
-            <post-item :mode="mode" v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post-item>
+            <post :mode="mode" v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post>
         </transition-group>
     </div>
 </template>
@@ -11,15 +11,6 @@
 
     export default {
         name: "post-list",
-        components: {
-            postItem: () => ({
-                component: import('../post/post'),
-                loading: import('../shared/LoadingComponent'),
-                error: import('../shared/LoadingComponent'),
-                delay: 200,
-                timeout: 3000
-            })
-        },
         data() {
             return {
                 posts: [],
