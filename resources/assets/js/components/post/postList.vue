@@ -1,7 +1,7 @@
 <template>
     <div class="posts-group">
         <transition-group name="fade">
-            <post :mode="mode" v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post>
+            <post-item :mode="mode" v-for="post in posts" :key="post.id" :post-data="post" @postDeleted="deletePost"></post-item>
         </transition-group>
     </div>
 </template>
@@ -12,16 +12,11 @@
     export default {
         name: "post-list",
         components: {
-            post: () => ({
-                // The component to load (should be a Promise)
+            postItem: () => ({
                 component: import('../post/post'),
-                // A component to use while the async component is loading
                 loading: import('../shared/LoadingComponent'),
-                // Delay before showing the loading component. Default: 200ms.
                 error: import('../shared/LoadingComponent'),
                 delay: 200,
-                // The error component will be displayed if a timeout is
-                // provided and exceeded. Default: Infinity.
                 timeout: 3000
             })
         },
