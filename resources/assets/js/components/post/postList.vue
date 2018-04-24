@@ -12,7 +12,7 @@
     export default {
         name: "post-list",
         components: {
-            post: require('./post')
+            post: () => import('./post')
         },
         data() {
             return {

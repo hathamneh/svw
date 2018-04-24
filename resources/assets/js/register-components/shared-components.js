@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+Vue.component('loading-component', require("../components/shared/LoadingComponent"))
+
 Vue.component('normal-message', require("../components/shared/messages/normalMessage"))
 Vue.component('list-message', require("../components/shared/messages/listMessage"))
 
