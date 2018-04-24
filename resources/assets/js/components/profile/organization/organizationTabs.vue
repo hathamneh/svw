@@ -8,7 +8,7 @@
             <event-list :user-id="user_id"></event-list>
         </el-tab-pane>
         <el-tab-pane label="Members" name="members">
-            <members></members>
+            <members :user-id="user_id"></members>
         </el-tab-pane>
     </el-tabs>
 </template>

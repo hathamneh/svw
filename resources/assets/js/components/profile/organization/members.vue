@@ -28,9 +28,15 @@
                 members: []
             }
         },
+        props: {
+            userId: Number
+        },
         methods: {
             loadMembers() {
-                axios.get("/api/organization/members")
+                let url = "/api/organization/members"
+                if(this.userId)
+                    url = "/api/organization/"+this.userId+"/members"
+                axios.get(url)
                     .then(res => {
                         if (res.data)
                             this.members = res.data
