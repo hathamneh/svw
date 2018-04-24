@@ -16,11 +16,12 @@
         components: {
             postList: () => ({
                 // The component to load (should be a Promise)
-                component: import('./post/postList'),
+                component: () => import('./post/postList'),
                 // A component to use while the async component is loading
                 loading: require('./shared/LoadingComponent'),
                 // Delay before showing the loading component. Default: 200ms.
-                delay: 200,
+                error: require('./shared/LoadingComponent'),
+                delay: 20,
                 // The error component will be displayed if a timeout is
                 // provided and exceeded. Default: Infinity.
                 timeout: 3000
