@@ -21,6 +21,20 @@
 <script>
     export default {
         name: "volunteerTabs",
+        components: {
+            postList: () => ({
+                // The component to load (should be a Promise)
+                component: import('../post/postList'),
+                // A component to use while the async component is loading
+                loading: require('../shared/LoadingComponent'),
+                // Delay before showing the loading component. Default: 200ms.
+                error: require('../shared/LoadingComponent'),
+                delay: 200,
+                // The error component will be displayed if a timeout is
+                // provided and exceeded. Default: Infinity.
+                timeout: 3000
+            })
+        },
         data() {
             return {
                 activeName: 'posts',
