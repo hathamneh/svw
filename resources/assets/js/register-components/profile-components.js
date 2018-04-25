@@ -16,4 +16,5 @@ Vue.component('organization-tabs', require('../components/profile/organization/o
 Vue.component('org-info', require('../components/profile/organization/orgInfo'))
 
 Vue.component('edit-org-details', require('../components/profile/organization/details'))
+Vue.component('org-cat-edit', require('../components/profile/organization/CatEdit'))
 

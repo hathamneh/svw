@@ -40,14 +40,7 @@
                         <edit-org-details></edit-org-details>
                     </div>
                     <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
-                        <div class="card">
-                            <div class="card-header">
-                                <i class="fa fa-check-square"></i> {{ trans("profile.organization_type") }}
-                            </div>
-                            <div class="card-body">
-                                <org-cat-edit></org-cat-edit>
-                            </div>
-                        </div>
+                        <org-cat-edit></org-cat-edit>
                     </div>
 
                     <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">good

@@ -88,6 +88,17 @@ class EventController extends Controller
         }
     }
 
+    public function isGoing(Event $event)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $event->going($user);
+        return [
+            'going'     => $event->isGoing(),
+            'subscribers' => $event->subscribers->count(),
+        ];
+    }
+
     public function addGoing(Event $event)
     {
         /** @var User $user */

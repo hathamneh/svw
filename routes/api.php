@@ -96,6 +96,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::put("/organization/{user}", "OrganizationProfileController@update")->where(['user' => '[0-9]+']);
         Route::get('/organization/members', "OrganizationProfileController@getMembers");
         Route::get('/organization/{user}/members', "OrganizationProfileController@getMembers")->where(['user' => '[0-9]+']);
+        Route::get('/organization/type', "OrganizationProfileController@getOrgType");
+        Route::get('/organization/{user}/type', "OrganizationProfileController@getOrgType")->where(['user' => '[0-9]+']);
 
         Route::get("/categories", "CategoryController@index");
         Route::get("/specialities", "SpecialityController@index");
@@ -105,6 +107,7 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::get('/organization/{user}/events', "EventController@index")->where(['user' => '[0-9]+']);
         Route::post('/event/{event}/going', 'EventController@addGoing')->where(['event' => '[0-9]+']);
         Route::post('/event/{event}/leave', 'EventController@removeGoing')->where(['event' => '[0-9]+']);
+        Route::post('/event/{event}/status', 'EventController@isGoing')->where(['event' => '[0-9]+']);
 
         Route::get("/feed/posts", "NewsfeedController@postsFeed");
         Route::get("/feed/events", "NewsfeedController@eventsFeed");

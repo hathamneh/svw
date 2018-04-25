@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\OrganizationCollection;
+use App\Http\Resources\SpecailityCollection;
 use App\Http\Resources\VolunteerCollection;
 use App\Organization;
 use App\User;
@@ -71,5 +73,17 @@ class OrganizationProfileController extends Controller
             throw new ModelNotFoundException();
 
         return VolunteerCollection::collection($user->members());
+    }
+
+    public function getOrgType(User $user = null)
+    {
+        if(is_null($user))
+            $user = Auth::user();
+        if(!$user->is_org || is_null($org = $user->organization))
+            throw new ModelNotFoundException();
+        return [
+            'category' => new CategoryCollection($org->category),
+            'specialities' => $org->specialities
+        ];
     }
 }

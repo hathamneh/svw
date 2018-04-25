@@ -5,9 +5,13 @@ namespace App;
 use App\Http\Resources\EventCollection;
 use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property Collection subscribers
+ */
 class Event extends Model
 {
     use SoftDeletes;
