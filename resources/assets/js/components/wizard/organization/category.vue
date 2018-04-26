@@ -3,7 +3,7 @@
         <div class="col-sm-8 mx-auto">
             <div class="form-group mt-2 mb-5">
                 <label>Select your organization Category:</label>
-                <el-select v-model="value" filterable placeholder="Select Category"
+                <el-select filterable placeholder="Select Category" v-model="category"
                            auto-complete="false" style="width: 100%;" @change="categoryChanged">
                     <el-option
                             v-for="cat in categories"
@@ -25,15 +25,21 @@
         name: "org-category",
         data() {
             return {
-                categories: []
+                categories: [],
+                category: this.value
             }
         },
         props: {
             value: Number
         },
+        watch: {
+            value: function(val) {
+                this.category = val
+            }
+        },
         methods: {
             categoryChanged() {
-                this.$emit("categoryChanged", this.value)
+                this.$emit("categoryChanged", this.category)
             },
             loadCategories() {
                 axios.get("/api/categories").then( res => {

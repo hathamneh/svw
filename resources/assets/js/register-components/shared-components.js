@@ -12,3 +12,4 @@ Vue.component('education-item', require('../components/shared/EducationItem'))
 Vue.component('experience-item', require('../components/shared/ExperienceItem'))
 
 Vue.component('home-tabs', require('../components/homeTabs'))
+Vue.component('users-list', require('../components/shared/usersList'))

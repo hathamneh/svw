@@ -63,12 +63,6 @@ class Organization extends Model
         return route("profile.organization", ["username" => $this->user->username]);
     }
 
-    public function getSpecialitiesAttribute()
-    {
-        return $this->specialities()->pluck("name")->toArray();
-
-    }
-
     public static function search($s)
     {
         $results = self::where("name", "LIKE", "%$s%")

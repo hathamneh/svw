@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Resources\EventCollection;
+use App\Http\Resources\UserCollection;
 use App\MyModel as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -28,6 +29,11 @@ class Event extends Model
     public function subscribers()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function getSubscribers()
+    {
+        return UserCollection::collection($this->subscribers);
     }
 
     public function getUrlAttribute()

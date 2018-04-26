@@ -1,3 +1,6 @@
 import Vue from 'vue'
 
-Vue.component('create-event-wizard', require("../components/events/createWizard"))
+Vue.component('event-wizard', require("../components/events/eventWizard"))
+Vue.component('event-header', require("../components/events/eventHeader"))
+Vue.component('event-tools', require("../components/events/eventTools"))
+Vue.component('event-details', require("../components/events/eventDetails"))

@@ -19,7 +19,7 @@ class VolunteerCollection extends JsonResource
         $out = [
             'id'              => $this->id,
             'user_id'         => $this->user_id,
-            'username'        => $this->user['username'],
+            'username'        => $this->user->username,
             'full_name'       => $this->full_name,
             'first_name'      => $this->first_name,
             'last_name'       => $this->last_name,

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\OrganizationCollection;
 use App\Http\Resources\SpecailityCollection;
 use App\Http\Resources\VolunteerCollection;
 use App\Organization;
+use App\Speciality;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -41,8 +43,7 @@ class OrganizationProfileController extends Controller
         if ($user->id != $org->user_id)
             throw new UnauthorizedException();
 
-        logger($request);
-
+        $result = false;
         $data = [];
         if ($request->has("name"))
             $data['name'] = $request->get("name");
@@ -61,15 +62,44 @@ class OrganizationProfileController extends Controller
         if (!empty($data))
             $result = $org->update($data);
 
+        if ($request->has('category')) {
+            $category_raw = $request->get('category');
+            logger($category_raw);
+            if (is_int($category_raw) && !is_null($category = Category::find($category_raw))) {
+
+                $org->category()->dissociate();
+                $org->category()->associate($category);
+            } elseif (is_string($category_raw)) {
+                $org->category()->dissociate();
+                $org->category()->associate(Category::where('name', '=', $category_raw)->firstOrFail());
+            }
+            $org->push();
+            $result = true;
+        }
+
+        if ($request->has('specialities')) {
+            $spec_raw = $request->get('specialities');
+            if (isset($spec_raw) && is_array($spec_raw)) {
+                $add = array_filter($spec_raw, 'is_int');
+                $new = array_filter($spec_raw, 'is_string');
+                foreach ($new as $speciality) {
+                    $s = Speciality::firstOrCreate(['name' => $speciality]);
+                    $add[] = $s->id;
+                }
+                $org->specialities()->sync($add);
+                $result = true;
+            }
+        }
+
         return response()->json(['updated' => $result]);
 
     }
 
     public function getMembers(User $user = null)
     {
-        if(is_null($user))
+        if (is_null($user))
             $user = Auth::user();
-        if(!$user->is_org)
+        if (!$user->is_org)
             throw new ModelNotFoundException();
 
         return VolunteerCollection::collection($user->members());
@@ -77,13 +107,14 @@ class OrganizationProfileController extends Controller
 
     public function getOrgType(User $user = null)
     {
-        if(is_null($user))
+        if (is_null($user))
             $user = Auth::user();
-        if(!$user->is_org || is_null($org = $user->organization))
+        if (!$user->is_org || is_null($org = $user->organization))
             throw new ModelNotFoundException();
         return [
-            'category' => new CategoryCollection($org->category),
-            'specialities' => $org->specialities
+            'id'           => $org->id,
+            'category'     => $org->category->id,
+            'specialities' => collect($org->specialities)->pluck('id'),
         ];
     }
 }

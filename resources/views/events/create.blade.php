@@ -11,6 +11,6 @@
         </div>
     </div>
     <div class="container">
-        <create-event-wizard></create-event-wizard>
+        <event-wizard></event-wizard>
     </div>
 @endsection

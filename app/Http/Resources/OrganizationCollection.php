@@ -31,7 +31,7 @@ class OrganizationCollection extends JsonResource
             'website'         => is_null($this->website) ? "" : $this->website,
             'founded_date'    => is_null($this->founded_date) ? "" : $this->founded_date->toFormattedDateString(),
             'category'        => $this->category->name,
-            'specialities'    => implode(",", $this->specialities),
+            'specialities'    => implode(",", $this->specialities->pluck("name")->toArray()),
         ];
     }
 }

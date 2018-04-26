@@ -26,8 +26,16 @@
         name: "org-specialities",
         data() {
             return {
-                specialities: [],
+                specialities: this.value || [],
                 loadedSpecialities: []
+            }
+        },
+        props: {
+            value: Array
+        },
+        watch: {
+            value: function(val) {
+                this.specialities = val
             }
         },
         methods: {

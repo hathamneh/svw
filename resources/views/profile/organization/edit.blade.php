@@ -24,11 +24,11 @@
                                role="tab" aria-controls="nav-category" aria-selected="false"><i
                                         class="fa fa-check-square"></i> @lang("profile.organization_type")</a>
 
-                            <hr>
+                            {{--<hr>
 
                             <a class="nav-item nav-link" id="nav-account-tab" data-toggle="tab" href="#nav-account"
                                role="tab" aria-controls="nav-account" aria-selected="false"><i
-                                        class="fa fa-wrench"></i> @lang("profile.account_settings")</a>
+                                        class="fa fa-wrench"></i> @lang("profile.account_settings")</a>--}}
 
                         </div>
                     </nav>
@@ -40,11 +40,10 @@
                         <edit-org-details></edit-org-details>
                     </div>
                     <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
-                        <org-cat-edit></org-cat-edit>
+                        <org-cat-edit :user-id="{{ $user->id }}"></org-cat-edit>
                     </div>
 
-                    <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">good
-                    </div>
+                    {{--<div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">good</div>--}}
                 </div>
             </div>
         </div>

@@ -26,10 +26,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "comments-list",
     components: {
         CommentItem: function CommentItem() {
-            return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, "./resources/assets/js/components/comments/comment.vue"));
+            return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, "./resources/assets/js/components/comments/comment.vue"));
         },
         NewComment: function NewComment() {
-            return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, "./resources/assets/js/components/comments/newComment.vue"));
+            return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, "./resources/assets/js/components/comments/newComment.vue"));
         }
     },
     data: function data() {

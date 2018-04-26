@@ -80,6 +80,40 @@
     color: #fff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   }
+
+  &-tools {
+    &__content {
+      display: flex;
+      align-items: center;
+    }
+    .tools-right {
+      margin-left: auto;
+    }
+    .tools-item {
+      padding: 0 1rem;
+      border-left: 1px solid #ccc;
+      &:last-child {
+        padding-right: 0.5rem;
+      }
+    }
+    .event-subscribers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__number {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+      &__text {
+        font-weight: lighter;
+        font-size: 0.75rem;
+      }
+    }
+  }
+  &__details {
+    font-size: 0.75rem;
+  }
 }
 
 .events-list {
@@ -137,4 +171,21 @@
       margin-bottom: 0;
     }
   }
+}
+
+[class^="icon-"] {
+  font-family: "Font Awesome 5 Free Regular";
+  width: 18px;
+  font-size: inherit;
+  font-style: normal;
+  margin-right: 0.25rem;
+}
+.icon-going:before {
+  content: "\f35a"
+}
+.icon-leave-event:before {
+  content: "\f057"
+}
+.icon-is-going:before {
+  content: "\f058"
 }

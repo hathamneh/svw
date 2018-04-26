@@ -39,7 +39,6 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        Log::info("Hi Idiot :)");
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'email' => 'required|email',

@@ -5,26 +5,26 @@
         <div class="row">
             <div class="col-md-10 mx-auto">
                 <div class="Event">
-                    <div class="Event__header">
-                        <div class="Event__image" style="background-image: url('{{ $event->picture }}')">
-                            <div class="Event__image__overlay"></div>
-                        </div>
-                        <div class="Event__top-text">
-                            <h3 class="Event__name">{{ $event->name }}</h3>
-                            <div class="Event__sub-text">
-                                {{ __("By: ") . $event->organization->name }}
-                            </div>
-                        </div>
+                    <event-header
+                            :event-data="{{ json_encode(['picture'=>$event->picture, 'name' => $event->name, 'orgName' => $event->organization->name]) }}">
+                    </event-header>
+                    <div class="mt-2">
+                        <event-tools :event-id="{{ $event->id }}"></event-tools>
                     </div>
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-secondary"><i class="far fa-arrow-alt-circle-right"></i> Going</button>
-                                </div>
-                                <div class="col d-flex justify-content-end">
-                                    Going {{ $event->subscribers->count() }}
-                                </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-5">
+                            <event-details :event="{{ json_encode([
+                                'date_range'=>$event->date_range,
+                                'description'=>$event->description,
+                                'country'=>$event->country,
+                                'city'=>$event->city,
+                                'address'=>$event->address,
+                            ]) }}"></event-details>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="Event_subscribers-list">
+                                <b class="text-muted my-2 d-block">Those who are coming:</b>
+                                <users-list :users="{{ json_encode($event->getSubscribers()) }}"></users-list>
                             </div>
                         </div>
                     </div>

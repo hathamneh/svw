@@ -16,6 +16,7 @@ class UserCollection extends JsonResource
     {
         return [
             'id'              => $this->id,
+            'full_name'       => $this->name,
             'username'        => $this->username,
             'email'           => $this->email,
             'is_org'          => $this->is_org,
@@ -24,6 +25,7 @@ class UserCollection extends JsonResource
             'ready'           => $this->ready(),
             'profile_picture' => $this->profile_picture,
             'cover_picture'   => $this->cover_picture,
+            'profile_url'     => $this->profile_url,
         ];
     }
 }

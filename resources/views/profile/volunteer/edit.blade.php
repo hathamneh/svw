@@ -32,11 +32,11 @@
                                role="tab" aria-controls="nav-more" aria-selected="false"><i
                                         class="fa fa-trophy"></i> @lang("profile.other_information")</a>
 
-                            <hr>
+                            {{--<hr>
 
                             <a class="nav-item nav-link" id="nav-account-tab" data-toggle="tab" href="#nav-account"
                                role="tab" aria-controls="nav-account" aria-selected="false"><i
-                                        class="fa fa-wrench"></i> @lang("profile.account_settings")</a>
+                                        class="fa fa-wrench"></i> @lang("profile.account_settings")</a>--}}
 
                         </div>
                     </nav>
@@ -67,10 +67,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-more" role="tabpanel" aria-labelledby="nav-more-tab">are you okay?
+                    <div class="tab-pane fade" id="nav-more" role="tabpanel" aria-labelledby="nav-more-tab">
+                        <w-more :is-profile="true" :user-id="{{ $user->id }}"></w-more>
                     </div>
-                    <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">good
-                    </div>
+                    {{--<div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">good</div>--}}
                 </div>
             </div>
             <div class="col-md-2"></div>
