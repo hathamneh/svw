@@ -21,6 +21,7 @@ class PostsCollection extends JsonResource
             'name'            => $this->user->name,
             'content'         => $this->content,
             'user_id'         => $this->user->id,
+            'is_org'          => $this->user->is_org,
             'user_url'        => $this->user->profile_url,
             'profile_picture' => $this->user->profile_picture,
             'post_url'        => $this->post_url,
