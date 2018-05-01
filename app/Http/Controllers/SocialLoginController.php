@@ -16,9 +16,9 @@ class SocialLoginController extends Controller
     public function callback($service)
     {
         $user = Socialite::with($service)->user();
-        $existUser = User::where("email", $user->email)->orWhere(function($query) use ($user) {
-            $query->where("provider", $user->provider)
-                ->where("provider_id", $user->provider_id);
+        $existUser = User::where("email", $user->email)->orWhere(function($query) use ($service, $user) {
+            $query->where("provider", $service)
+                ->where("provider_id", $user->id);
         })->first();
         dd($existUser);
     }
