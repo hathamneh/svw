@@ -93,7 +93,7 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        return redirect('/login')->withInput()->withErrors(ValidationException::withMessages([
+        return redirect($this->loginPath)->withInput()->withErrors(ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
         ]));
     }
