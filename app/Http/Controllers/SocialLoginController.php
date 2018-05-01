@@ -37,7 +37,7 @@ class SocialLoginController extends Controller
             return $authUser;
         }
         $authUser = User::create([
-            'name'     => $user->name,
+            'username'     => $user->id,
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id
