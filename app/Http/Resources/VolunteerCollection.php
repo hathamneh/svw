@@ -17,27 +17,28 @@ class VolunteerCollection extends JsonResource
     public function toArray($request)
     {
         $out = [
-            'id'              => $this->id,
-            'user_id'         => $this->user_id,
-            'username'        => $this->user->username,
-            'full_name'       => $this->full_name,
-            'first_name'      => $this->first_name,
-            'last_name'       => $this->last_name,
-            "birthday"        => $this->birthday->toFormattedDateString(),
-            "gender"          => $this->gender,
-            "country"         => CountriesFacade::lookup()[$this->country] ?? $this->country,
-            "country_code"    => $this->country,
-            "city"            => $this->city,
-            "phone"           => $this->phone,
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'username' => $this->user->username,
+            'email' => $this->user->email,
+            'full_name' => $this->full_name,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            "birthday" => $this->birthday->toFormattedDateString(),
+            "gender" => $this->gender,
+            "country" => CountriesFacade::lookup()[$this->country] ?? $this->country,
+            "country_code" => $this->country,
+            "city" => $this->city,
+            "phone" => $this->phone,
             "profile_picture" => $this->user['profile_picture'],
-            "cover_picture"   => $this->user['cover_picture'],
-            "bio"             => $this->bio,
-            "profile_url"     => $this->profile_url,
+            "cover_picture" => $this->user['cover_picture'],
+            "bio" => $this->bio,
+            "profile_url" => $this->profile_url,
         ];
         if ($request->has("all"))
             $out += [
-                "educations"   => $this->educations,
-                "experiences"  => $this->experiences,
+                "educations" => $this->educations,
+                "experiences" => $this->experiences,
                 "capabilities" => Capability::groupify($this->capabilities),
             ];
 
