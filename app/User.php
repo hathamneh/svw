@@ -3,11 +3,13 @@
 namespace App;
 
 use App\Http\Resources\PostsCollection;
+use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
@@ -217,7 +219,27 @@ class User extends Authenticatable
         $file_name = 'avatars/' . $this->id . '/' . md5($this->username . time()) . "." . $extension;
         Storage::disk('public')->put($file_name, $image_data);
         $uploaded_url = Storage::disk('public')->url($file_name);
-        logger($uploaded_url);
+
+        switch ($target) {
+            case "profile":
+                $this->profile_picture = $uploaded_url;
+                $this->save();
+                break;
+            case "cover":
+                $this->cover_picture = $uploaded_url;
+                $this->save();
+                break;
+        }
+    }
+
+    public function uploadImageFromUrl($target, $url)
+    {
+        $extension = '.jpg';
+        $file_name = 'avatars/' . $this->id . '/' . md5($this->username . time()) . $extension;
+        $fileContents = file_get_contents($url);
+        Storage::disk('public')->put($file_name, $fileContents);
+        $uploaded_url = Storage::disk('public')->url($file_name);
+
         switch ($target) {
             case "profile":
                 $this->profile_picture = $uploaded_url;
