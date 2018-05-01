@@ -23,8 +23,6 @@ class SocialLoginController extends Controller
         $authUser = $this->findOrCreateUser($user, $service);
         Auth::login($authUser);
         return redirect($this->redirectTo);
-
-
     }
 
     public function findOrCreateUser($user, $provider)
