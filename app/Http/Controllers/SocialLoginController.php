@@ -16,6 +16,6 @@ class SocialLoginController extends Controller
     {
         $user = Socialite::with($service)->user();
 
-        
+        return $user;
     }
 }
