@@ -6,7 +6,7 @@ git push
 
 echo ""
 echo "ACCESSING SERVER"
-ssh haitham@159.65.50.55 sh ./deployServer.sh
+ssh haitham@socialvolunteerwork.me sh ./deployServer.sh
 
 echo ""
 echo "FINISHED DEPLOYMENT"
