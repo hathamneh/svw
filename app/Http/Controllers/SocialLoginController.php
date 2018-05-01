@@ -20,6 +20,6 @@ class SocialLoginController extends Controller
             $query->where("provider", $service)
                 ->where("provider_id", $user->id);
         })->first();
-        dd($existUser);
+        return $existUser;
     }
 }
