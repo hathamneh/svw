@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -20,6 +21,29 @@ class AuthController extends Controller
      */
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('SVW APP')->accessToken;
+            $success['user_id'] = $user->id;
+            $success['is_org'] = $user->is_org;
+            $success['ready'] = $user->ready();
+            return response()->json(['success' => $success], $this->successStatus);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 401);
+        }
+    }
+
+    /**
+     * social login api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function social(){
+        $provider = request('provider');
+        $token = request('token');
+        $providerUser = Socialite::driver($provider)->userFromToken($token);
+        $user = $this->findOrCreateUser($providerUser, $provider);
+        if(Auth::login($user)) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('SVW APP')->accessToken;
             $success['user_id'] = $user->id;
@@ -68,5 +92,25 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         return response()->json(['success' => $user], $this->successStatus);
+    }
+
+    public function findOrCreateUser($user, $provider)
+    {
+        /** @var User $authUser */
+        $authUser = User::where("email", $user->email)->orWhere(function($query) use ($provider, $user) {
+            $query->where("provider", $provider)
+                ->where("provider_id", $user->id);
+        })->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        $authUser = User::create([
+            'username'     => $user->id,
+            'email'    => $user->email,
+            'provider' => $provider,
+            'provider_id' => $user->id
+        ]);
+        $authUser->uploadImageFromUrl("profile", $user->image_url);
+        return $authUser;
     }
 }

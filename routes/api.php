@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::namespace("Api")->middleware("lang")->group(function () {
     Route::post('/login', "AuthController@login");
     Route::post('/register', "AuthController@register");
+    Route::post('/login/social', "AuthController@social");
     Route::get('/countries', "CountriesController@index");
     Route::get('/countries/keyValue', "CountriesController@keyValue");
 
