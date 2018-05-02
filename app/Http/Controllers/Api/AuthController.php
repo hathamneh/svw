@@ -44,8 +44,7 @@ class AuthController extends Controller
         $provider = request('provider');
         $token = request('token');
         $driver = Socialite::driver($provider);
-        $access_token = $driver->getAccessToken($token);
-        $providerUser = $driver->userFromToken($access_token);
+        $providerUser = $driver->userFromToken($token);
         $user = $this->findOrCreateUser($providerUser, $provider);
         if (Auth::login($user)) {
             $user = Auth::user();
