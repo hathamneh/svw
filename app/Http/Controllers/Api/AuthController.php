@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -19,17 +20,17 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(){
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+    public function login()
+    {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('SVW APP')->accessToken;
+            $success['token'] = $user->createToken('SVW APP')->accessToken;
             $success['user_id'] = $user->id;
             $success['is_org'] = $user->is_org;
             $success['ready'] = $user->ready();
             return response()->json(['success' => $success], $this->successStatus);
-        }
-        else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+        } else {
+            return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
 
@@ -38,21 +39,23 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function social(){
+    public function social()
+    {
         $provider = request('provider');
         $token = request('token');
-        $providerUser = Socialite::driver($provider)->userFromToken($token);
+        $driver = Socialite::driver($provider);
+        $access_token = $driver->getAccessToken($token);
+        $providerUser = $driver->userFromToken($access_token);
         $user = $this->findOrCreateUser($providerUser, $provider);
-        if(Auth::login($user)) {
+        if (Auth::login($user)) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('SVW APP')->accessToken;
+            $success['token'] = $user->createToken('SVW APP')->accessToken;
             $success['user_id'] = $user->id;
             $success['is_org'] = $user->is_org;
             $success['ready'] = $user->ready();
             return response()->json(['success' => $success], $this->successStatus);
-        }
-        else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+        } else {
+            return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
 
@@ -71,16 +74,16 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 401);
         }
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('SVW APP')->accessToken;
-        $success['username'] =  $user->username;
+        $success['token'] = $user->createToken('SVW APP')->accessToken;
+        $success['username'] = $user->username;
         $success['user_id'] = $user->id;
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response()->json(['success' => $success], $this->successStatus);
     }
 
     /**
@@ -97,7 +100,7 @@ class AuthController extends Controller
     public function findOrCreateUser($user, $provider)
     {
         /** @var User $authUser */
-        $authUser = User::where("email", $user->email)->orWhere(function($query) use ($provider, $user) {
+        $authUser = User::where("email", $user->email)->orWhere(function ($query) use ($provider, $user) {
             $query->where("provider", $provider)
                 ->where("provider_id", $user->id);
         })->first();
@@ -105,8 +108,8 @@ class AuthController extends Controller
             return $authUser;
         }
         $authUser = User::create([
-            'username'     => $user->id,
-            'email'    => $user->email,
+            'username' => $user->id,
+            'email' => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id
         ]);
