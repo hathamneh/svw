@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,22 @@ Route::namespace("Api")->middleware("lang")->group(function () {
     Route::post('/login', "AuthController@login");
     Route::post('/register', "AuthController@register");
     Route::post('/login/social', "AuthController@social");
+    Route::post('/social/{provider}/authorize', function ($provider) {
+        return Socialite::driver($provider)->stateless()->redirect();
+    });
+    Route::post('/social/{provider}/login', function ($provider) {
+        $socialite = Socialite::driver($provider)->stateless()->user();
+
+        $user_by_email = User::where('email', $socialite->email)->first();
+
+        if ($user_by_email) {
+            $user = $user_by_email;
+        }
+
+
+
+        return $user;
+    });
     Route::get('/countries', "CountriesController@index");
     Route::get('/countries/keyValue', "CountriesController@keyValue");
 
