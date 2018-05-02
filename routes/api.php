@@ -22,10 +22,10 @@ Route::namespace("Api")->middleware("lang")->group(function () {
     Route::post('/login', "AuthController@login");
     Route::post('/register', "AuthController@register");
     Route::post('/login/social', "AuthController@social");
-    Route::post('/social/{provider}/authorize', function ($provider) {
+    Route::get('/social/{provider}/authorize', function ($provider) {
         return Socialite::driver($provider)->stateless()->redirect();
     });
-    Route::post('/social/{provider}/login', function ($provider) {
+    Route::get('/social/{provider}/login', function ($provider) {
         $socialite = Socialite::driver($provider)->stateless()->user();
 
         $user_by_email = User::where('email', $socialite->email)->first();
