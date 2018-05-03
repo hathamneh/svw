@@ -15,10 +15,11 @@
     <profile-numbers :is-org="{{ $current_user->is_org ? "true" : "false" }}" class="profile-numbers-sm"
                      :user-id="{{ $current_user->id }}"></profile-numbers>
 </div>
+<hr>
+<div>
+    <small class="bold">Events</small>
+
+</div>
 @if($current_user->is_org)
-    <hr>
-    <div>
-        <small class="bold">Events</small>
-    </div>
     <a href="/event/create">Create new event</a>
 @endif

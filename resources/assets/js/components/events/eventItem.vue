@@ -1,6 +1,6 @@
 <template>
     <li class="events-list__item">
-        <a :href="event.url" class="card">
+        <a v-if="size === 'normal'" :href="event.url" class="card">
             <div class="card-body">
                 <div class="d-flex flex-column">
                     <div class="item-image">
@@ -23,6 +23,16 @@
                 </div>
             </div>
         </a>
+        <a v-else-if="size === 'tiny'" :href="event.url">
+            <div class="item-content__text">
+                <h3>{{ event.name }}</h3>
+                <p class="text-muted">
+                    {{ trans("By") }}: {{ event.organization }}
+                    <br>
+                    {{ trans("When") }}: {{ event.date_range }}
+                </p>
+            </div>
+        </a>
     </li>
 </template>
 
@@ -36,7 +46,11 @@
         },
         props: {
             eventData: Object,
-            eventId: Number
+            eventId: Number,
+            size: {
+                type: String,
+                default: 'normal'
+            }
         },
         mounted() {
             if (this.eventId)
