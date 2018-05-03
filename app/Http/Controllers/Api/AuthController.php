@@ -46,6 +46,8 @@ class AuthController extends Controller
         $driver = Socialite::driver($provider);
         $providerUser = $driver->userFromToken($token);
         $user = $this->findOrCreateUser($providerUser, $provider);
+        logger($providerUser->email);
+        logger($user);
         if (Auth::login($user)) {
             $user = Auth::user();
             $success['token'] = $user->createToken('SVW APP')->accessToken;
