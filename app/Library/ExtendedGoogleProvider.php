@@ -2,6 +2,7 @@
 
 namespace App\Library;
 
+use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Two\GoogleProvider;
 
 class ExtendedGoogleProvider extends GoogleProvider
