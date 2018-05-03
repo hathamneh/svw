@@ -115,7 +115,7 @@ class AuthController extends Controller
             'provider' => $provider,
             'provider_id' => $user->id
         ]);
-        $authUser->uploadImageFromUrl("profile", $user->image_url);
+        $authUser->uploadImageFromUrl("profile", $user->getAvatar());
         return $authUser;
     }
 }
