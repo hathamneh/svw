@@ -23,6 +23,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
     Route::post('/register', "AuthController@register");
     Route::post('/login/social', "AuthController@social");
     Route::get('/social/{provider}/authorize', function ($provider) {
+        $config = new \SocialiteProviders\Manager\Config($clientId,$clientSecret,$redirectUrl);
+
         return Socialite::driver($provider)->stateless()->redirect();
     });
     Route::get('/social/{provider}/login', function ($provider) {

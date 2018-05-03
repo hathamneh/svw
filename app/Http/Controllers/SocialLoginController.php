@@ -20,6 +20,7 @@ class SocialLoginController extends Controller
     public function callback($service)
     {
         $user = Socialite::with($service)->user();
+        logger($user->getToken());
         $authUser = $this->findOrCreateUser($user, $service);
         Auth::login($authUser);
         return redirect($this->redirectTo);
