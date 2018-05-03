@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\ServiceProvider;
-use App\Library\ExtendedGoogleProvider
+use App\Library\ExtendedGoogleProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
