@@ -112,6 +112,7 @@ class AuthController extends Controller
         $authUser = User::create([
             'username' => $user->id,
             'email' => $user->email,
+            'is_org' => false,
             'provider' => $provider,
             'provider_id' => $user->id
         ]);
