@@ -49,7 +49,7 @@ class AuthController extends Controller
         logger($providerUser->email);
         logger($user);
         if ($user) {
-            Auth::login($user)
+            Auth::login($user);
             $user = Auth::user();
             $success['token'] = $user->createToken('SVW APP')->accessToken;
             $success['user_id'] = $user->id;
