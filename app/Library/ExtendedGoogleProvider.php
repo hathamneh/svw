@@ -2,6 +2,7 @@
 
 namespace App\Library;
 
+use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Two\GoogleProvider;
 
