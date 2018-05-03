@@ -4,7 +4,7 @@ namespace App\Library;
 
 use Laravel\Socialite\Two\GoogleProvider;
 
-class SocialConnect extends GoogleProvider
+class ExtendedGoogleProvider extends GoogleProvider
 {
 
     public function getUserByToken($token)
