@@ -176,6 +176,13 @@ class User extends Authenticatable
         return $events;
     }
 
+    public function eventSchedule()
+    {
+        if ($this->is_org) {
+            return $this->organization->events();
+        }
+        return $this->events();
+    }
 
     public function getProfilePictureAttribute($val)
     {

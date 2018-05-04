@@ -16,10 +16,10 @@
                             <div class="social-login text-center">
                                 <label>Login with:</label>
                                 <div class="sites-links">
-                                    <a href="#" class="login-btn fb-login col-sm-6">
+                                    <a href="/redirect/facebook" class="login-btn fb-login col-sm-6">
                                         <i class="fab fa-facebook"></i> Facebook
                                     </a>
-                                    <a href="#" class="login-btn google-login col-sm-6">
+                                    <a href="/redirect/google" class="login-btn google-login col-sm-6">
                                         <i class="fab fa-google"></i> Google
                                     </a>
                                 </div>

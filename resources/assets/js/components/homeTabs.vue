@@ -2,14 +2,14 @@
     <b-tabs pills class="nav-fill newsfeed-tabs">
         <b-tab active>
             <template slot="title">
-                <i class="image-icon mx-2"><img src="/images/post-icon.svg" alt=""></i>{{ trans('Latest Posts') }}
+                <i class="image-icon mx-2"><img src="/images/post-icon.svg" alt=""></i>{{ trans('Posts') }}
             </template>
             <new-post></new-post>
             <post-list :newsfeed="true"></post-list>
         </b-tab>
         <b-tab>
             <template slot="title">
-                <i class="fa fa-calendar mx-2"></i>{{ trans('Latest Events') }}
+                <i class="fa fa-calendar mx-2"></i>{{ trans('Explore Events') }}
             </template>
 
             <event-list :feed="true"></event-list>
@@ -36,6 +36,9 @@
                 delay: 200,
                 timeout: 3000
             })
+        },
+        created() {
+
         }
     }
 </script>

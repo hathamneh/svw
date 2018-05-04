@@ -1,7 +1,7 @@
 <template>
-    <ul class="events-list">
+    <ul :class="['events-list', size]">
         <event-item v-for="event in events" :key="event.id" :event-data="event" :id="'event-' + event.id"
-            size="normal"></event-item>
+                    :size="size"></event-item>
     </ul>
 </template>
 
@@ -23,6 +23,10 @@
                 type: Boolean,
                 default: false
             },
+            schedule: {
+                type: Boolean,
+                default: false
+            },
             count: Number,
             size: {
                 type: String,
@@ -32,15 +36,18 @@
         methods: {
             loadEvents() {
                 let url = '/api/organization/events'
-                if(this.feed)
+                if (this.feed)
                     url = '/api/feed/events'
-                else if(this.userId)
-                    url = '/api/organization/'+this.userId+'/events'
-                if(this.count)
+                else if (this.schedule)
+                    url = '/api/user/events'
+                else
+                if (this.userId)
+                    url = '/api/organization/' + this.userId + '/events'
+                if (this.count)
                     url += "?count=" + this.count
                 axios.get(url)
                     .then(res => {
-                        if(res.data && Array.isArray(res.data))
+                        if (res.data && Array.isArray(res.data))
                             this.events = res.data
                     })
             }

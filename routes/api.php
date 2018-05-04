@@ -128,6 +128,8 @@ Route::namespace("Api")->middleware("lang")->group(function () {
         Route::post('/event/{event}/going', 'EventController@addGoing')->where(['event' => '[0-9]+']);
         Route::post('/event/{event}/leave', 'EventController@removeGoing')->where(['event' => '[0-9]+']);
         Route::get('/event/{event}/status', 'EventController@isGoing')->where(['event' => '[0-9]+']);
+        Route::get('/user/events', 'EventController@schedule');
+        Route::get('/user/{user}/events', 'EventController@schedule')->where(['user' => '[0-9]+']);
 
         Route::get("/feed/posts", "NewsfeedController@postsFeed");
         Route::get("/feed/events", "NewsfeedController@eventsFeed");

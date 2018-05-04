@@ -118,4 +118,11 @@ class EventController extends Controller
             'subscribers' => $event->subscribers->count(),
         ];
     }
+
+    public function schedule(User $user = null)
+    {
+        if(is_null($user))
+            $user = Auth::user();
+        return EventCollection::collection($user->eventSchedule()->get());
+    }
 }

@@ -24,12 +24,10 @@
             </div>
         </a>
         <a v-else-if="size === 'tiny'" :href="event.url">
-            <div class="item-content__text">
+            <div class="item-content">
                 <h3>{{ event.name }}</h3>
                 <p class="text-muted">
-                    {{ trans("By") }}: {{ event.organization }}
-                    <br>
-                    {{ trans("When") }}: {{ event.date_range }}
+                    {{ event.date_range }}
                 </p>
             </div>
         </a>
