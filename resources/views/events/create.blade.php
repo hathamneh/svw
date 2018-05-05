@@ -1,6 +1,7 @@
 @extends("layouts.appWithFooter")
 
 @section("content")
+    <main>
     <div class="sub-heading">
         <div class="container">
             <h3><i class="fa fa-calendar mr-3"></i>@lang("Create New Event")</h3>
@@ -13,4 +14,5 @@
     <div class="container">
         <event-wizard></event-wizard>
     </div>
+    </main>
 @endsection

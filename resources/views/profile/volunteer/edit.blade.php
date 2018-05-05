@@ -1,6 +1,7 @@
 @extends("layouts.appWithFooter")
 
 @section("content")
+    <main>
     <div class="sub-heading">
         <div class="container">
             <h3>@lang("Edit your profile")</h3>
@@ -76,4 +77,5 @@
             <div class="col-md-2"></div>
         </div>
     </div>
+    </main>
 @endsection

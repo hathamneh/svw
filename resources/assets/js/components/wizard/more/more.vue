@@ -45,6 +45,13 @@
                     projects: [],
                     languages: []
                 },
+                newCaps: {
+                    skills: [],
+                    courses: [],
+                    certificates: [],
+                    projects: [],
+                    languages: []
+                },
                 types: {
                     skills: {
                         name: "skills",
@@ -109,7 +116,7 @@
                 if (this.isProfile)
                     this.save(val, false)
                 else
-                    this.caps[type].push(val.value);
+                    this.newCaps[type].push(val.value);
 
             },
             save(item, update) {
@@ -155,7 +162,7 @@
             },
         },
         watch: {
-            caps: {
+            newCaps: {
                 handler(val) {
                     this.$emit("newCaps", val);
                 },

@@ -30,17 +30,19 @@
 @endsection
 
 @section("content")
-    <div class="flex-center position-ref full-height">
-        <div class="content d-flex flex-column flex-center">
-            <i class="fa fa-exclamation-circle fa-5x"></i>
-            <div class="title">
-                @yield('message')
-            </div>
-            <hr>
-            <span>
+    <main>
+        <div class="flex-center position-ref full-height">
+            <div class="content d-flex flex-column flex-center">
+                <i class="fa fa-exclamation-circle fa-5x"></i>
+                <div class="title">
+                    @yield('message')
+                </div>
+                <hr>
+                <span>
                 @yield('details')
             </span>
 
+            </div>
         </div>
-    </div>
+    </main>
 @endsection

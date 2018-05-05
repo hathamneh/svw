@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="landing-page image-container">
+    <main class="landing-page image-container">
         <div class="filter"></div>
         <div class="container">
             <div class="row">
@@ -74,5 +74,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 @endsection

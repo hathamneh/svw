@@ -23,6 +23,11 @@
                 </div>
 
             </div>
+            <div class="col-sm-12">
+                <div class="alert alert-danger w-100" v-for="error in errorsData">
+                    {{ error }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -31,16 +36,23 @@
     export default {
         data() {
             return {
-                accType: ""
+                accType: "",
+                errorsData: this.errors
             };
+        },
+        props: {
+            errors: Array
         },
         watch: {
             accType: function (val, oldVal) {
-                this.$emit("accTypeUpdated",val)
+                this.$emit("accTypeUpdated", val)
+            },
+            errors: function(val, old) {
+                this.errorsData = val
             }
+        },
+        mounted() {
+            this.errorsData = this.errors
         }
-        // mounted() {
-        //     console.log('Component mounted.')
-        // }
     }
 </script>

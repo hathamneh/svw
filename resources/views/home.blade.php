@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <main>
     <?php /** @var \App\Volunteer $volunteer */ ?>
 
     <div class="container pt-4">
@@ -27,5 +28,5 @@
             </div>
         </div>
     </div>
-
+    </main>
 @endsection

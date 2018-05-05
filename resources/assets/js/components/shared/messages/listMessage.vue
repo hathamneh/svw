@@ -9,7 +9,7 @@
     export default {
         data() {
             return {
-                icon: "fa fa-exclamation-triangle",
+                icon: "fa fa-info-circle",
                 text: this.$slots.default[0].text
             }
         },

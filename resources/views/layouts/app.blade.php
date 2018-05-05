@@ -98,9 +98,8 @@
             </div>
         </div>
     </nav>
-    <main>
-        @yield('content')
-    </main>
+
+    @yield('content')
     @yield("page_footer")
 </div>
 

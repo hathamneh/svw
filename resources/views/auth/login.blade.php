@@ -28,32 +28,32 @@
                                 <hr>
                                 <span>OR</span>
                             </div>
-                            <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                                {{ csrf_field() }}
-                                <div class="form-group row align-items-center{{ $errors->has('login_email') ? ' has-error' : '' }}">
-                                    <label for="email" class="control-label col-md-3">Email: </label>
-                                    <div class="col-md-9">
-                                        <input id="email" type="email" class="form-control" name="login_email"
-                                               value="{{ old('login_email') }}"
-                                               placeholder="Email..." required autofocus>
-                                        @if ($errors->has('login_email'))
-                                            <span class="help-block">
+                            @if ($errors->has('login_email'))
+                                <span class="help-block alert alert-danger">
                                                 <strong>{{ $errors->first('login_email') }}</strong>
                                             </span>
-                                        @endif
+                            @endif
+                            @if ($errors->has('login_password'))
+                                <span class="help-block">
+                                                <strong>{{ $errors->first('login_password') }}</strong>
+                                            </span>
+                            @endif
+                            <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                <div class="form-group row align-items-center">
+                                    <label for="email" class="control-label col-md-3">Email: </label>
+                                    <div class="col-md-9">
+                                        <input id="email" type="text" class="form-control" name="login_email"
+                                               value="{{ old('login_email') }}"
+                                               placeholder="Email..." required autofocus>
                                     </div>
                                 </div>
-                                <div class="form-group row align-items-center{{ $errors->has('login_password') ? ' has-error' : '' }}">
+                                <div class="form-group row align-items-center">
                                     <label for="password" class="control-label col-md-3">Password: </label>
                                     <div class="col-md-9">
                                         <input id="password" type="password" class="form-control" name="login_password"
                                                placeholder="Password..."
                                                required>
-                                        @if ($errors->has('login_password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('login_password') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row no-gutters">
@@ -66,7 +66,7 @@
                                         </label>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in-alt"></i> Login
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-key"></i> Login
                                     </button>
                                 </div>
 

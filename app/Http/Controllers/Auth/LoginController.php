@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -49,7 +50,7 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         $username = $request->get($this->username());
-        if(filter_var($username, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             //user sent their email
             return ['email' => $username, 'password' => $request->get($this->password())];
         } else {
@@ -93,9 +94,17 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        return redirect($this->loginPath)->withInput()->withErrors(ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]));
+        $prev = $request->headers->get('referer');
+        $prev = parse_url($prev, PHP_URL_PATH);
+        if ($prev !== "/login")
+            return redirect($this->loginPath)->withInput()->withErrors([
+                $this->username() => [trans('auth.failed')],
+            ]);
+        else
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.failed')],
+            ]);
+
     }
 
 }
