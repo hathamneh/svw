@@ -11,6 +11,7 @@ class ExtendedGoogleProvider extends GoogleProvider
 
     public function getUserByToken($token)
     {
+        logger($this->getAccessTokenResponse($this->getCode()));
         $response = $this->getHttpClient()->get('https://www.googleapis.com/oauth2/v3/tokeninfo?', [
             'query' => [
                 'id_token' => $token,
