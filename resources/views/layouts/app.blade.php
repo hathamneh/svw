@@ -19,18 +19,41 @@
 @yield("after_body")
 
 <div id="app">
-    <nav class="navbar navbar-expand-sm{{ isset($wizard) ? " transparent-bg" : " fixed-top" }}">
-        <div class="container">
+    <nav class="navbar navbar-expand-md{{ isset($wizard) ? " transparent-bg" : " fixed-top" }}">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="d-md-none navbar-nav mr-2">
                 @guest
+                    @if(!isset($login) || !$login)
+                        <a href="/login" class="btn btn-sm btn-secondary"><i class="fa fa-key"></i> Login</a>
+                    @endif
                 @else
+                    <el-menu mode="horizontal">
+                        <el-submenu index="1">
+                            <template slot="title">
+                                <a href="{{{ auth()->user()->profile_url }}}" title="{{{ auth()->user()->name }}}"><img
+                                            src="{{ auth()->user()->profile_picture }}" width="25"
+                                            alt="{{{ auth()->user()->name }}}"></a>
+                            </template>
+                            <el-menu-item index="1-1">
+                                <a href="{{ $current_user->edit_url }}">{{ __('Edit Profile') }}</a>
+                            </el-menu-item>
+                            <el-menu-item index="2-1">
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                >Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </el-menu-item>
+                        </el-submenu>
+                    </el-menu>
+                @endguest
+            </div>
+            <div class="d-none d-md-block">
+                @auth
                     @if(!isset($wizard))
                         <form action="{{ route("search") }}" class="header-search-form">
                             <input type="text" placeholder="Find Organization, Events, Volunteers ..."
@@ -38,7 +61,7 @@
                             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     @endif
-                @endguest
+                @endauth
                 <div class="navbar-nav ml-auto ">
                     @guest
                         @if(!isset($login) || !$login)

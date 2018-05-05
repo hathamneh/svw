@@ -30,6 +30,18 @@
                 <w-more v-if="!is_org" @newCaps="(val) => { volunteerFormData.capabilities = val }"></w-more>
                 <org-specialities v-if="is_org" @specialityChanged="val => orgFormData.specialities = val"></org-specialities>
             </tab-content>
+
+            <template slot="footer" slot-scope="props">
+                <div class=wizard-footer-left>
+                    <wizard-button  v-if="props.activeTabIndex > 0 && !props.isLastStep" @click.native="props.prevTab()" :style="props.fillButtonStyle">
+                        <i class="fa fa-angle-left"></i> Back</wizard-button>
+                </div>
+                <div class="wizard-footer-right">
+                    <wizard-button v-if="!props.isLastStep"@click.native="props.nextTab()" class="wizard-footer-right m-0" :style="props.fillButtonStyle">Next <i class="fa fa-angle-right"></i></wizard-button>
+
+                    <wizard-button v-else @click.native="completed" class="wizard-footer-right m-0 finish-button" :style="props.fillButtonStyle"><i class="fa fa-check"></i> Finish</wizard-button>
+                </div>
+            </template>
         </form-wizard>
 
     </div>

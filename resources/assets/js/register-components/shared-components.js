@@ -13,3 +13,5 @@ Vue.component('experience-item', require('../components/shared/ExperienceItem'))
 
 Vue.component('home-tabs', require('../components/homeTabs'))
 Vue.component('users-list', require('../components/shared/usersList'))
+
+Vue.component('social-buttons', require('../components/shared/socialButtons'))

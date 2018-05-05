@@ -34,3 +34,47 @@
   display: block;
   margin-top: 0.5rem;
 }
+
+
+.social-btn {
+  width: 100%;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: bold;
+  border: 1px solid;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.2rem;
+  transition: all 0.5s;
+  margin-bottom: 0.5rem;
+  i, svg, img {
+    font-weight: normal;
+    font-size: 1rem;
+    margin-right: 0.25rem;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.fb-login {
+  background-color: $fb;
+  border-color: darken($fb, 5);
+  color: #fff;
+  &:hover {
+    color: #fff;
+    background-color: darken($fb, 8);
+  }
+}
+
+.google-login {
+  background-color: #f6f6f6;
+  border-color: #ddd;
+  color: #666;
+  img {
+    width: 18px;
+  }
+  &:hover {
+    color: #555;
+    background-color: #ddd;
+  }
+}

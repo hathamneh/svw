@@ -12,12 +12,8 @@
  
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-
-
 @import "paper-bootstrap-wizard/variables";
 @import "paper-bootstrap-wizard/mixins";
-
-
 @import "paper-bootstrap-wizard/typography";
 //@import "paper-bootstrap-wizard/inputs";
 @import "paper-bootstrap-wizard/misc";
@@ -36,10 +32,17 @@
   font-weight: lighter;
   font-size: 1rem;
 }
-.vue-form-wizard li.active .wizard-icon-circle {
-  background-color: $primary-color;
-  font-size: 1rem;
+
+.vue-form-wizard li {
+  .wizard-icon-circle.tab_shape {
+    min-width: 0 !important;
+  }
+  &.active .wizard-icon-circle {
+    background-color: $primary-color;
+    font-size: 1rem;
+  }
 }
+
 .experience-dialog {
   .el-radio-button {
     margin-bottom: 3px;

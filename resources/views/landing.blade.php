@@ -3,24 +3,17 @@
 @section('content')
     <main class="landing-page image-container">
         <div class="filter"></div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-sm-7 col-12 ml-auto">
+                <div class="col-lg-6 col-md-6 d-none d-md-block mx-auto">
                     <div class="landing-message">
                         <span class="typed"></span>
                     </div>
-
                 </div>
-                <div class="col-md-4 col-sm-5 col-12 mr-auto">
+                <div class="col-lg-4 col-md-6 col-sm-5 col-12 mx-auto">
                     <div class="card card-register">
                         <h3 class="card-title text-center">Register</h3>
-                        <div class="social">
-                            <a href="/redirect/facebook" class="btn btn-just-icon btn-neutral btn-facebook"><i
-                                        class="fab fa-facebook-f"></i></a>
-                            <a href="/redirect/google" class="btn btn-just-icon btn-neutral btn-google"><i
-                                        class="fab fa-google"></i></a>
-                        </div>
-
+                        <social-buttons style="margin: 1rem 0 -0.9rem;"></social-buttons>
                         <div class="division">
                             <div class="line l"></div>
                             <span>or</span>
@@ -68,7 +61,7 @@
                                     <div class="form-control-feedback">{{ $errors->first('register_password_confirmation') }}</div>
                                 @endif
                             </div>
-                            <button class="btn btn-primary btn-block btn-round">Register</button>
+                            <button class="btn btn-primary btn-block btn-round font-weight-bold"><i class="fa fa-user-plus"></i> Register</button>
                         </form>
                     </div>
                 </div>

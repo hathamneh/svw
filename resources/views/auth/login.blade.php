@@ -7,23 +7,13 @@
     <main class="image-container">
         <div class="filter"></div>
 
-        <div class="container login-page">
+        <div class="container-fluid login-page">
             <div class="row align-items-center">
                 <div class="col-sm-6 mx-auto">
 
                     <div class="login-form card">
                         <div class="card-body">
-                            <div class="social-login text-center">
-                                <label>Login with:</label>
-                                <div class="sites-links">
-                                    <a href="/redirect/facebook" class="login-btn fb-login col-sm-6">
-                                        <i class="fab fa-facebook"></i> Facebook
-                                    </a>
-                                    <a href="/redirect/google" class="login-btn google-login col-sm-6">
-                                        <i class="fab fa-google"></i> Google
-                                    </a>
-                                </div>
-                            </div>
+                            <social-buttons></social-buttons>
                             <div class="divider">
                                 <hr>
                                 <span>OR</span>
