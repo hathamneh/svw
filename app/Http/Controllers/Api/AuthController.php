@@ -102,10 +102,12 @@ class AuthController extends Controller
     public function findOrCreateUser($user, $provider)
     {
         /** @var User $authUser */
-        $authUser = User::where("email", $user->email)->orWhere(function ($query) use ($provider, $user) {
+        $tmp = User::where("email", $user->email)->orWhere(function ($query) use ($provider, $user) {
             $query->where("provider", $provider)
                 ->where("provider_id", $user->id);
-        })->first();
+        });
+        logger($tmp->toSql());
+        $authUser = $tmp->first();
         if ($authUser) {
             return $authUser;
         }
