@@ -11,7 +11,6 @@ class ExtendedGoogleProvider extends GoogleProvider
 
     public function getUserByToken($token)
     {
-        logger($this->getAccessTokenResponse($this->getCode()));
         $response = $this->getHttpClient()->get('https://www.googleapis.com/oauth2/v3/tokeninfo?', [
             'query' => [
                 'id_token' => $token,
@@ -29,7 +28,7 @@ class ExtendedGoogleProvider extends GoogleProvider
     {
 
         return (new User)->setRaw($user)->map([
-            'id' => $user['kid'], 'nickname' => Arr::get($user, 'given_name'), 'name' => $user['name'],
+            'id' => $user['sub'], 'nickname' => Arr::get($user, 'given_name'), 'name' => $user['name'],
             'email' => $user['email'], 'avatar' => Arr::get($user, 'picture'),
             'avatar_original' => preg_replace('/\?sz=([0-9]+)/', '', Arr::get($user, 'picture')),
         ]);
