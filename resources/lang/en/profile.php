@@ -1,7 +1,8 @@
 <?php
 
 return [
-    "personal_information"       => "Personal Information",
-    "organization_details"       => "Organization Details",
-    "organization_type"       => "Organization Category",
+    "personal_information" => "Personal Information",
+    "organization_details" => "Organization Details",
+    "organization_type"    => "Organization Category",
+    "no_bio"               => "No Bio"
 ];
