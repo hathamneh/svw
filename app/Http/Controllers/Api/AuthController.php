@@ -47,6 +47,7 @@ class AuthController extends Controller
         $providerUser = $driver->userFromToken($token);
         $user = $this->findOrCreateUser($providerUser, $provider);
         logger($providerUser->email);
+        logger($providerUser->id);
         logger($user);
         if ($user) {
             Auth::login($user);
