@@ -107,7 +107,7 @@ class AuthController extends Controller
                 ->where("provider_id", $user->id);
         });
         $query = str_replace(array('?'), array('\'%s\''), $tmp->toSql());
-        $query = vsprintf($query, $builder->getBindings());
+        $query = vsprintf($query, $tmp->getBindings());
         logger($query);
         $authUser = $tmp->first();
         if ($authUser) {
