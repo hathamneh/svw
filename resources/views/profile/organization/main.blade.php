@@ -36,15 +36,23 @@
                     <profile-tabs :is-org="true" mode="{{ $view_mode }}" :user_id="{{ $user->id }}"></profile-tabs>
                 </div>
                 <div class="col-md-2">
-                    <small class="text-muted"><b>Suggestions</b></small>
-                    <div class="suggestion-item demo">
+                    <div class="sidebar-home-right sidebar-sticky">
+                        <div class="d-none d-md-block">
+                            <small class="text-muted"><b>Suggestions</b></small>
+                            <div class="suggestion-item demo">
 
-                    </div>
-                    <div class="suggestion-item demo">
+                            </div>
+                            <div class="suggestion-item demo">
 
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="mt-4">
+                            <small style="font-size: 0.65rem;" class="text-muted"><b>All rights reserved &copy; SVW
+                                    2018</b>
+                            </small>
+                        </div>
                     </div>
-                    <hr>
-                    <small style="font-size: 0.65rem;" class="text-muted"><b>All rights reserved &copy; SVW 2018</b></small>
                 </div>
             </div>
         </div>
