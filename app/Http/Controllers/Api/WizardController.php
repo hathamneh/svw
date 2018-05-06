@@ -151,8 +151,6 @@ class WizardController extends Controller
             'birthday'   => 'required|date',
             'gender'     => 'required',
             'country'    => 'required',
-            'city'       => 'required',
-            'phone'      => 'required',
         ];
 
         return Validator::make(json_decode(json_encode($data), true), $rules);
