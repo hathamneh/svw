@@ -32,7 +32,7 @@ import '../sass/element-vars.scss';
 require('./bootstrap');
 Vue.prototype.$http = window.axios;
 
-Vue.use(Element,{ locale })
+Vue.use(Element, {locale})
 Vue.use(VueAutosize)
 
 Vue.prototype.trans = (string, args) => {
@@ -44,7 +44,7 @@ Vue.prototype.trans = (string, args) => {
     return value;
 };
 
-require('./Auth') 
+require('./Auth')
 require('./register-components/shared-components')
 require('./register-components/registration-wizard')
 require('./register-components/profile-components')
@@ -57,9 +57,11 @@ require('./register-components/events-components')
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import {EventBus} from "./event-bus";
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
+
 });
 
 $(document).ready(function () {
@@ -68,4 +70,11 @@ $(document).ready(function () {
             strings: ["A Place for the Volunteers of the World."],
             typeSpeed: 75
         });
+    let $searchToggle = $(".search-mobile-toggle");
+    if ($searchToggle.length) {
+        $searchToggle.on('click', function (e) {
+            e.preventDefault()
+            $('.search-mobile').toggleClass('expanded');
+        })
+    }
 });

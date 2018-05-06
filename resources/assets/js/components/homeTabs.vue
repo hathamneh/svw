@@ -9,7 +9,7 @@
         </b-tab>
         <b-tab>
             <template slot="title">
-                <i class="fa fa-calendar mx-2"></i>{{ trans('Explore Events') }}
+                <i class="fa fa-calendar mx-2"></i>{{ trans('Events') }}
             </template>
 
             <event-list :feed="true"></event-list>

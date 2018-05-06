@@ -5,6 +5,7 @@
 @import "variables";
 // Libraries
 @import "~bootstrap/scss/bootstrap";
+$default-color: $secondary;
 @import "paper-kit";
 @import "paper-bootstrap-wizard";
 @import "nucleo-icons";
@@ -91,6 +92,7 @@ a.card:hover {
   text-align: center;
   color: #aaa;
   padding: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .list-message {

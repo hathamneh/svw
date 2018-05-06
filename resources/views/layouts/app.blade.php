@@ -28,36 +28,15 @@
                     @if(!isset($login) || !$login)
                         <a href="/login" class="btn btn-sm btn-secondary"><i class="fa fa-key"></i> Login</a>
                     @endif
-                @else
-                    <el-menu mode="horizontal">
-                        <el-submenu index="1">
-                            <template slot="title">
-                                <a href="{{{ auth()->user()->profile_url }}}" title="{{{ auth()->user()->name }}}"><img
-                                            src="{{ auth()->user()->profile_picture }}" width="25"
-                                            alt="{{{ auth()->user()->name }}}"></a>
-                            </template>
-                            <el-menu-item index="1-1">
-                                <a href="{{ $current_user->edit_url }}">{{ __('Edit Profile') }}</a>
-                            </el-menu-item>
-                            <el-menu-item index="2-1">
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                >Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </el-menu-item>
-                        </el-submenu>
-                    </el-menu>
                 @endguest
             </div>
-            <div class="d-none d-md-flex" style="flex:1;">
+            <div class="d-flex" style="flex:1;">
                 @auth
                     @if(!isset($wizard))
-                        <form action="{{ route("search") }}" class="header-search-form">
+                        <form action="{{ route("search") }}" class="header-search-form d-none d-md-flex">
                             <input type="text" placeholder="Find Organization, Events, Volunteers ..."
                                    name="s" value="{{ $s ?? "" }}" class="form-control">
+                            <input type="hidden" name="type" value="{{ $type ?? "" }}">
                             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     @endif
@@ -65,7 +44,7 @@
                 <div class="navbar-nav ml-auto ">
                     @guest
                         @if(!isset($login) || !$login)
-                            <form class="form-login" action="{{ route('login') }}" method="post">
+                            <form class="form-login d-none d-md-flex" action="{{ route('login') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-sm" name="login_email"
@@ -93,34 +72,52 @@
                         @endif
                     @else
                     <!-- Right Side Of Navbar -->
-
-                        <el-menu mode="horizontal">
-                            <el-submenu index="1">
-                                <template slot="title">
-                                    <a href="{{{ auth()->user()->profile_url }}}"><img
-                                                src="{{ auth()->user()->profile_picture }}" width="25"
-                                                alt="{{{ auth()->user()->name }}}"> {{{ auth()->user()->name }}}</a>
-                                </template>
-                                <el-menu-item index="1-1">
-                                    <a href="{{ $current_user->edit_url }}">{{ __('Edit Profile') }}</a>
-                                </el-menu-item>
-                                <el-menu-item index="2-1">
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                    >Logout</a>
+                        <ul class="nav nav-pills header-navigation">
+                            @if(!isset($isSearch))
+                                <li class="nav-item d-md-none">
+                                    <a class="nav-link px-3 search-mobile-toggle" href="/search">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{{ auth()->user()->profile_url }}}">
+                                    <img src="{{ auth()->user()->profile_picture }}" width="25"
+                                         alt="{{{ auth()->user()->name }}}"> <span
+                                            class="d-none d-md-inline">{{{ auth()->user()->name }}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle px-3" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ $current_user->edit_url }}"><i
+                                                class="fa fa-cogs"></i> Profile Settings</a>
+                                    <div class="dropdown-divider"></div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
-                                </el-menu-item>
-                            </el-submenu>
-                        </el-menu>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                    ><i class="fa fa-sign-out-alt"></i> Logout</a>
+                                </div>
+                            </li>
+                        </ul>
 
                     @endguest
                 </div>
             </div>
         </div>
     </nav>
+    <div class="search-mobile{{ isset($isSearch) ? " expanded in-search-page" : "" }}">
+        <form action="{{ route("search") }}" class="header-search-form">
+            <input type="text" placeholder="Find Organization, Events, Volunteers ..."
+                   name="s" value="{{ $s ?? "" }}" class="form-control">
+            <input type="hidden" name="type" value="{{ $type ?? "" }}">
+            <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
 
     @yield('content')
     @yield("page_footer")

@@ -28,12 +28,20 @@
 
 .newsfeed-tabs {
   .nav-pills {
+    margin: 0 -0.5rem;
+    box-shadow: inset 0 0px 15px #d8d1c8;
+    overflow: hidden;
     margin-bottom: 1rem;
     .nav-link {
       color: $gray-400;
+      font-size: 1rem;
+      @include media-breakpoint-down("sm") {
+        padding: 1rem;
+      }
       &.active {
         color: $primary;
         background-color: #fff;
+        box-shadow: 0 0 10px #d8d1c8;
       }
     }
   }

@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @section("content")
-    <main>
+    <main class="search-page">
         <div class="sub-heading">
             <div class="container">
                 <h3>@lang("Results for ") {{ $s }}</h3>

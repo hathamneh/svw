@@ -203,6 +203,9 @@
                     .then((response) => {
                         //console.log(response.data)
                         this.added = response.data
+                        for(let i = 0; i < this.added.length; i++) {
+                            this.added[i].organization_name = this.added[i].organization
+                        }
                     })
                     .catch(function (response) {
                         console.error(response);

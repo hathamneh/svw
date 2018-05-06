@@ -1,15 +1,14 @@
 <template>
-    <ul :class="['events-list', size]">
-        <event-item v-for="event in events" :key="event.id" :event-data="event" :id="'event-' + event.id"
-                    :size="size"></event-item>
-        <li v-if="schedule && !events.length" class="events-list__item">
-            <div class="item-content py-3">
-                <p class="text-muted text-center">
-                    {{ trans("Your schedule is empty!") }}
-                </p>
-            </div>
-        </li>
-    </ul>
+    <div>
+        <ul v-if="events.length" :class="['events-list', size]">
+            <event-item v-for="event in events" :key="event.id" :event-data="event" :id="'event-' + event.id"
+                        :size="size"></event-item>
+        </ul>
+        <div v-else>
+            <normal-message v-if="schedule">{{ trans("Schedule Empty!") }}</normal-message>
+            <list-message v-else>No Events Yet!</list-message>
+        </div>
+    </div>
 </template>
 
 <script>

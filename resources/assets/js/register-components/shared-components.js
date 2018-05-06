@@ -15,3 +15,4 @@ Vue.component('home-tabs', require('../components/homeTabs'))
 Vue.component('users-list', require('../components/shared/usersList'))
 
 Vue.component('social-buttons', require('../components/shared/socialButtons'))
+Vue.component('search-results', require('../components/searchResults'))

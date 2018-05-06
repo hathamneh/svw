@@ -14,7 +14,7 @@ class SearchController extends Controller
 
     public function show(Request $request)
     {
-        $s = $request->get("s",false);
+        $s = $request->get("s", false);
         $type = $request->get("type", "volunteer");
         $results = $this->doSearch($s, $type);
 
@@ -29,6 +29,7 @@ class SearchController extends Controller
             'results'   => $results,
             'user'      => $user,
             'volunteer' => $volunteer,
+            'isSearch'  => true
         ]);
     }
 
@@ -39,7 +40,7 @@ class SearchController extends Controller
 
     public function doSearch($s, $type = "volunteer")
     {
-        if(!$s || empty($s))
+        if (!$s || empty($s))
             return collect([]);
         $query = self::escapeLike($s);
         switch ($type) {
@@ -47,8 +48,14 @@ class SearchController extends Controller
                 return Event::search($query);
             case "organization":
                 return Organization::search($query);
-            default:
+            case "volunteer":
                 return Volunteer::search($query);
+            default:
+                return [
+                    "volunteers" => Volunteer::search($query),
+                    "organizations" => Organization::search($query),
+                    "events" => Event::search($query),
+                ];
         }
     }
 }
