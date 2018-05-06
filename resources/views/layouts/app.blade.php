@@ -29,7 +29,7 @@
                         <form action="{{ route("search") }}" class="header-search-form d-none d-md-flex">
                             <input type="text" placeholder="Find Organization, Events, Volunteers ..."
                                    name="s" value="{{ $s ?? "" }}" class="form-control">
-                            <input type="hidden" name="type" value="{{ $type ?? "" }}">
+                            <input type="hidden" name="type" value="{{ $type ?? "volunteer" }}">
                             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     @endif
@@ -114,7 +114,7 @@
         <form action="{{ route("search") }}" class="header-search-form">
             <input type="text" placeholder="Find Organization, Events, Volunteers ..."
                    name="s" value="{{ $s ?? "" }}" class="form-control">
-            <input type="hidden" name="type" value="{{ $type ?? "" }}">
+            <input type="hidden" name="type" value="{{ $type ?? "volunteer" }}">
             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
