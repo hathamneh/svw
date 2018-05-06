@@ -86,9 +86,9 @@ class WizardController extends Controller
             'gender'     => $user_data->personal_info->gender,
             'birthday'   => date("Y-m-d G:i:s", strtotime($user_data->personal_info->birthday)),
             'country'    => $user_data->personal_info->country,
-            'city'       => $user_data->personal_info->city,
         ]);
 
+        $volunteer->city =  $user_data->personal_info->city ?? null;
         $volunteer->phone = $user_data->personal_info->phone ?? null;
         if (isset($user_data->personal_info->bio))
             $volunteer->bio = $user_data->personal_info->bio;
@@ -117,6 +117,7 @@ class WizardController extends Controller
             'founded_date' => $user_data->details->founded_date,
             'country'      => $user_data->details->country,
         ]);
+
 
         $organization->city = $user_data->details->city ?? null;
         $organization->address = $user_data->details->address ?? null;
