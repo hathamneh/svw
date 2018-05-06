@@ -51,11 +51,12 @@ class SearchController extends Controller
             case "volunteer":
                 return Volunteer::search($query);
             default:
-                return [
-                    "volunteers" => Volunteer::search($query),
-                    "organizations" => Organization::search($query),
-                    "events" => Event::search($query),
-                ];
+                return Volunteer::search($query);
+//                return [
+//                    "volunteers" => Volunteer::search($query),
+//                    "organizations" => Organization::search($query),
+//                    "events" => Event::search($query),
+//                ];
         }
     }
 }
