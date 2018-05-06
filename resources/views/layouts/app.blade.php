@@ -52,7 +52,7 @@
                     </el-menu>
                 @endguest
             </div>
-            <div class="d-none d-md-block">
+            <div class="d-none d-md-flex" style="flex:1;">
                 @auth
                     @if(!isset($wizard))
                         <form action="{{ route("search") }}" class="header-search-form">
