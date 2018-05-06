@@ -23,14 +23,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">Social<br>Volunteer<br>Work</a>
 
-            <div class="d-md-none navbar-nav mr-2">
-                @guest
-                    @if(!isset($login) || !$login)
-                        <a href="/login" class="btn btn-sm btn-secondary"><i class="fa fa-key"></i> Login</a>
-                    @endif
-                @endguest
-            </div>
-            <div class="d-none d-md-flex" style="flex:1;">
+            <div class="d-flex" style="flex:1;">
                 @auth
                     @if(!isset($wizard))
                         <form action="{{ route("search") }}" class="header-search-form d-none d-md-flex">
@@ -40,9 +33,14 @@
                             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     @endif
+                @else
+                    @if(!isset($login) || !$login)
+                        <a href="/login" class="btn btn-sm btn-secondary d-md-none ml-auto"><i class="fa fa-key"></i> Login</a>
+                    @endif
                 @endauth
-                <div class="navbar-nav ml-auto ">
-                    @guest
+
+                @guest
+                    <div class="navbar-nav ml-auto d-none d-md-block">
                         @if(!isset($login) || !$login)
                             <form class="form-login d-none d-md-flex" action="{{ route('login') }}" method="post">
                                 {{ csrf_field() }}
@@ -70,8 +68,10 @@
                                    href='{{ route('password.request') }}'><b>Forgot your<br>password?</b></a>
                             </form>
                         @endif
-                    @else
-                    <!-- Right Side Of Navbar -->
+                    </div>
+                @else
+                    <div class="navbar-nav ml-auto ">
+                        <!-- Right Side Of Navbar -->
                         <ul class="nav nav-pills header-navigation">
                             @if(!isset($isSearch))
                                 <li class="nav-item d-md-none">
@@ -104,9 +104,9 @@
                                 </div>
                             </li>
                         </ul>
+                    </div>
+                @endguest
 
-                    @endguest
-                </div>
             </div>
         </div>
     </nav>
